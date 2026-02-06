@@ -1,0 +1,16 @@
+{
+  "ts": "2026-02-06T13:28:08.881Z",
+  "chatId": "qa-lookup-1",
+  "sessionId": "qa-lookup-1",
+  "model": "deepseek-chat",
+  "tool": "terminal_exec",
+  "id": "757ab635-5749-4896-82d2-846344215982",
+  "args": {
+    "command": "mcp-search \"Trump pedophilia allegations 2024-12-06\""
+  },
+  "result": {
+    "ok": true,
+    "output": "{\n  \"ok\": false,\n  \"error\": \"web-search: Error executing tool 'web-search': Search failed for \\\"T\nrump pedophilia allegations 2024-12-06\\\": HTTP 202: Failed to fetch search resul\nts\",\n  \"provider\": \"ddg\"\n}",
+    "exitCode": 1
+  }
+}

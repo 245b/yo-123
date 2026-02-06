@@ -1,0 +1,16 @@
+{
+  "ts": "2026-02-06T13:28:47.150Z",
+  "chatId": "qa-shell-1",
+  "sessionId": "qa-shell-1",
+  "model": "deepseek-chat",
+  "tool": "terminal_exec",
+  "id": "bde9373c-33a7-48e0-874a-be471ae9caec",
+  "args": {
+    "command": "ls -la"
+  },
+  "result": {
+    "ok": true,
+    "output": "total 0\ndrwxrwxr-x 1 operator operator 4096 Feb  6 13:28 .\ndrwxrwsr-x 1 root     operator 4096 Feb  6 13:28 ..",
+    "exitCode": 0
+  }
+}

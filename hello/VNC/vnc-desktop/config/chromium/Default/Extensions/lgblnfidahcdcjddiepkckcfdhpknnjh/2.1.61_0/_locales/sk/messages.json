@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker od STANDS"
+   },
+   "add_site": {
+      "message": "Pridať stránku"
+   },
+   "added_sites": {
+      "message": "Pridané stránky"
+   },
+   "advertising": {
+      "message": "Reklamná kampaň"
+   },
+   "allowed_sites": {
+      "message": "Povolené stránky"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Blokátor reklám pre YouTube, video reklamy, Facebook, Twitch, vyskakovacie okná a webové stránky."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Zablokovať"
+   },
+   "block_elements_on_this_page": {
+      "message": "Zablokovať prvky na tejto stránke"
+   },
+   "block_popups_on_this_site": {
+      "message": "Zablokovať vyskakovacie okná na tejto stránke"
+   },
+   "blocking_settings": {
+      "message": "Nastavenia blokovania"
+   },
+   "blocking_statistic": {
+      "message": "Štatistika blokovania"
+   },
+   "blocking_statistics_text": {
+      "message": "Tu máte historické údaje o tom, koľko reklám bolo zablokovaných počas určitého obdobia."
+   },
+   "blocks_on_this_page": {
+      "message": "Bloky na tejto stránke"
+   },
+   "close": {
+      "message": "Zatvoriť"
+   },
+   "cookie_banners": {
+      "message": "Upozornenie na súbory cookie"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Pridajte stránky, na ktorých uprednostňujete zobrazovanie upozornení na súbory cookie"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Zoznam povolených upozornení na súbory cookie"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Blokovať upozornenia na súbory cookie na všetkých webových stránkach. Upozorňujeme, že niektoré upozornenia týkajúce sa súborov cookie sa môžu stále zobrazovať, pretože sú nevyhnutné pre správne fungovanie určitých webových stránok."
+   },
+   "describe_the_issue": {
+      "message": "Popísať problém"
+   },
+   "elements_blocked": {
+      "message": "$count$ blokovaných prvkov",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Spätná väzba"
+   },
+   "feedback_screen_text": {
+      "message": "Chceli by sme počuť vaše myšlienky, návrhy, obavy alebo problémy s čímkoľvek, aby sme mohli zlepšiť produkt!"
+   },
+   "guided_setup": {
+      "message": "Začať s vedeným nastavením:"
+   },
+   "guided_setup_go": {
+      "message": "POĎME NA TO"
+   },
+   "guided_setup_later": {
+      "message": "NESKÔR"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Skryť banner cookie na tejto stránke"
+   },
+   "in_total": {
+      "message": "celkom"
+   },
+   "include_current_url": {
+      "message": "Zahrnúť aktuálnu URL adresu do hlásenia"
+   },
+   "items_blocked": {
+      "message": "Blokované položky"
+   },
+   "minutes_saved": {
+      "message": "minúty ušetrené"
+   },
+   "more_info_on_statistics": {
+      "message": "Viac informácií na obrazovke 'Štatistiky'"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "tu"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Nie, zvládnem to sám"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stojany AdBlocker už blokujú nechcené reklamy a kontextové okná. Teraz skryjeme aj bannery súborov cookie tak, že pre vás budeme prijímať iba nevyhnutné a funkčné súbory cookie."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Toto nastavenie môžete kedykoľvek zmeniť. Viac podrobností nájdete"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Už žiadne vyskakovacie okná cookie"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Áno, blokovať bannery súborov cookie"
+   },
+   "off": {
+      "message": "vypnuté"
+   },
+   "on_this_page": {
+      "message": "na tejto stránke"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Pridajte stránky s povolenými vyskakovacími oknami pomocou formulára nižšie."
+   },
+   "popup_allowed_sites": {
+      "message": "Stránky s povolenými vyskakovacími oknami"
+   },
+   "popups": {
+      "message": "Vyskakovacie okná"
+   },
+   "popups_tooltip": {
+      "message": "Výskakové okná sú zablokované na všetkých stránkach štandardne, ale môžete si povoliť vyskakovacie okná na konkrétnych stránkach."
+   },
+   "privacy_policy": {
+      "message": "Zásady ochrany osobných údajov"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Je nám ľúto, že sa niečo nedarí. Povedzte nám o tom a opravíme to."
+   },
+   "resume_blocking": {
+      "message": "Obnoviť blokovanie na tejto stránke"
+   },
+   "seconds_saved": {
+      "message": "sekúnd ušetrených"
+   },
+   "send": {
+      "message": "Odoslať"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Nastavenia"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS je pozastavený na všetkých stránkach"
+   },
+   "statistic": {
+      "message": "Štatistika"
+   },
+   "terms_of_use": {
+      "message": "Podmienky použitia"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Webstránka $host$ bola pridaná do zoznamu výnimiek",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Celkový počet"
+   },
+   "tracking": {
+      "message": "Sledovanie"
+   },
+   "tracking_tooltip": {
+      "message": "Chránime vaše súkromie pred tisíckami sledovacích skriptov a tretích strán"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Vypnúť blokovanie všade"
+   },
+   "turn_on": {
+      "message": "Zapnúť"
+   },
+   "turn_on_blocking": {
+      "message": "Zapnúť blokovanie"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Povoliť blokovanie reklám na tejto stránke"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Odblokovať prvky na tejto stránke"
+   },
+   "version": {
+      "message": "Verzia"
+   },
+   "whitelist_this_site": {
+      "message": "Pridať túto stránku do zoznamu výnimiek"
+   },
+   "whitelisted_sites": {
+      "message": "Webové stránky v zozname výnimiek"
+   },
+   "whitelisted_text": {
+      "message": "Tu môžete spravovať svoj zoznam výnimiek. Keď je stránka pridaná do zoznamu výnimiek, Stands je úplne vypnutý na tejto stránke, bez blokovania a bez zobrazovania reklám, ktoré podporujú vašu vec."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

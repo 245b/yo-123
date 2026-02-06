@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=thunar "/home/operator/Data/Downloads"
+Icon=folder-download
+StartupNotify=true
+Terminal=false
+Categories=Utility;X-XFCE;X-Xfce-Toplevel;
+OnlyShowIn=XFCE;
+X-AppStream-Ignore=True
+Name=Downloads
+Comment=Open downloads
+X-XFCE-Source=file:///usr/share/applications/thunar.desktop

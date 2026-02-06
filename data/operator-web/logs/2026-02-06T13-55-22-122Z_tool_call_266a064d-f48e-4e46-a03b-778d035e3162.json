@@ -1,0 +1,11 @@
+{
+  "ts": "2026-02-06T13:55:22.122Z",
+  "chatId": "4a8c7468-ab99-4ba7-afa1-94b53940d9b5",
+  "sessionId": "4a8c7468-ab99-4ba7-afa1-94b53940d9b5",
+  "model": "deepseek-chat",
+  "tool": "terminal_exec",
+  "id": "5b024378-802b-45ae-8b8f-a1bd9a699a33",
+  "args": {
+    "command": "mcp-search \"2026-02-06 check time and search about trump\""
+  }
+}

@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "STANDS의 AdBlocker"
+   },
+   "add_site": {
+      "message": "사이트 추가"
+   },
+   "added_sites": {
+      "message": "추가된 사이트"
+   },
+   "advertising": {
+      "message": "광고"
+   },
+   "allowed_sites": {
+      "message": "허용된 사이트"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: YouTube, 비디오 광고, Facebook, Twitch, 팝업 및 웹사이트용 광고 차단기. Stands로 광고를 무료로 차단하세요!"
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "차단"
+   },
+   "block_elements_on_this_page": {
+      "message": "이 페이지의 요소 차단"
+   },
+   "block_popups_on_this_site": {
+      "message": "이 사이트의 팝업 차단"
+   },
+   "blocking_settings": {
+      "message": "차단 설정"
+   },
+   "blocking_statistic": {
+      "message": "차단 통계"
+   },
+   "blocking_statistics_text": {
+      "message": "여기에서 특정 기간 동안 차단 된 광고 수에 대한 이전 데이터가 있습니다."
+   },
+   "blocks_on_this_page": {
+      "message": "이 페이지에서 차단 된 내용"
+   },
+   "close": {
+      "message": "닫기"
+   },
+   "cookie_banners": {
+      "message": "쿠키 공지"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "쿠키 알림이 표시되기를 원하는 사이트를 추가하세요."
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "쿠키 알림 화이트리스트"
+   },
+   "cookie_banners_tooltip": {
+      "message": "모든 웹사이트에서 쿠키 알림을 차단합니다. 일부 쿠키 알림은 특정 웹사이트가 제대로 작동하는 데 필수적이므로 계속 표시될 수 있습니다."
+   },
+   "describe_the_issue": {
+      "message": "문제를 설명하세요"
+   },
+   "elements_blocked": {
+      "message": "$count$개의 요소가 차단되었습니다",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "피드백"
+   },
+   "feedback_screen_text": {
+      "message": "의견, 제안, 우려 사항 또는 문제가 있으면 언제든지 알려주세요. 우리는 개선하기 위해 노력합니다!"
+   },
+   "guided_setup": {
+      "message": "가이드 설정으로 시작하세요:"
+   },
+   "guided_setup_go": {
+      "message": "가자"
+   },
+   "guided_setup_later": {
+      "message": "나중에"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "이 사이트에서 쿠키 배너 숨기기"
+   },
+   "in_total": {
+      "message": "전체에서"
+   },
+   "include_current_url": {
+      "message": "보고서에 현재 URL 포함하기"
+   },
+   "items_blocked": {
+      "message": "차단된 항목들"
+   },
+   "minutes_saved": {
+      "message": "절약한 시간"
+   },
+   "more_info_on_statistics": {
+      "message": "통계 화면에서 더 많은 정보 확인"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "자세한 내용은 여기에서 확인할 수 있습니다."
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "아니요, 제가 직접 관리하겠습니다."
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands AdBlocker는 원치 않는 광고와 팝업을 이미 차단합니다. 이제 필수적이고 기능적인 쿠키만 허용하여 쿠키 배너도 숨길 것입니다."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "이 설정은 언제든지 변경할 수 있습니다."
+   },
+   "no_more_cookie_banners_title": {
+      "message": "더 이상 쿠키 팝업이 표시되지 않습니다."
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "예, 쿠키 배너를 차단합니다"
+   },
+   "off": {
+      "message": "끄기"
+   },
+   "on_this_page": {
+      "message": "이 페이지에서"
+   },
+   "popup_allowed_add_sites": {
+      "message": "아래 양식을 사용하여 허용된 팝업이 있는 사이트를 추가하세요."
+   },
+   "popup_allowed_sites": {
+      "message": "허용된 팝업이 있는 사이트"
+   },
+   "popups": {
+      "message": "팝업"
+   },
+   "popups_tooltip": {
+      "message": "기본적으로 모든 사이트에서 팝업이 차단됩니다. 특정 사이트에서 팝업을 허용할 수 있습니다."
+   },
+   "privacy_policy": {
+      "message": "개인 정보 보호 정책"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "문제가 있어서 죄송합니다. 문제를 알려주시면 수정하겠습니다."
+   },
+   "resume_blocking": {
+      "message": "이 사이트에서 차단을 계속 진행하세요"
+   },
+   "seconds_saved": {
+      "message": "절약한 초"
+   },
+   "send": {
+      "message": "보내기"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "설정"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "모든 사이트에서 STANDS가 일시 중지되었습니다"
+   },
+   "statistic": {
+      "message": "통계"
+   },
+   "terms_of_use": {
+      "message": "이용 약관"
+   },
+   "the_site_was_whitelisted": {
+      "message": "$host$ 사이트가 화이트리스트에 추가되었습니다",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "합계"
+   },
+   "tracking": {
+      "message": "추적"
+   },
+   "tracking_tooltip": {
+      "message": "수천 개의 웹 추적 스크립트와 제3자로부터 개인정보를 보호하세요"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "모든 차단을 해제하려면 끄기"
+   },
+   "turn_on": {
+      "message": "켜기"
+   },
+   "turn_on_blocking": {
+      "message": "차단 켜기"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "이 사이트에서 광고 차단을 활성화합니다."
+   },
+   "unblock_elements_on_this_page": {
+      "message": "이 페이지의 요소 차단 해제"
+   },
+   "version": {
+      "message": "버전"
+   },
+   "whitelist_this_site": {
+      "message": "이 사이트를 화이트리스트에 추가하세요"
+   },
+   "whitelisted_sites": {
+      "message": "화이트리스트에 추가된 사이트"
+   },
+   "whitelisted_text": {
+      "message": "여기에서 화이트리스트를 관리할 수 있습니다. 사이트가 화이트리스트에 추가되면 해당 사이트에서 STANDS는 완전히 비활성화되며 어떤 종류의 차단도 없으며 광고도 게재되지 않습니다."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

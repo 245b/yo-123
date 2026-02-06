@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker από την STANDS"
+   },
+   "add_site": {
+      "message": "Προσθήκη ιστοσελίδας"
+   },
+   "added_sites": {
+      "message": "Προστιθέμενες ιστοσελίδες"
+   },
+   "advertising": {
+      "message": "Διαφημίσεις"
+   },
+   "allowed_sites": {
+      "message": "Επιτρεπόμενες ιστοσελίδες"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Αναστολέας διαφημίσεων για YouTube, βίντεο διαφημίσεις, Facebook, Twitch, αναδυόμενα παράθυρα και ιστότοπους."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Αποκλεισμός"
+   },
+   "block_elements_on_this_page": {
+      "message": "Αποκλείστε στοιχεία σε αυτήν τη σελίδα"
+   },
+   "block_popups_on_this_site": {
+      "message": "Αποκλεισμός αναδυόμενων παραθύρων σε αυτόν τον ιστότοπ"
+   },
+   "blocking_settings": {
+      "message": "Ρυθμίσεις αποκλεισμού"
+   },
+   "blocking_statistic": {
+      "message": "Στατιστικά αποκλεισμού"
+   },
+   "blocking_statistics_text": {
+      "message": "Εδώ έχετε ιστορικά δεδομένα για το πόσες διαφημίσεις αποκλείστηκαν κατά μήκος ενός συγκεκριμένου χρονικού διαστήματος."
+   },
+   "blocks_on_this_page": {
+      "message": "Αποκλεισμός στη σελίδα"
+   },
+   "close": {
+      "message": "Κλείσιμο"
+   },
+   "cookie_banners": {
+      "message": "Ειδοποίηση cookie"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Προσθέστε τοποθεσίες όπου προτιμάτε να εμφανίζονται ειδοποιήσεις cookie"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Λίστα επιτρεπόμενων ειδοποιήσεων cookie"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Αποκλεισμός ειδοποιήσεων cookie σε όλους τους ιστότοπους. Λάβετε υπόψη ότι ορισμένες ειδοποιήσεις cookie ενδέχεται να εξακολουθούν να εμφανίζονται, καθώς είναι απαραίτητες για τη σωστή λειτουργία ορισμένων ιστότοπων."
+   },
+   "describe_the_issue": {
+      "message": "Περιγράψτε το πρόβλημα"
+   },
+   "elements_blocked": {
+      "message": "$count$ στοιχεία αποκλείστηκαν",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Ανατροφοδότηση"
+   },
+   "feedback_screen_text": {
+      "message": "Θέλουμε να ακούσουμε τις σκέψεις, τις προτάσεις, τις ανησυχίες ή τα προβλήματά σας με οτιδήποτε, έτσι ώστε να μπορέσουμε να βελτιώσουμε!"
+   },
+   "guided_setup": {
+      "message": "Ξεκινήστε με έναν καθοδηγούμενο οδηγό:"
+   },
+   "guided_setup_go": {
+      "message": "ΠΆΜΕ"
+   },
+   "guided_setup_later": {
+      "message": "ΑΡΓΟΤΕΡΑ"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Απόκρυψη banner cookie σε αυτόν τον ιστότοπο"
+   },
+   "in_total": {
+      "message": "συνολικά"
+   },
+   "include_current_url": {
+      "message": "Συμπερίληψη τρέχουσας διεύθυνσης URL στην αναφορά"
+   },
+   "items_blocked": {
+      "message": "Στοιχεία που αποκλείστηκαν"
+   },
+   "minutes_saved": {
+      "message": "λεπτά που εξοικονομήθηκαν"
+   },
+   "more_info_on_statistics": {
+      "message": "Περισσότερες πληροφορίες στην οθόνη 'Στατιστικά'"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "εδώ"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Όχι, θα το διαχειριστώ μόνος μου"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands Το AdBlocker αποκλείει ήδη ανεπιθύμητες διαφημίσεις και αναδυόμενα παράθυρα. Τώρα θα αποκρύψουμε επίσης τα banner cookie αποδεχόμενοι μόνο βασικά και λειτουργικά cookie για εσάς."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Μπορείτε να αλλάξετε αυτήν τη ρύθμιση ανά πάσα στιγμή. Περισσότερες λεπτομέρειες είναι διαθέσιμες"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Όχι άλλα αναδυόμενα cookie"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Ναι, αποκλεισμός πανό cookie"
+   },
+   "off": {
+      "message": "απενεργ."
+   },
+   "on_this_page": {
+      "message": "σε αυτήν τη σελίδα"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Προσθέστε ιστότοπους με επιτρεπόμενα αναδυόμενα παράθυρα χρησιμοποιώντας τη φόρμα παρακάτω."
+   },
+   "popup_allowed_sites": {
+      "message": "Ιστότοποι με επιτρεπόμενα αναδυόμενα παράθυρα"
+   },
+   "popups": {
+      "message": "Αναδυόμενα παράθυρα"
+   },
+   "popups_tooltip": {
+      "message": "Από προεπιλογή, τα αναδυόμενα παράθυρα είναι αποκλεισμένα σε όλους τους ιστότοπους, μπορείτε να επιτρέψετε αναδυόμενα παράθυρα σε συγκεκριμένους ιστότοπους"
+   },
+   "privacy_policy": {
+      "message": "Πολιτική απορρήτου"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Λυπούμαστε που κάτι δεν πάει καλά. Παρακαλούμε πείτε μας γι'αυτό και θα το διορθώσουμε."
+   },
+   "resume_blocking": {
+      "message": "Συνέχιση αποκλεισμού σε αυτόν τον ιστότοπο"
+   },
+   "seconds_saved": {
+      "message": "δευτερόλεπτα αποθηκευμένα"
+   },
+   "send": {
+      "message": "Αποστολή"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Ρυθμίσεις"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "Το STANDS είναι παύση σε όλους τους ιστότοπους"
+   },
+   "statistic": {
+      "message": "Στατιστική"
+   },
+   "terms_of_use": {
+      "message": "Όροι χρήσης"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Η ιστοσελίδα $host$ εγκρίθηκε στη λευκή λίστα",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Συνολικά"
+   },
+   "tracking": {
+      "message": "Παρακολούθηση"
+   },
+   "tracking_tooltip": {
+      "message": "Προστατέψτε την ιδιωτικότητά σας από χιλιάδες σενάρια παρακολούθησης στον ιστό και τρίτους"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Απενεργοποίηση αναστολής παντού"
+   },
+   "turn_on": {
+      "message": "Ενεργοποίηση"
+   },
+   "turn_on_blocking": {
+      "message": "Ενεργοποίηση αναστολής"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Ενεργοποιήστε τον αποκλεισμό διαφημίσεων σε αυτόν τον ιστότοπο"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Ξεμπλοκάρετε στοιχεία σε αυτήν τη σελίδα"
+   },
+   "version": {
+      "message": "Έκδοση"
+   },
+   "whitelist_this_site": {
+      "message": "Προσθήκη σε λευκή λίστα αυτής της ιστοσελίδας"
+   },
+   "whitelisted_sites": {
+      "message": "Ιστοσελίδες στη λευκή λίστα"
+   },
+   "whitelisted_text": {
+      "message": "Εδώ μπορείτε να διαχειριστείτε τη λευκή σας λίστα. Όταν μια ιστοσελίδα είναι στη λευκή λίστα, το Stands απενεργοποιείται εντελώς σε αυτήν την ιστοσελίδα, χωρίς κανέναν αποκλεισμό και χωρίς την τοποθέτηση διαφημίσεων που χρηματοδοτούν το αίτημά σας."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

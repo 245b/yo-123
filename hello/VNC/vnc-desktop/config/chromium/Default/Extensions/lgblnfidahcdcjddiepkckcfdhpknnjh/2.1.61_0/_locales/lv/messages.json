@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker no STANDS"
+   },
+   "add_site": {
+      "message": "Pievienot vietni"
+   },
+   "added_sites": {
+      "message": "Pievienotās vietnes"
+   },
+   "advertising": {
+      "message": "Reklamēšana"
+   },
+   "allowed_sites": {
+      "message": "Atļautās vietnes"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Reklāmu bloķētājs YouTube, video reklāmām, Facebook, Twitch, uznirstošajiem logiem un tīmekļa vietnēm."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Bloķēt"
+   },
+   "block_elements_on_this_page": {
+      "message": "Bloķēt elementus šajā lapā"
+   },
+   "block_popups_on_this_site": {
+      "message": "Bloķēt uznirstošos logus šajā vietnē"
+   },
+   "blocking_settings": {
+      "message": "Bloķēšanas iestatījumi"
+   },
+   "blocking_statistic": {
+      "message": "Bloķēšanas statistika"
+   },
+   "blocking_statistics_text": {
+      "message": "Šeit jums ir vēsturiskie dati par to, cik daudzas reklāmas tika bloķētas noteiktā laika periodā."
+   },
+   "blocks_on_this_page": {
+      "message": "Bloki šajā lapā"
+   },
+   "close": {
+      "message": "Aizvērt"
+   },
+   "cookie_banners": {
+      "message": "Paziņojums par sīkfailiem"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Pievienojiet vietnes, kurās vēlaties, lai tiktu rādīti sīkfailu paziņojumi"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Sīkfailu paziņojumu baltais saraksts"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Bloķējiet paziņojumus par sīkfailiem visās vietnēs. Lūdzu, ņemiet vērā, ka daži sīkfailu paziņojumi joprojām var tikt parādīti, jo tie ir būtiski noteiktu vietņu pareizai darbībai."
+   },
+   "describe_the_issue": {
+      "message": "Aprakstiet problēmu"
+   },
+   "elements_blocked": {
+      "message": "Bloķēti $count$ elementi",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Atsauksmes"
+   },
+   "feedback_screen_text": {
+      "message": "Mēs vēlētos dzirdēt jūsu domas, ieteikumus, bažas vai problēmas ar jebkuru tēmu, lai mēs varētu uzlaboties!"
+   },
+   "guided_setup": {
+      "message": "Sākt ar vadīto iestatījumu:"
+   },
+   "guided_setup_go": {
+      "message": "APTUVIET"
+   },
+   "guided_setup_later": {
+      "message": "VĒLĀK"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Paslēpt sīkfailu reklāmkarogu šajā vietnē"
+   },
+   "in_total": {
+      "message": "kopā"
+   },
+   "include_current_url": {
+      "message": "Iekļaut pašreizējo URL paziņojumā"
+   },
+   "items_blocked": {
+      "message": "Bloķētie elementi"
+   },
+   "minutes_saved": {
+      "message": "taupītie minūtes"
+   },
+   "more_info_on_statistics": {
+      "message": "Papildu informācija 'Statistikas' ekrānā"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "šeit"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Nē, es pats to nokārtošu"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "AdBlocker jau bloķē nevēlamas reklāmas un uznirstošos logus. Tagad mēs arī paslēpsim sīkfailu reklāmkarogus, pieņemot tikai jums nepieciešamās un funkcionālās sīkdatnes."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Šo iestatījumu varat mainīt jebkurā laikā. Sīkāka informācija pieejama"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Vairs nav sīkfailu uznirstošo logu"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Jā, bloķēt sīkfailu banerus"
+   },
+   "off": {
+      "message": "izslēgts"
+   },
+   "on_this_page": {
+      "message": "šajā lapā"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Pievienojiet vietnes, kurām ir atļauti uznirstošie logi, izmantojot zemāk esošo veidlapu."
+   },
+   "popup_allowed_sites": {
+      "message": "Atļauti uznirstošo logu vietnes"
+   },
+   "popups": {
+      "message": "Uznirstošie logi"
+   },
+   "popups_tooltip": {
+      "message": "Pēc noklusējuma uznirstošie logi tiek bloķēti visās vietnēs, bet jūs varat atļaut tos konkrētās vietnēs."
+   },
+   "privacy_policy": {
+      "message": "Privātuma politika"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Mēs nožēlojam, ka kas notiek nepareizi. Pastāstiet mums par to, un mēs to salabosim."
+   },
+   "resume_blocking": {
+      "message": "Atsākt bloķēšanu šajā vietnē"
+   },
+   "seconds_saved": {
+      "message": "taupītie sekundes"
+   },
+   "send": {
+      "message": "Sūtīt"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Iestatījumi"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS ir apturēts visos saitos"
+   },
+   "statistic": {
+      "message": "Statistikas"
+   },
+   "terms_of_use": {
+      "message": "Lietošanas noteikumi"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Vietne $host$ tika iekļauta baltajā sarakstā.",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Kopā"
+   },
+   "tracking": {
+      "message": "Izsekošana"
+   },
+   "tracking_tooltip": {
+      "message": "Aizsargājiet savu privātumu no tūkstošiem vietņu izsekošanas skriptu un trešo personu."
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Izslēgt bloķēšanu visur"
+   },
+   "turn_on": {
+      "message": "Ieslēgt"
+   },
+   "turn_on_blocking": {
+      "message": "Ieslēgt bloķēšanu"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Iespējot reklāmu bloķēšanu šajā vietnē"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Atbloķēt elementus uz šīs lapas"
+   },
+   "version": {
+      "message": "Versija"
+   },
+   "whitelist_this_site": {
+      "message": "Baltajā sarakstā iekļaut šo vietni"
+   },
+   "whitelisted_sites": {
+      "message": "Vietnes, kas iekļautas baltajā sarakstā"
+   },
+   "whitelisted_text": {
+      "message": "Šeit jūs varat pārvaldīt savu baltu sarakstu. Kad vietne ir iekļauta baltajā sarakstā, Stands uz tās vietnes ir pilnībā atslēgts, nav nekādas bloķēšanas un nav arī reklāmu, kas atbalsta jūsu lietu."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

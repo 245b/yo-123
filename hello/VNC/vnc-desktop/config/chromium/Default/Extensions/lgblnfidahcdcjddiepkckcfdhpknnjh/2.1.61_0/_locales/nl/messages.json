@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker door STANDS"
+   },
+   "add_site": {
+      "message": "Site toevoegen"
+   },
+   "added_sites": {
+      "message": "Toegevoegde sites"
+   },
+   "advertising": {
+      "message": "Adverteren"
+   },
+   "allowed_sites": {
+      "message": "Toegestane sites"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Adblocker voor YouTube, videoadvertenties, Facebook, Twitch, pop-ups en websites."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Blokkeer"
+   },
+   "block_elements_on_this_page": {
+      "message": "Blokkeer elementen op deze pagina"
+   },
+   "block_popups_on_this_site": {
+      "message": "Blokkeer pop-ups op deze site"
+   },
+   "blocking_settings": {
+      "message": "Blokkeringsinstellingen"
+   },
+   "blocking_statistic": {
+      "message": "Blokkeringsstatistieken"
+   },
+   "blocking_statistics_text": {
+      "message": "Hier vindt u historische gegevens over hoeveel advertenties er gedurende een bepaalde periode zijn geblokkeerd."
+   },
+   "blocks_on_this_page": {
+      "message": "Blokkeert op deze pagina"
+   },
+   "close": {
+      "message": "Sluiten"
+   },
+   "cookie_banners": {
+      "message": "Cookie-melding"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Voeg sites toe waarop u wilt dat cookiemeldingen worden weergegeven"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Witte lijst met cookiemeldingen"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Blokkeer cookiemeldingen op alle websites. Houd er rekening mee dat sommige cookiemeldingen nog steeds kunnen verschijnen, aangezien deze essentieel zijn voor het goed functioneren van bepaalde websites."
+   },
+   "describe_the_issue": {
+      "message": "Beschrijf het probleem"
+   },
+   "elements_blocked": {
+      "message": "$count$ elementen geblokkeerd",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Feedback"
+   },
+   "feedback_screen_text": {
+      "message": "We horen graag uw gedachten, suggesties, zorgen of problemen met alles, zodat we kunnen verbeteren!"
+   },
+   "guided_setup": {
+      "message": "Begin met een begeleide setup:"
+   },
+   "guided_setup_go": {
+      "message": "LATEN WE GAAN"
+   },
+   "guided_setup_later": {
+      "message": "LATER"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Verberg de cookiebanner op deze site"
+   },
+   "in_total": {
+      "message": "in totaal"
+   },
+   "include_current_url": {
+      "message": "Huidige URL opnemen in het rapport"
+   },
+   "items_blocked": {
+      "message": "Geblokkeerde items"
+   },
+   "minutes_saved": {
+      "message": "minuten bespaard"
+   },
+   "more_info_on_statistics": {
+      "message": "Meer informatie op het 'Statistieken' scherm"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "Meer details zijn hier beschikbaar"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Nee, ik regel het zelf"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands AdBlocker blokkeert al ongewenste advertenties en pop-ups. Nu verbergen we ook cookiebanners door alleen essentiële en functionele cookies voor u te accepteren."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "U kunt deze instelling op elk gewenst moment wijzigen."
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Geen cookie-pop-ups meer"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Ja, blokkeer cookiebanners"
+   },
+   "off": {
+      "message": "uit"
+   },
+   "on_this_page": {
+      "message": "op deze pagina"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Voeg sites toe met toegestane pop-ups met behulp van het onderstaande formulier."
+   },
+   "popup_allowed_sites": {
+      "message": "Toegestane pop-up-sites"
+   },
+   "popups": {
+      "message": "Pop-ups"
+   },
+   "popups_tooltip": {
+      "message": "Standaard worden pop-ups geblokkeerd op alle sites, u kunt pop-ups toestaan op specifieke sites"
+   },
+   "privacy_policy": {
+      "message": "Privacybeleid"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Het spijt ons te horen dat er iets niet klopt. Vertel ons erover en we zullen het oplossen."
+   },
+   "resume_blocking": {
+      "message": "Hervat het blokkeren op deze site"
+   },
+   "seconds_saved": {
+      "message": "seconden bespaard"
+   },
+   "send": {
+      "message": "Verzenden"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Instellingen"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS is gepauzeerd op alle sites"
+   },
+   "statistic": {
+      "message": "Statistiek"
+   },
+   "terms_of_use": {
+      "message": "Gebruiksvoorwaarden"
+   },
+   "the_site_was_whitelisted": {
+      "message": "De site $host$ is op de whitelist gezet",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Totaal"
+   },
+   "tracking": {
+      "message": "Tracking"
+   },
+   "tracking_tooltip": {
+      "message": "Bescherm uw privacy tegen duizenden webtracking-scripts en derden"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Overal blokkeren uitschakelen"
+   },
+   "turn_on": {
+      "message": "Inschakelen"
+   },
+   "turn_on_blocking": {
+      "message": "Blokkeren inschakelen"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Schakel advertentieblokkering op deze site in"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Elementen op deze pagina deblokkeren"
+   },
+   "version": {
+      "message": "Versie"
+   },
+   "whitelist_this_site": {
+      "message": "Whitelist deze site"
+   },
+   "whitelisted_sites": {
+      "message": "Gewhiteliste sites"
+   },
+   "whitelisted_text": {
+      "message": "Hier kunt u uw whitelist beheren. Wanneer een site op de whitelist staat, is Stands volledig uitgeschakeld op die site, geen blokkering van welke aard dan ook en geen plaatsing van advertenties die uw zaak sponsoren."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

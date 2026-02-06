@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker by STANDS"
+   },
+   "add_site": {
+      "message": "Lisää sivusto"
+   },
+   "added_sites": {
+      "message": "Lisätyt sivustot"
+   },
+   "advertising": {
+      "message": "Mainonta"
+   },
+   "allowed_sites": {
+      "message": "Sallitut sivustot"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Mainosten estäjä YouTubelle, videomainoksille, Facebookille, Twitchille, ponnahdusikkunoille ja verkkosivuille."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Estä"
+   },
+   "block_elements_on_this_page": {
+      "message": "Estä elementit tältä sivulta"
+   },
+   "block_popups_on_this_site": {
+      "message": "Estä ponnahdusikkunat tällä sivustolla"
+   },
+   "blocking_settings": {
+      "message": "Eston asetukset"
+   },
+   "blocking_statistic": {
+      "message": "Eston tilastot"
+   },
+   "blocking_statistics_text": {
+      "message": "Täältä näet historialliset tiedot siitä, kuinka monta mainosta on estetty tiettynä ajanjaksona."
+   },
+   "blocks_on_this_page": {
+      "message": "Estetyt elementit tällä sivulla"
+   },
+   "close": {
+      "message": "Sulje"
+   },
+   "cookie_banners": {
+      "message": "Evästeilmoitus"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Lisää sivustoja, joissa haluat evästeilmoitusten näkyvän"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Evästeilmoitusten sallittujen luettelo"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Estä evästeilmoitukset kaikilla verkkosivustoilla. Huomaa, että jotkin evästeilmoitukset saattavat silti näkyä, koska ne ovat välttämättömiä tiettyjen verkkosivustojen asianmukaisen toiminnan kannalta."
+   },
+   "describe_the_issue": {
+      "message": "Kuvaile ongelmaa"
+   },
+   "elements_blocked": {
+      "message": "$count$ estettyä elementtiä",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Palaute"
+   },
+   "feedback_screen_text": {
+      "message": "Haluaisimme kuulla ajatuksiasi, ehdotuksiasi, huolesi tai ongelmasi jotta voimme parantaa!"
+   },
+   "guided_setup": {
+      "message": "Aloita ohjatulla asennuksella:"
+   },
+   "guided_setup_go": {
+      "message": "ALOITA"
+   },
+   "guided_setup_later": {
+      "message": "MYÖHEMMIN"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Piilota evästebanneri tällä sivustolla"
+   },
+   "in_total": {
+      "message": "yhteensä"
+   },
+   "include_current_url": {
+      "message": "Sisällytä nykyinen URL-raporttiin."
+   },
+   "items_blocked": {
+      "message": "Estetyt kohteet"
+   },
+   "minutes_saved": {
+      "message": "säästetyt minuutit"
+   },
+   "more_info_on_statistics": {
+      "message": "Lisätietoja 'Tilastot' näytöllä"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "täältä"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Ei, hoidan sen itse"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "AdBlocker estää jo ei-toivotut mainokset ja ponnahdusikkunat. Nyt piilotamme myös evästebannerit hyväksymällä vain välttämättömät ja toiminnalliset evästeet puolestasi."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Voit muuttaa tätä asetusta milloin tahansa. Lisätietoja on saatavilla"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Ei enää evästeen ponnahdusikkunoita"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Kyllä, estä evästebannerit"
+   },
+   "off": {
+      "message": "Pois päältä"
+   },
+   "on_this_page": {
+      "message": "Tällä sivulla"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Lisää sivustoja, joilla on sallittuja pop-up-ikkunoita alla olevalla lomakkeella."
+   },
+   "popup_allowed_sites": {
+      "message": "Sallitut pop-up-sivustot"
+   },
+   "popups": {
+      "message": "Pop-up-ikkunat"
+   },
+   "popups_tooltip": {
+      "message": "Oletusarvoisesti pop-up-ikkunat ovat estettyjä kaikilla sivustoilla, mutta voit sallia ne tietyillä sivustoilla."
+   },
+   "privacy_policy": {
+      "message": "Tietosuojakäytäntö"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Olemme pahoillamme, että jotain on pielessä. Kerro siitä meille, niin korjaamme sen."
+   },
+   "resume_blocking": {
+      "message": "Jatka estämistä tällä sivustolla"
+   },
+   "seconds_saved": {
+      "message": "sekuntia säästetty"
+   },
+   "send": {
+      "message": "Lähetä"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Asetukset"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS on pysäytetty kaikilla sivustoilla"
+   },
+   "statistic": {
+      "message": "Tilasto"
+   },
+   "terms_of_use": {
+      "message": "Käyttöehdot"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Sivusto $host$ on lisätty sallittujen joukkoon (whitelist).",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Yhteensä"
+   },
+   "tracking": {
+      "message": "Seuranta"
+   },
+   "tracking_tooltip": {
+      "message": "Suojaa yksityisyytesi tuhansilta verkkoseurantaohjelmilta ja kolmansilta osapuolilta"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Poista esto kaikkialta"
+   },
+   "turn_on": {
+      "message": "Kytke päälle"
+   },
+   "turn_on_blocking": {
+      "message": "Kytke mainosten esto päälle"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Ota mainosten esto käyttöön tällä sivustolla"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Poista esto tältä sivulta"
+   },
+   "version": {
+      "message": "Versio"
+   },
+   "whitelist_this_site": {
+      "message": "Lisää tämä sivusto whitelistalle"
+   },
+   "whitelisted_sites": {
+      "message": "Whitelistatut sivustot"
+   },
+   "whitelisted_text": {
+      "message": "Täällä voit hallita sallittuja sivustoja. Kun sivusto on sallittu, Stands on täysin poissa käytöstä kyseisellä sivustolla, ei estoa millään tavalla eikä mainosten asettamista tukemaan aihettasi."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

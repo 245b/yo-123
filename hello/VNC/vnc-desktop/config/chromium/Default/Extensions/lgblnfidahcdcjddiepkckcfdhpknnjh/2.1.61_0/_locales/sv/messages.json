@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker av STANDS"
+   },
+   "add_site": {
+      "message": "Lägg till webbplats"
+   },
+   "added_sites": {
+      "message": "Tillagda webbplatser"
+   },
+   "advertising": {
+      "message": "Annonsmarknad"
+   },
+   "allowed_sites": {
+      "message": "Tillåtna webbplatser"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Annonsblockerare för YouTube, videoannonser, Facebook, Twitch, popup-fönster och webbplatser."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Blockera"
+   },
+   "block_elements_on_this_page": {
+      "message": "Blockera element på denna sida"
+   },
+   "block_popups_on_this_site": {
+      "message": "Blockera popup-fönster på denna webbplats"
+   },
+   "blocking_settings": {
+      "message": "Blockeringsinställningar"
+   },
+   "blocking_statistic": {
+      "message": "Blockeringsstatistik"
+   },
+   "blocking_statistics_text": {
+      "message": "Här har du historisk data om hur många annonser som blockerats under en viss period."
+   },
+   "blocks_on_this_page": {
+      "message": "Blockerade element på denna sida"
+   },
+   "close": {
+      "message": "Stäng"
+   },
+   "cookie_banners": {
+      "message": "Cookiemeddelande"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Lägg till webbplatser där du föredrar att cookiemeddelanden ska visas"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Vitlista för cookiemeddelanden"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Blockera cookie-aviseringar på alla webbplatser. Observera att vissa cookiemeddelanden fortfarande kan visas, eftersom de är nödvändiga för att vissa webbplatser ska fungera korrekt."
+   },
+   "describe_the_issue": {
+      "message": "Beskriv problemet"
+   },
+   "elements_blocked": {
+      "message": "$count$ element blockerade",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Feedback"
+   },
+   "feedback_screen_text": {
+      "message": "Vi skulle vilja höra dina tankar, förslag, oro eller problem med något så att vi kan förbättra!"
+   },
+   "guided_setup": {
+      "message": "Börja med en guidad installation:"
+   },
+   "guided_setup_go": {
+      "message": "LÅT OSS GÅ"
+   },
+   "guided_setup_later": {
+      "message": "SENARE"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Dölj cookie-banner på denna webbplats"
+   },
+   "in_total": {
+      "message": "totalt"
+   },
+   "include_current_url": {
+      "message": "Inkludera aktuell URL i rapporten"
+   },
+   "items_blocked": {
+      "message": "Blockerade element"
+   },
+   "minutes_saved": {
+      "message": "minuter sparade"
+   },
+   "more_info_on_statistics": {
+      "message": "Mer information på 'Statistik'-skärmen"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "här"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Nej, jag klarar det själv"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands AdBlocker blockerar redan oönskade annonser och popup-fönster. Nu kommer vi också att dölja cookie-banners genom att endast acceptera viktiga och funktionella cookies för dig."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Du kan ändra den här inställningen när som helst. Mer information finns"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Inga fler popup-fönster för kakor"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Ja, blockera cookie-banners"
+   },
+   "off": {
+      "message": "avstängd"
+   },
+   "on_this_page": {
+      "message": "på den här sidan"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Lägg till webbplatser med tillåtna popup-fönster med hjälp av formuläret nedan."
+   },
+   "popup_allowed_sites": {
+      "message": "Webbplatser med tillåtna popup-fönster"
+   },
+   "popups": {
+      "message": "Popup-fönster"
+   },
+   "popups_tooltip": {
+      "message": "Som standard blockeras popup-fönster på alla webbplatser, du kan tillåta popup-fönster på specifika webbplatser"
+   },
+   "privacy_policy": {
+      "message": "Integritetspolicy"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Vi beklagar att något inte stämmer. Berätta för oss om det och vi kommer att åtgärda det."
+   },
+   "resume_blocking": {
+      "message": "Återuppta blockering på denna webbplats"
+   },
+   "seconds_saved": {
+      "message": "sekunder sparade"
+   },
+   "send": {
+      "message": "Skicka"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Inställningar"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS är pausad på alla webbplatser"
+   },
+   "statistic": {
+      "message": "Statistik"
+   },
+   "terms_of_use": {
+      "message": "Användarvillkor"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Webbplatsen $host$ blev vitlistad",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Totalt"
+   },
+   "tracking": {
+      "message": "Spårning"
+   },
+   "tracking_tooltip": {
+      "message": "Skydda din integritet från tusentals webb-spårningsskript och tredjeparter"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Stäng av blockering överallt"
+   },
+   "turn_on": {
+      "message": "Sätt på"
+   },
+   "turn_on_blocking": {
+      "message": "Sätt på blockering"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Aktivera annonsblockering på den här webbplatsen"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Avblockera element på den här sidan"
+   },
+   "version": {
+      "message": "Version"
+   },
+   "whitelist_this_site": {
+      "message": "Lägg till den här webbplatsen på vitlistan"
+   },
+   "whitelisted_sites": {
+      "message": "Webbplatser på vitlistan"
+   },
+   "whitelisted_text": {
+      "message": "Här kan du hantera din vitlista. När en webbplats är vitlistad är Stands helt avstängd på den webbplatsen, ingen blockering av något slag och ingen placering av annonser som sponsrar din sak."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

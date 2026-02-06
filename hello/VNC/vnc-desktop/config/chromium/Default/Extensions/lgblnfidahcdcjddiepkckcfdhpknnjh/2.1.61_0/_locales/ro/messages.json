@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker de la STANDS"
+   },
+   "add_site": {
+      "message": "Adăugați site-ul"
+   },
+   "added_sites": {
+      "message": "Site-uri adăugate"
+   },
+   "advertising": {
+      "message": "Publicitate"
+   },
+   "allowed_sites": {
+      "message": "Site-uri permise"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Blocator de reclame pentru YouTube, reclame video, Facebook, Twitch, ferestre pop-up și site-uri web."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Blocare"
+   },
+   "block_elements_on_this_page": {
+      "message": "Blocați elementele de pe această pagină"
+   },
+   "block_popups_on_this_site": {
+      "message": "Blocați popup-urile pe acest site"
+   },
+   "blocking_settings": {
+      "message": "Setări de blocare"
+   },
+   "blocking_statistic": {
+      "message": "Statistică de blocare"
+   },
+   "blocking_statistics_text": {
+      "message": "Aici aveți date istorice despre câte reclame au fost blocate într-un anumit interval de timp."
+   },
+   "blocks_on_this_page": {
+      "message": "Blocuri pe această pagină"
+   },
+   "close": {
+      "message": "Închide"
+   },
+   "cookie_banners": {
+      "message": "Notificare privind cookie-urile"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Adăugați site-uri unde preferați să fie afișate notificări privind cookie-urile"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Lista albă a notificărilor privind cookie-urile"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Blocați notificările cookie pe toate site-urile web. Vă rugăm să rețineți că unele notificări privind cookie-urile pot apărea în continuare, deoarece sunt esențiale pentru buna funcționare a anumitor site-uri web."
+   },
+   "describe_the_issue": {
+      "message": "Descrie problema"
+   },
+   "elements_blocked": {
+      "message": "$count$ elemente blocate",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Feedback"
+   },
+   "feedback_screen_text": {
+      "message": "Ne-ar plăcea să auzim opiniile, sugestiile, îngrijorările sau problemele tale cu orice pentru a putea îmbunătăți!"
+   },
+   "guided_setup": {
+      "message": "Începeți cu o configurare ghidată:"
+   },
+   "guided_setup_go": {
+      "message": "HAI SĂ ÎNCEPEM"
+   },
+   "guided_setup_later": {
+      "message": "MAI TÂRZIU"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Ascunde bannerul cookie pe acest site"
+   },
+   "in_total": {
+      "message": "în total"
+   },
+   "include_current_url": {
+      "message": "Includere URL curent în raport"
+   },
+   "items_blocked": {
+      "message": "Elemente blocate"
+   },
+   "minutes_saved": {
+      "message": "Minute economisite"
+   },
+   "more_info_on_statistics": {
+      "message": "Mai multe informatii pe ecranul 'Statistici'"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "aici"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Nu, mă voi descurca eu"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands AdBlocker blochează deja reclamele și ferestrele pop-up nedorite. Acum vom ascunde și bannerele cookie acceptând numai cookie-uri esențiale și funcționale pentru dvs."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Puteți modifica oricând această setare. Mai multe detalii sunt disponibile"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Gata cu ferestre pop-up pentru cookie-uri"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Da, blocați bannerele cookie"
+   },
+   "off": {
+      "message": "oprit"
+   },
+   "on_this_page": {
+      "message": "pe aceasta pagina"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Adauga site-uri cu ferestre pop-up permise folosind formularul de mai jos."
+   },
+   "popup_allowed_sites": {
+      "message": "Site-uri permise de ferestre pop-up"
+   },
+   "popups": {
+      "message": "Ferestre pop-up"
+   },
+   "popups_tooltip": {
+      "message": "In mod implicit, ferestrele pop-up sunt blocate pe toate site-urile, puteti permite ferestre pop-up pe anumite site-uri"
+   },
+   "privacy_policy": {
+      "message": "Politica de confidentialitate"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Ne pare rau sa auzim ca ceva nu este in regula. Va rugam sa ne spuneti despre asta si vom remedia situatia."
+   },
+   "resume_blocking": {
+      "message": "Reluati blocarea pe acest site"
+   },
+   "seconds_saved": {
+      "message": "secunde economisite"
+   },
+   "send": {
+      "message": "Trimite"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Setări"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS este oprit pe toate site-urile"
+   },
+   "statistic": {
+      "message": "Statistica"
+   },
+   "terms_of_use": {
+      "message": "Termeni și condiții"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Site-ul $host$ a fost adăugat în lista albă",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Total"
+   },
+   "tracking": {
+      "message": "Urmărire"
+   },
+   "tracking_tooltip": {
+      "message": "Protejează-ți intimitatea de mii de scripturi de urmărire web și terțe părți"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Dezactivează blocarea pretutindeni"
+   },
+   "turn_on": {
+      "message": "Activează"
+   },
+   "turn_on_blocking": {
+      "message": "Activează blocarea"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Activați blocarea anunțurilor pe acest site"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Deblochează elementele de pe această pagină"
+   },
+   "version": {
+      "message": "Versiune"
+   },
+   "whitelist_this_site": {
+      "message": "Adaugă acest site în lista albă"
+   },
+   "whitelisted_sites": {
+      "message": "Site-uri din lista albă"
+   },
+   "whitelisted_text": {
+      "message": "Aici poți gestiona lista ta albă. Când un site este adăugat în lista albă, Stands este complet dezactivat pe acel site, fără blocare de niciun fel și fără plasarea de reclame care să susțină cauza ta."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

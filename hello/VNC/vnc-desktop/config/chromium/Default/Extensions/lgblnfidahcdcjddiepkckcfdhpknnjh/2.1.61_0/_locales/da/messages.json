@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker af STANDS"
+   },
+   "add_site": {
+      "message": "Tilføj websted"
+   },
+   "added_sites": {
+      "message": "Tilføjede websteder"
+   },
+   "advertising": {
+      "message": "Annoncering"
+   },
+   "allowed_sites": {
+      "message": "Tilladte websteder"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Adblocker til YouTube, videoannoncer, Facebook, Twitch, pop-ups og websites. Bloker annoncer gratis med Stands!"
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Bloker"
+   },
+   "block_elements_on_this_page": {
+      "message": "Bloker elementer på denne side"
+   },
+   "block_popups_on_this_site": {
+      "message": "Bloker pop-ups på denne side"
+   },
+   "blocking_settings": {
+      "message": "Blokeringsindstillinger"
+   },
+   "blocking_statistic": {
+      "message": "Blokeringsstatistik"
+   },
+   "blocking_statistics_text": {
+      "message": "Her kan du se historiske data om, hvor mange reklamer der blev blokeret over en vis periode."
+   },
+   "blocks_on_this_page": {
+      "message": "Blokerede på denne side"
+   },
+   "close": {
+      "message": "Luk"
+   },
+   "cookie_banners": {
+      "message": "Cookie-meddelelse"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Tilføj websteder, hvor du foretrækker, at meddelelser om cookies skal vises"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Cookie-bemærkning hvidliste"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Bloker cookie-meddelelser på alle websteder. Bemærk venligst, at nogle cookie-meddelelser stadig kan vises, da de er afgørende for, at visse websteder fungerer korrekt."
+   },
+   "describe_the_issue": {
+      "message": "Beskriv problemet"
+   },
+   "elements_blocked": {
+      "message": "$count$ elementer blokeret",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Feedback"
+   },
+   "feedback_screen_text": {
+      "message": "Vi vil gerne høre dine tanker, forslag, bekymringer eller problemer med noget, så vi kan forbedre!"
+   },
+   "guided_setup": {
+      "message": "Start med en guidet opsætning:"
+   },
+   "guided_setup_go": {
+      "message": "LAD OS GÅ"
+   },
+   "guided_setup_later": {
+      "message": "SENERE"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Skjul cookie-banner på denne side"
+   },
+   "in_total": {
+      "message": "i alt"
+   },
+   "include_current_url": {
+      "message": "Inkludér den nuværende URL i rapporten"
+   },
+   "items_blocked": {
+      "message": "Blokerede elementer"
+   },
+   "minutes_saved": {
+      "message": "minutter sparet"
+   },
+   "more_info_on_statistics": {
+      "message": "Mere info på 'Statistik' skærmen"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "her"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Nej, jeg klarer det selv"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands AdBlocker blokerer allerede uønskede annoncer og pop-ups. Nu vil vi også skjule cookie-bannere ved kun at acceptere essentielle og funktionelle cookies for dig."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Du kan til enhver tid ændre denne indstilling. Flere detaljer er tilgængelige"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Ikke flere cookie-pop-ups"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Ja, bloker cookie-bannere"
+   },
+   "off": {
+      "message": "slukket"
+   },
+   "on_this_page": {
+      "message": "på denne side"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Tilføj websteder med tilladte popups ved hjælp af formularen nedenfor."
+   },
+   "popup_allowed_sites": {
+      "message": "Popup tilladte websteder"
+   },
+   "popups": {
+      "message": "Pop-ups"
+   },
+   "popups_tooltip": {
+      "message": "Som standard blokeres popups på alle websteder, du kan tillade popups på specifikke websteder"
+   },
+   "privacy_policy": {
+      "message": "Fortrolighedspolitik"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Vi beklager at høre, at noget ikke er i orden. Fortæl os om det, og vi vil rette det."
+   },
+   "resume_blocking": {
+      "message": "Genoptag blokering på dette websted"
+   },
+   "seconds_saved": {
+      "message": "sekunder sparet"
+   },
+   "send": {
+      "message": "Send"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Indstillinger"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS er sat på pause på alle sider"
+   },
+   "statistic": {
+      "message": "Statistik"
+   },
+   "terms_of_use": {
+      "message": "Brugsbetingelser"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Webstedet $host$ blev sat på hvidlisten",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Total"
+   },
+   "tracking": {
+      "message": "Sporing"
+   },
+   "tracking_tooltip": {
+      "message": "Beskyt dit privatliv mod tusindvis af web-tracking-scripts og tredjeparter"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Sluk blokering overalt"
+   },
+   "turn_on": {
+      "message": "Tænd for"
+   },
+   "turn_on_blocking": {
+      "message": "Tænd for blokering"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Aktiver annonceblokering på dette websted"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Fjern blokering af elementer på denne side"
+   },
+   "version": {
+      "message": "Version"
+   },
+   "whitelist_this_site": {
+      "message": "Føj denne side til whitelisten"
+   },
+   "whitelisted_sites": {
+      "message": "Whitelistede sider"
+   },
+   "whitelisted_text": {
+      "message": "Her kan du administrere din whitelist. Når en side er whitelisted, er Stands helt deaktiveret på den side, ingen blokering af nogen art og ingen visning af annoncer, der støtter din sag."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

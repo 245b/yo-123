@@ -1,0 +1,14 @@
+{
+  "ts": "2026-02-06T13:42:19.789Z",
+  "chatId": "19525f5e-e5cc-461c-a7db-ee6e04fbd120",
+  "sessionId": "19525f5e-e5cc-461c-a7db-ee6e04fbd120",
+  "model": "deepseek-chat",
+  "text": "What went wrong:\nThe system's reasoning stage attempted to process a user request to create a Python file but received a \"Bad response\" from the DeepSeek component. This indicates the external reasoning service failed to provide a valid or interpretable output for the given task.\n\nWhere the failure occurred:\nThe failure originated in the \"reasoning\" stage of the request processing pipeline, specifically during communication with the external DeepSeek service over a stream transport.\n\nWhy progress could not continue:\nThe system relies on a successful response from the DeepSeek reasoning service to formulate a concrete execution plan. Since the service returned a bad response, no valid tool plan or actionable instructions were generated. Consequently, the system had no subsequent operations to perform and could not proceed to the execution phase.\n\nWhat is missing or misconfigured:\nThe DeepSeek service connection or its internal state is misconfigured, temporarily unavailable, or is returning malformed data for the specified request. A valid, structured response from the reasoning service is required to continue.",
+  "ctx": {
+    "type": "model_failure",
+    "stage": "reasoning",
+    "source": "llm",
+    "reason": "Bad response from DeepSeek",
+    "transport": "stream"
+  }
+}

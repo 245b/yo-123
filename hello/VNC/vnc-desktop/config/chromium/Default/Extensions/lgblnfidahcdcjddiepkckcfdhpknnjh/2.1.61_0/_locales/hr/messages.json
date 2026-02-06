@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker od STANDS-a"
+   },
+   "add_site": {
+      "message": "Dodaj stranicu"
+   },
+   "added_sites": {
+      "message": "Dodane stranice"
+   },
+   "advertising": {
+      "message": "Oglašavanje"
+   },
+   "allowed_sites": {
+      "message": "Dopuštene stranice"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Blokator oglasa za YouTube, video oglase, Facebook, Twitch, skočne prozore i web stranice."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Blokiraj"
+   },
+   "block_elements_on_this_page": {
+      "message": "Blokiraj elemente na ovoj stranici"
+   },
+   "block_popups_on_this_site": {
+      "message": "Blokiraj iskačuće prozore na ovoj stranici"
+   },
+   "blocking_settings": {
+      "message": "Postavke blokiranja"
+   },
+   "blocking_statistic": {
+      "message": "Statistika blokiranja"
+   },
+   "blocking_statistics_text": {
+      "message": "Ovdje imate povijesne podatke o tome koliko je oglasa blokirano u određenom razdoblju."
+   },
+   "blocks_on_this_page": {
+      "message": "Blokovi na ovoj stranici"
+   },
+   "close": {
+      "message": "Zatvori"
+   },
+   "cookie_banners": {
+      "message": "Obavijest o kolačićima"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Dodajte stranice na kojima želite da se prikazuju obavijesti o kolačićima"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Popis dopuštenih obavijesti o kolačićima"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Blokiraj obavijesti o kolačićima na svim web stranicama. Imajte na umu da se neke obavijesti o kolačićima ipak mogu pojaviti jer su neophodni za pravilan rad određenih web stranica."
+   },
+   "describe_the_issue": {
+      "message": "Opis problema"
+   },
+   "elements_blocked": {
+      "message": "blokirano $count$ elemenata",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Povratna informacija"
+   },
+   "feedback_screen_text": {
+      "message": "Željeli bismo čuti vaše misli, prijedloge, zabrinutosti ili probleme s bilo čime kako bismo se mogli poboljšati!"
+   },
+   "guided_setup": {
+      "message": "Započnite s vođenim postavljanjem:"
+   },
+   "guided_setup_go": {
+      "message": "KRENIMO"
+   },
+   "guided_setup_later": {
+      "message": "KASNIJE"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Sakrij banner kolačića na ovoj stranici"
+   },
+   "in_total": {
+      "message": "ukupno"
+   },
+   "include_current_url": {
+      "message": "Uključite trenutni URL u izvješće"
+   },
+   "items_blocked": {
+      "message": "Blokirani elementi"
+   },
+   "minutes_saved": {
+      "message": "ušteđeno minuta"
+   },
+   "more_info_on_statistics": {
+      "message": "Više informacija na zaslonu 'Statistika'"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "ovdje"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Ne, snaći ću se sam"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands AdBlocker već blokira neželjene oglase i skočne prozore. Sada ćemo također sakriti natpise s kolačićima prihvaćajući samo bitne i funkcionalne kolačiće za vas."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Ovu postavku možete promijeniti bilo kada. Više detalja dostupno je"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Nema više skočnih prozora za kolačiće"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Da, blokiraj bannere kolačića"
+   },
+   "off": {
+      "message": "isključeno"
+   },
+   "on_this_page": {
+      "message": "na ovoj stranici"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Dodajte web-lokacije s dopuštenim iskačućim prozorima koristeći obrazac u nastavku."
+   },
+   "popup_allowed_sites": {
+      "message": "Web-lokacije s dopuštenim iskačućim prozorima"
+   },
+   "popups": {
+      "message": "Iskačući prozori"
+   },
+   "popups_tooltip": {
+      "message": "Iskačući prozori su po defaultu blokirani na svim web-lokacijama, ali možete im dopustiti na određenim web-lokacijama."
+   },
+   "privacy_policy": {
+      "message": "Pravila privatnosti"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Žao nam je što nešto nije u redu. Recite nam o tome i popravit ćemo to."
+   },
+   "resume_blocking": {
+      "message": "Nastavi blokirati na ovoj web-lokaciji"
+   },
+   "seconds_saved": {
+      "message": "ušteđeno sekundi"
+   },
+   "send": {
+      "message": "Pošalji"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Postavke"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS je pauziran na svim stranicama"
+   },
+   "statistic": {
+      "message": "Statistika"
+   },
+   "terms_of_use": {
+      "message": "Uvjeti korištenja"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Web stranica $host$ je dodana na bijelu listu",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Ukupno"
+   },
+   "tracking": {
+      "message": "Pracenje"
+   },
+   "tracking_tooltip": {
+      "message": "Zaštitite svoju privatnost od tisuća web skripti za praćenje i trećih strana"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Isključi blokiranje svugdje"
+   },
+   "turn_on": {
+      "message": "Uključi"
+   },
+   "turn_on_blocking": {
+      "message": "Uključi blokiranje"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Omogućite blokiranje oglasa na ovoj stranici"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Odblokiraj elemente na ovoj stranici"
+   },
+   "version": {
+      "message": "Verzija"
+   },
+   "whitelist_this_site": {
+      "message": "Dodaj ovu stranicu na bijelu listu"
+   },
+   "whitelisted_sites": {
+      "message": "Stranice na bijeloj listi"
+   },
+   "whitelisted_text": {
+      "message": "Ovdje možete upravljati svojom bijelom listom. Kada je stranica na bijeloj listi, Stands je potpuno onemogućen na toj stranici, nema blokiranja ni vrste oglasa koji podržavaju vašu stvar."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

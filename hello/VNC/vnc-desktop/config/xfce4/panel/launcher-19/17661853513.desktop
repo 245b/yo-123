@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=env LD_LIBRARY_PATH=/opt/chromium-libs/lib chromium --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-session-crashed-bubble --no-first-run --no-default-browser-check %u
+Icon=chromium
+StartupNotify=true
+Terminal=false
+Categories=Network;X-XFCE;X-Xfce-Toplevel;
+OnlyShowIn=XFCE;
+X-XFCE-MimeType=x-scheme-handler/http;x-scheme-handler/https;
+X-AppStream-Ignore=True
+Name=Chromium
+Comment=Browse the web
+X-XFCE-Source=file:///usr/share/applications/xfce4-web-browser.desktop

@@ -1,0 +1,33 @@
+{
+  "ts": "2026-02-06T13:38:57.822Z",
+  "chatId": "585cc352-b703-419d-8031-3d3d2844b320",
+  "sessionId": "585cc352-b703-419d-8031-3d3d2844b320",
+  "model": "deepseek-chat",
+  "messages": [
+    {
+      "role": "user",
+      "content": "hi"
+    },
+    {
+      "role": "assistant",
+      "content": "Hello. How can I help you today?"
+    },
+    {
+      "role": "user",
+      "content": "Attached files were extracted to text. Use the chunks and notes below as source material for your response."
+    },
+    {
+      "role": "user",
+      "content": "Image attachments were OCR-processed. Acknowledge receipt of the screenshot/photo, then analyze the extracted text. Do not say you cannot analyze images."
+    },
+    {
+      "role": "user",
+      "content": "[File: WhatsApp Image 2026-02-01 at 8.47.25 PM.jpeg] [Type: image/jpeg] [Chunk 1/1]\nNy 3 AEs ) hl\nu . A he)\nFer ¥ CR\n> a {ct 4 ». a \\\n\nf 7 or\n’ Lo + 3a’\nJ Algal) pyiliaal) 3 ped) |] 3 J\ni ital J) sell (pa lain Gai fis Ea) 3 3\nSapa) y cua 2 he?\n\nJol gall anliiall 5 gual pus; le 585 § yr\ncsisal / ell 3 ed\noll Jl pads go dpumi tl) Cysn £5, |\nJad 4 Lo 71\nHSIN Gil chum 2h cp SS Ji 7.\nGA aud) 5 Ti\nasian ol agua of 3g Jo ie) hes\nod\nor clas Lud Alia) bd .\ni £5,500 mb ce 130 hl Ci FILL 0 lo Ses cold\n* oh dl os\nSua Ge Aalll Jas\n5a of Aull Saale of mami 05 ype of Aly gla Jal Ja Fg sn of 4p pes a Ja .\nS81 hh LS load Bl) co id a Fails of 43a .\nIe fs kL REPS LW] pr\nLE cd clad) Guds Gl Gad NS 3\n; 2 $0 of (5 all dxias SN a) Jagr a\n3 Ag A QUAY 16 5 skal) Fgh)\nLc FR\n; GY + cla + Ai) pad a)\na od R {\non ee\n1K all! - call daa ddl dao LAN\"\n{ k x fall Yea dual Gilal da . on\nEE PL EUR RY Y\nTE de eb Z\na we Xo\nyf 5a g Alga Ay ji a $15 ll glaial yy 450 goasnds\nSeal 2 ull lula oe\n95 ipay Alle SN AT dae\nToahie ll daa Cilal Jus dao\nfell ell pel tee\nfas lia) ALBA dso\nSN |"
+    },
+    {
+      "role": "user",
+      "content": "Please analyze the attached files (WhatsApp Image 2026-02-01 at 8.47.25 PM.jpeg)."
+    }
+  ],
+  "mode": "operator-1-5-lite"
+}

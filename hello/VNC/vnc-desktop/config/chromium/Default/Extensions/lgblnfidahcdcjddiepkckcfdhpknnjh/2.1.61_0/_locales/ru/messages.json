@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker by STANDS"
+   },
+   "add_site": {
+      "message": "Добавить сайт"
+   },
+   "added_sites": {
+      "message": "Добавленные сайты"
+   },
+   "advertising": {
+      "message": "Реклама"
+   },
+   "allowed_sites": {
+      "message": "Разрешенные сайты"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Блокировщик рекламы для YouTube, видео рекламы, Facebook, Twitch, всплывающих окон и веб-сайтов."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Заблокировать"
+   },
+   "block_elements_on_this_page": {
+      "message": "Блокировать элементы на этой странице"
+   },
+   "block_popups_on_this_site": {
+      "message": "Блокировать поп-апы на этом сайте"
+   },
+   "blocking_settings": {
+      "message": "Настройки блокировки"
+   },
+   "blocking_statistic": {
+      "message": "Статистика блокировки"
+   },
+   "blocking_statistics_text": {
+      "message": "Здесь вы найдете исторические данные о том, сколько рекламных объявлений было заблокировано за определенный период."
+   },
+   "blocks_on_this_page": {
+      "message": "Заблокировано на этой странице"
+   },
+   "close": {
+      "message": "Закрыть"
+   },
+   "cookie_banners": {
+      "message": "Уведомления о cookie-баннерах"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Добавьте сайты, на которых хотите видеть уведомления о cookie-баннерами"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Сайты с cookie-баннерами"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Блокируйте уведомления о файлах cookie на всех сайтах. Однако некоторые из них могут все же появляться, так как без них сайт может работать некорректно."
+   },
+   "describe_the_issue": {
+      "message": "Опишите проблему"
+   },
+   "elements_blocked": {
+      "message": "$count$ заблокировано",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Обратная связь"
+   },
+   "feedback_screen_text": {
+      "message": "We would like to hear your thoughts, suggestions, concerns or problems with anything so we can improve!"
+   },
+   "guided_setup": {
+      "message": "Начать настройку"
+   },
+   "guided_setup_go": {
+      "message": "НАЧАТЬ"
+   },
+   "guided_setup_later": {
+      "message": "ПОЗЖЕ"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Скрыть cookie-баннеры на этом сайте"
+   },
+   "in_total": {
+      "message": "всего"
+   },
+   "include_current_url": {
+      "message": "Include current URL in the report"
+   },
+   "items_blocked": {
+      "message": "Items blocked"
+   },
+   "minutes_saved": {
+      "message": "минут сохранено"
+   },
+   "more_info_on_statistics": {
+      "message": "More info on 'Statistics' screen"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "здесь"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Нет, я разберусь сам"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands AdBlocker уже блокирует нежелательную рекламу и всплывающие окна. Теперь мы также будем скрывать баннеры о файлах cookie, автоматически принимая только необходимые и функциональные cookie-файлы."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Вы можете изменить этот настройку в любой момент. Подробнее —"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Больше никаких всплывающих окон о файлах cookie"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Да, заблокировать баннеры о файлах cookie"
+   },
+   "off": {
+      "message": "off"
+   },
+   "on_this_page": {
+      "message": "на этой странице"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Add sites with allowed popups using the form below."
+   },
+   "popup_allowed_sites": {
+      "message": "Сайты с разрешенными поп-апами"
+   },
+   "popups": {
+      "message": "Поп-апы"
+   },
+   "popups_tooltip": {
+      "message": "By default popups are blocked on all sites, you can allow popups on specific sites"
+   },
+   "privacy_policy": {
+      "message": "Privacy policy"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Проблема"
+   },
+   "report_issue_text": {
+      "message": "We are sorry to hear that something isn’t right. Please tell us about it and we’ll fix it."
+   },
+   "resume_blocking": {
+      "message": "Возобновить блокировку на этом сайте"
+   },
+   "seconds_saved": {
+      "message": "секунд сохранено"
+   },
+   "send": {
+      "message": "Отправить"
+   },
+   "send_feedback": {
+      "message": "Фидбек"
+   },
+   "settings": {
+      "message": "Настройки"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS is paused on all sites"
+   },
+   "statistic": {
+      "message": "Статистика"
+   },
+   "terms_of_use": {
+      "message": "Terms of use"
+   },
+   "the_site_was_whitelisted": {
+      "message": "The site $host$ was whitelisted",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Всего"
+   },
+   "tracking": {
+      "message": "Трекеры"
+   },
+   "tracking_tooltip": {
+      "message": "Protect your privacy from thousands of web tracking scripts and third parties"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Turn off blocking everywhere"
+   },
+   "turn_on": {
+      "message": "Включить"
+   },
+   "turn_on_blocking": {
+      "message": "Включить блокировку"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Блокировать рекламу на сайте"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Unblock elements on this page"
+   },
+   "version": {
+      "message": "Версия"
+   },
+   "whitelist_this_site": {
+      "message": "Добавить сайт в исключения"
+   },
+   "whitelisted_sites": {
+      "message": "Исключения"
+   },
+   "whitelisted_text": {
+      "message": "Here you can manage your whitelist. When a site is whitelisted, Stands is completely disabled on that site, no blocking of any kind and no placement of ads that sponsor your cause."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

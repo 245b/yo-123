@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=thunar trash:///
+Icon=user-trash
+StartupNotify=true
+Terminal=false
+Categories=Utility;X-XFCE;X-Xfce-Toplevel;
+OnlyShowIn=XFCE;
+X-AppStream-Ignore=True
+Name=Trash
+Comment=Open the trash
+X-XFCE-Source=file:///usr/share/applications/thunar.desktop

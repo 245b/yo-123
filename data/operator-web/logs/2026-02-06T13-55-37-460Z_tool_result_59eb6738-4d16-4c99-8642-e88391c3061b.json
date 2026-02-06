@@ -1,0 +1,16 @@
+{
+  "ts": "2026-02-06T13:55:27.755Z",
+  "chatId": "4a8c7468-ab99-4ba7-afa1-94b53940d9b5",
+  "sessionId": "4a8c7468-ab99-4ba7-afa1-94b53940d9b5",
+  "model": "deepseek-chat",
+  "tool": "terminal_exec",
+  "id": "78f79fea-0ae3-407a-853e-619e74d8cc46",
+  "args": {
+    "command": "mcp-search \"Trump news 2024-12-06\""
+  },
+  "result": {
+    "ok": true,
+    "output": "{\n  \"ok\": false,\n  \"error\": \"web-search: Error executing tool 'web-search': Search failed for \\\"T\nrump news 2024-12-06\\\": HTTP 202: Failed to fetch search results\",\n  \"provider\": \"ddg\"\n}",
+    "exitCode": 1
+  }
+}

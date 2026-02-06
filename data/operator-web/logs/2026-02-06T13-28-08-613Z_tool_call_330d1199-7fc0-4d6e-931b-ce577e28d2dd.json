@@ -1,0 +1,11 @@
+{
+  "ts": "2026-02-06T13:28:08.613Z",
+  "chatId": "qa-lookup-1",
+  "sessionId": "qa-lookup-1",
+  "model": "deepseek-chat",
+  "tool": "terminal_exec",
+  "id": "26d7c37b-7e4d-4f59-b98f-0fbef5097b66",
+  "args": {
+    "command": "date -u +%Y-%m-%d"
+  }
+}

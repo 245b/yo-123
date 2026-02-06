@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker by STANDS"
+   },
+   "add_site": {
+      "message": "Hozzáadás oldal"
+   },
+   "added_sites": {
+      "message": "Hozzáadott oldalak"
+   },
+   "advertising": {
+      "message": "Hirdetési"
+   },
+   "allowed_sites": {
+      "message": "Engedélyezett oldalak"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Hirdetésblokkoló YouTube-hoz, videóhirdetésekhez, Facebookhoz, Twitchhez, felugró ablakokhoz és webhelyekhez."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Blokkolás"
+   },
+   "block_elements_on_this_page": {
+      "message": "Elem blokkolása ezen az oldalon"
+   },
+   "block_popups_on_this_site": {
+      "message": "Felugró ablakok blokkolása ezen a webhelyen"
+   },
+   "blocking_settings": {
+      "message": "Blokkolási beállítások"
+   },
+   "blocking_statistic": {
+      "message": "Blokkolási statisztika"
+   },
+   "blocking_statistics_text": {
+      "message": "Itt megtalálható a történelmi adatok arról, hogy mennyi hirdetést blokkoltak bizonyos időszak alatt."
+   },
+   "blocks_on_this_page": {
+      "message": "Blokkok ezen az oldalon"
+   },
+   "close": {
+      "message": "Bezárás"
+   },
+   "cookie_banners": {
+      "message": "Cookie-figyelmeztetés"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Adjon hozzá olyan webhelyeket, ahol a cookie-kkal kapcsolatos értesítéseket szeretné megjeleníteni"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Cookie-figyelmeztetések engedélyezési listája"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Blokkolja a cookie-értesítéseket az összes webhelyen. Felhívjuk figyelmét, hogy bizonyos cookie-értesítések továbbra is megjelenhetnek, mivel ezek elengedhetetlenek bizonyos webhelyek megfelelő működéséhez."
+   },
+   "describe_the_issue": {
+      "message": "Jelezze a problémát"
+   },
+   "elements_blocked": {
+      "message": "$count$ elem blokkolva",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Visszajelzés"
+   },
+   "feedback_screen_text": {
+      "message": "Szeretnénk meghallgatni a gondolataidat, javaslataidat, aggodalmaidat vagy problémáidat bármivel kapcsolatban, hogy javíthassunk!"
+   },
+   "guided_setup": {
+      "message": "Kezdje a vezetett beállítással:"
+   },
+   "guided_setup_go": {
+      "message": "MENJÜNK"
+   },
+   "guided_setup_later": {
+      "message": "KÉSŐBB"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Cookie-banner elrejtése ezen az oldalon"
+   },
+   "in_total": {
+      "message": "összesen"
+   },
+   "include_current_url": {
+      "message": "A jelenlegi URL belefoglalása a jelentésbe"
+   },
+   "items_blocked": {
+      "message": "Elemek blokkolva"
+   },
+   "minutes_saved": {
+      "message": "percek megtakarítva"
+   },
+   "more_info_on_statistics": {
+      "message": "További információk a 'Statisztika' képernyőn"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "További részletek itt érhetők el"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Nem, megoldom magam"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Az AdBlocker már blokkolja a nem kívánt hirdetéseket és felugró ablakokat. Mostantól a cookie-szalaghirdetéseket is elrejtjük azzal, hogy csak a lényeges és funkcionális cookie-kat fogadjuk el."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Ezt a beállítást bármikor módosíthatja."
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Nincs több süti felugró ablaka"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Igen, blokkolja a cookie-bannereket"
+   },
+   "off": {
+      "message": "ki"
+   },
+   "on_this_page": {
+      "message": "ezzel az oldallal kapcsolatban"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Adjon hozzá engedélyezett felugró ablakokkal rendelkező oldalakat az alábbi űrlap segítségével."
+   },
+   "popup_allowed_sites": {
+      "message": "Felugró ablak engedélyezett oldalak"
+   },
+   "popups": {
+      "message": "Felugró ablakok"
+   },
+   "popups_tooltip": {
+      "message": "Alapértelmezés szerint a felugró ablakokat minden oldalon letiltjuk, de engedélyezheti őket bizonyos oldalakon."
+   },
+   "privacy_policy": {
+      "message": "Adatvédelmi irányelvek"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Sajnáljuk, hogy valami nem megfelelő. Kérjük, jelezze nekünk, és mi megjavítjuk."
+   },
+   "resume_blocking": {
+      "message": "Folytatás a blokkolással ezen az oldalon"
+   },
+   "seconds_saved": {
+      "message": "megtakarított másodpercek"
+   },
+   "send": {
+      "message": "Küldés"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Beállítások"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "A STANDS minden oldalon szünetel"
+   },
+   "statistic": {
+      "message": "Statisztika"
+   },
+   "terms_of_use": {
+      "message": "Felhasználási feltételek"
+   },
+   "the_site_was_whitelisted": {
+      "message": "A(z) $host$ webhely felkerült a engedélyezett listára",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Összesen"
+   },
+   "tracking": {
+      "message": "Követés"
+   },
+   "tracking_tooltip": {
+      "message": "Védelmezd meg a magánéletedet a webkövető szkriptektől és harmadik felektől"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Kikapcsolja a blokkolást mindenhol"
+   },
+   "turn_on": {
+      "message": "Bekapcsolás"
+   },
+   "turn_on_blocking": {
+      "message": "Bekapcsolja a blokkolást"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Engedélyezze a hirdetésblokkolást ezen a webhelyen"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Elemek engedélyezése ezen a lapon"
+   },
+   "version": {
+      "message": "Verzió"
+   },
+   "whitelist_this_site": {
+      "message": "Engedélyezze ezt a webhelyet"
+   },
+   "whitelisted_sites": {
+      "message": "Engedélyezett webhelyek"
+   },
+   "whitelisted_text": {
+      "message": "Itt kezelheti engedélyező listáját. Amikor egy webhely szerepel az engedélyező listán, a Stands teljesen letiltva van ezen a webhelyen, semmilyen blokkolás nem történik, és nem helyeznek el olyan hirdetéseket, amelyek támogatják az ügyét."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "STANDSによるフェア AdBlock"
+   },
+   "add_site": {
+      "message": "サイトを追加する"
+   },
+   "added_sites": {
+      "message": "追加されたサイト"
+   },
+   "advertising": {
+      "message": "広告"
+   },
+   "allowed_sites": {
+      "message": "許可されたサイト"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: YouTube、ビデオ広告、Facebook、Twitch、ポップアップ広告およびウェブサイト用の広告ブロッカー。Standsで無料で広告をブロック！"
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "ブロック"
+   },
+   "block_elements_on_this_page": {
+      "message": "このページの要素をブロックする"
+   },
+   "block_popups_on_this_site": {
+      "message": "このサイトのポップアップをブロックする"
+   },
+   "blocking_settings": {
+      "message": "ブロック設定"
+   },
+   "blocking_statistic": {
+      "message": "ブロックされた統計"
+   },
+   "blocking_statistics_text": {
+      "message": "ここでは、ある期間にどれだけの広告がブロックされたかについての過去のデータがあります。"
+   },
+   "blocks_on_this_page": {
+      "message": "このページのブロック数"
+   },
+   "close": {
+      "message": "閉じる"
+   },
+   "cookie_banners": {
+      "message": "クッキーに関する通知"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Cookie 通知を表示したいサイトを追加します"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Cookie 通知のホワイトリスト"
+   },
+   "cookie_banners_tooltip": {
+      "message": "すべての Web サイトで Cookie 通知をブロックします。一部の Cookie 通知は、特定の Web サイトが適切に機能するために不可欠であるため、引き続き表示される場合があることに注意してください。"
+   },
+   "describe_the_issue": {
+      "message": "問題を説明してください"
+   },
+   "elements_blocked": {
+      "message": "$count$ 個の要素がブロックされました",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "フィードバック"
+   },
+   "feedback_screen_text": {
+      "message": "意見、提案、懸念事項、または何か問題がある場合は、お聞かせください。改善するために役立ちます！"
+   },
+   "guided_setup": {
+      "message": "ガイド付きセットアップを開始："
+   },
+   "guided_setup_go": {
+      "message": "始めましょう"
+   },
+   "guided_setup_later": {
+      "message": "後で"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "このサイトの Cookie バナーを非表示にする"
+   },
+   "in_total": {
+      "message": "合計で"
+   },
+   "include_current_url": {
+      "message": "レポートに現在の URL を含める"
+   },
+   "items_blocked": {
+      "message": "ブロックされたアイテム"
+   },
+   "minutes_saved": {
+      "message": "節約した時間（分）"
+   },
+   "more_info_on_statistics": {
+      "message": "「統計」画面の詳細"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "詳細はこちらからご覧いただけます"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "いいえ、自分で管理します"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "AdBlocker はすでに不要な広告やポップアップをブロックしています。今後は、必須かつ機能的な Cookie のみを受け入れることで、Cookie バナーも非表示になります。"
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "この設定はいつでも変更できます。"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Cookie ポップアップはもう表示されません"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "はい、Cookie バナーをブロックします"
+   },
+   "off": {
+      "message": "オフ"
+   },
+   "on_this_page": {
+      "message": "このページで"
+   },
+   "popup_allowed_add_sites": {
+      "message": "以下のフォームを使用してポップアップを許可するサイトを追加してください。"
+   },
+   "popup_allowed_sites": {
+      "message": "ポップアップを許可するサイト"
+   },
+   "popups": {
+      "message": "ポップアップ"
+   },
+   "popups_tooltip": {
+      "message": "デフォルトではすべてのサイトでポップアップがブロックされています。特定のサイトでポップアップを許可することができます。"
+   },
+   "privacy_policy": {
+      "message": "プライバシーポリシー"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "何かが正しくないと聞いて申し訳ありません。その旨をお知らせください。修正いたします。"
+   },
+   "resume_blocking": {
+      "message": "このサイトでのブロックを再開する"
+   },
+   "seconds_saved": {
+      "message": "保存された秒数"
+   },
+   "send": {
+      "message": "送信"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "設定"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDSはすべてのサイトで一時停止中です"
+   },
+   "statistic": {
+      "message": "統計情報"
+   },
+   "terms_of_use": {
+      "message": "利用規約"
+   },
+   "the_site_was_whitelisted": {
+      "message": "サイト$host$はホワイトリストに登録されました",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "合計"
+   },
+   "tracking": {
+      "message": "トラッキング"
+   },
+   "tracking_tooltip": {
+      "message": "数千のウェブトラッキングスクリプトや第三者からプライバシーを保護します"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "すべてのブロックをオフにする"
+   },
+   "turn_on": {
+      "message": "オンにする"
+   },
+   "turn_on_blocking": {
+      "message": "ブロックをオンにする"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "このサイトで広告ブロックを有効にする"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "このページのブロック要素を解除する"
+   },
+   "version": {
+      "message": "バージョン"
+   },
+   "whitelist_this_site": {
+      "message": "このサイトをホワイトリストに登録する"
+   },
+   "whitelisted_sites": {
+      "message": "ホワイトリストに登録されたサイト"
+   },
+   "whitelisted_text": {
+      "message": "ここではホワイトリストを管理できます。サイトがホワイトリストに登録されると、そのサイトでStandsは完全に無効になり、どのような種類のブロックや広告掲載も行われません。"
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

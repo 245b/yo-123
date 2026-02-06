@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker by STANDS"
+   },
+   "add_site": {
+      "message": "Lisage sait"
+   },
+   "added_sites": {
+      "message": "Lisatud saidid"
+   },
+   "advertising": {
+      "message": "Reklaamid"
+   },
+   "allowed_sites": {
+      "message": "Lubatud saidid"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Reklaamiblokeerija YouTube'i, video reklaamide, Facebooki, Twitchi, hüpikakende ja veebisaitide jaoks."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Blokkeerima"
+   },
+   "block_elements_on_this_page": {
+      "message": "Blokeeri elemendid sellel lehel"
+   },
+   "block_popups_on_this_site": {
+      "message": "Blokeeri hüpikaknad sellel saidil"
+   },
+   "blocking_settings": {
+      "message": "Blokeerimise seaded"
+   },
+   "blocking_statistic": {
+      "message": "Blokeerimise statistika"
+   },
+   "blocking_statistics_text": {
+      "message": "Siin on ajalooline teave selle kohta, kui palju reklaame on teatud perioodi jooksul blokeeritud."
+   },
+   "blocks_on_this_page": {
+      "message": "Blokid sellel lehel"
+   },
+   "close": {
+      "message": "Sulge"
+   },
+   "cookie_banners": {
+      "message": "Küpsise teatis"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Lisage saite, kus eelistate küpsiste märguannete kuvamist"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Küpsiste teatiste lubatud loend"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Küpsiste märguannete blokeerimine kõigil veebisaitidel. Pange tähele, et mõned küpsiste teatised võivad siiski ilmuda, kuna need on teatud veebisaitide nõuetekohaseks toimimiseks hädavajalikud."
+   },
+   "describe_the_issue": {
+      "message": "Kirjelda probleemi"
+   },
+   "elements_blocked": {
+      "message": "$count$ elementi blokeeritud",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Tagasiside"
+   },
+   "feedback_screen_text": {
+      "message": "Soovime kuulda teie mõtteid, ettepanekuid, muresid või probleeme mis tahes küsimusega seoses, et saaksime parendusi teha!"
+   },
+   "guided_setup": {
+      "message": "Alustage juhendatud seadistusega:"
+   },
+   "guided_setup_go": {
+      "message": "ALUSTAME"
+   },
+   "guided_setup_later": {
+      "message": "HILJEM"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Peida sellel saidil küpsiste bänner"
+   },
+   "in_total": {
+      "message": "kokku"
+   },
+   "include_current_url": {
+      "message": "Kaasa praegune URL aruandes"
+   },
+   "items_blocked": {
+      "message": "Blokeeritud üksused"
+   },
+   "minutes_saved": {
+      "message": "säästetud minutid"
+   },
+   "more_info_on_statistics": {
+      "message": "Rohkem infot 'Statistika' ekraanil"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "siit"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Ei, ma saan sellega ise hakkama"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "AdBlocker blokeerib juba soovimatud reklaamid ja hüpikaknad. Nüüd peidame ka küpsiste bännerid, aktsepteerides teie jaoks ainult olulisi ja toimivaid küpsiseid."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Saate seda seadet igal ajal muuta. Lisateavet leiate"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Küpsiste hüpikaknaid pole enam"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Jah, blokeeri küpsiste bännerid"
+   },
+   "off": {
+      "message": "välja"
+   },
+   "on_this_page": {
+      "message": "sellel lehel"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Lisage lubatud hüpikaknadega saite allpool oleva vormi abil."
+   },
+   "popup_allowed_sites": {
+      "message": "Lubatud hüpikakende saitide loend"
+   },
+   "popups": {
+      "message": "Hüpikaknad"
+   },
+   "popups_tooltip": {
+      "message": "Vaikimisi on hüpikaknad blokeeritud kõigil saitidel, kuid saate lubada hüpikaknad konkreetsetel saitidel."
+   },
+   "privacy_policy": {
+      "message": "Privaatsuspoliitika"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Vabandame, et midagi ei ole õige. Palun andke meile sellest teada ja me parandame selle ära."
+   },
+   "resume_blocking": {
+      "message": "Jätka blokeerimist sellel saidil"
+   },
+   "seconds_saved": {
+      "message": "säästetud sekundid"
+   },
+   "send": {
+      "message": "Saada"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Seaded"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS on pausil kõigil saitidel"
+   },
+   "statistic": {
+      "message": "Statistika"
+   },
+   "terms_of_use": {
+      "message": "Kasutustingimused"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Sait $host$ on lubatud",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Kokku"
+   },
+   "tracking": {
+      "message": "Jälitus"
+   },
+   "tracking_tooltip": {
+      "message": "Kaitse oma privaatsust tuhandete veebilehe jälgimisskriptide ja kolmandate osapoolte eest"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Lülita blokeerimine igal pool välja"
+   },
+   "turn_on": {
+      "message": "Lülita sisse"
+   },
+   "turn_on_blocking": {
+      "message": "Lülita blokeerimine sisse"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Luba sellel saidil reklaamide blokeerimine"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Luba elemente sellel lehel"
+   },
+   "version": {
+      "message": "Versioon"
+   },
+   "whitelist_this_site": {
+      "message": "Lisa see sait valge nimekirja"
+   },
+   "whitelisted_sites": {
+      "message": "Valgenimekirjas olevad saidid"
+   },
+   "whitelisted_text": {
+      "message": "Siin saad hallata oma valget nimekirja. Kui sait on valgenimekirjas, on Stands selles täielikult välja lülitatud, pole blokeerimist ega ka sinu eesmärki toetavaid reklaame."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.$",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

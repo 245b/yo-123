@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+if [ "${ENABLE_COMPOSITOR:-0}" = "1" ]; then
+  xcompmgr -n >/tmp/xcompmgr.log 2>&1 &
+fi
+
+if [ "${ENABLE_DESKTOP_EXTRAS:-0}" = "1" ] && command -v xfce4-panel >/dev/null 2>&1; then
+  xfce4-panel >/tmp/xfce4-panel.log 2>&1 &
+fi
+
+if [ "${ENABLE_DESKTOP_ICONS:-1}" = "1" ]; then
+  xfdesktop >/tmp/xfdesktop.log 2>&1 &
+fi

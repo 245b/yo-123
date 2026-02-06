@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <script>
+      ;(() => {
+        const base0 = "%BASE_URL%"
+        const base = base0.endsWith("/") ? base0 : `${base0}/`
+        const loc = window.location
+        const path0 = loc.pathname || "/"
+        const path = path0.trim() || "/"
+        const cut = path.startsWith(base) ? path.slice(base.length - 1) : path
+        const rel0 = cut.trim()
+        const rel = rel0 || "/"
+        const full = rel + (loc.search || "") + (loc.hash || "")
+        window.sessionStorage.setItem("gh:path", full)
+        loc.replace(base)
+      })()
+    </script>
+  </body>
+</html>

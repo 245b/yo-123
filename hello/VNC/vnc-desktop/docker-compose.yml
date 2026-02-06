@@ -1,0 +1,62 @@
+services:
+  vnc:
+    build:
+      context: .
+    platform: linux/amd64
+    container_name: diy-vnc
+    hostname: operator
+    ports:
+      - "6080:6080"
+      - "5900:5900"
+      - "9222:9223"
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    environment:
+      - VNC_RESOLUTION=1152x648
+      - VNC_COL_DEPTH=24
+      - VNC_PORT=5900
+      - VNC_LISTEN=0.0.0.0
+      - VNC_PASSWORD=
+      - VNC_PASSWORD_FILE=
+      - NOVNC_PORT=6080
+      - EDITOR_W_PCT=30
+      - TERM_H_PCT=25
+      - RELAYOUT_INTERVAL=5
+      - RUN_USER=operator
+      - RUN_HOME=/home/operator
+      - WORKSPACE_DIR=/home/operator/Desktop
+      - WORKSPACE_ROOT=/projects/Operator
+      - PROJECTS_DIR=/projects
+      - OPERATOR_DIR=/projects/Operator
+      - TERM_SESSION_DIR=/projects/Operator
+      - DATA_DIR=/home/operator/Data
+      - DOWNLOAD_DIR=/home/operator/Data/Downloads
+      - LOW_MEMORY_MODE=1
+      - EDITOR_EXTRA_FLAGS=
+      - BROWSER_RENDERER_LIMIT=2
+      - BROWSER_MAX_MEM_MB=384
+      - BROWSER_DISABLE_EXTENSIONS=1
+      - BROWSER_EXTRA_FLAGS=
+      - BROWSER_DEBUG_PORT=9222
+      - BROWSER_DEBUG_ADDRESS=0.0.0.0
+      - BROWSER_CDP_PROXY_PORT=9223
+      - BROWSER_CDP_TARGET_HOST=127.0.0.1
+      - ENABLE_COMPOSITOR=0
+      - MEMORY_LOG_INTERVAL=60
+      - ENABLE_DESKTOP_EXTRAS=0
+      - ENABLE_DESKTOP_ICONS=1
+      - APP_RELAUNCH_DELAY=8
+      - STATUS_LOG_INTERVAL=60
+      - COMPOSITOR_CHECK_INTERVAL=30
+      - BLACK_BG_REFRESH_INTERVAL=30
+      - BROWSER_URL=about:blank
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+    volumes:
+      - ./workspace:/workspace
+      - ./workspace:/projects
+      - ./workspace:/home/operator/workspace
+      - ./desktop:/home/operator/Desktop
+      - ./data:/home/operator/Data
+      - ./config:/home/operator/.config
+    restart: unless-stopped

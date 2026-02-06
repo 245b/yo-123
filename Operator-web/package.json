@@ -1,0 +1,48 @@
+{
+  "name": "mhtml-vite-tailwind",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun scripts/dev.ts",
+    "dev:web": "vite",
+    "dev:all": "bun scripts/dev.ts",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "bun server/index.ts",
+    "dev:server": "bun --watch server/index.ts",
+    "start": "bun server/index.ts",
+    "check": "npm run typecheck && npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "stress:install": "playwright install chromium",
+    "stress": "npm run build && playwright test"
+  },
+  "dependencies": {
+    "mammoth": "^1.11.0",
+    "pdfjs-dist": "^5.4.530",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/bun": "^1.2.22",
+    "@types/node": "^22.17.1",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^18.3.24",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.6.0",
+    "autoprefixer": "^10.4.21",
+    "pngjs": "^7.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.12",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.6"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "4.53.3",
+    "@tailwindcss/oxide-win32-x64-msvc": "4.1.18",
+    "lightningcss-win32-x64-msvc": "1.30.2"
+  }
+}

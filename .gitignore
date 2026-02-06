@@ -1,0 +1,8 @@
+.env
+.codex-debugger/
+.codex-trash/
+hello/VNC/vnc-desktop/config/chromium/Singleton*
+hello/VNC/vnc-desktop/desktop/Data
+hello/VNC/vnc-desktop/desktop/Downloads
+hello/VNC/vnc-desktop/desktop/Projects
+hello/VNC/vnc-desktop/desktop/Temp Files

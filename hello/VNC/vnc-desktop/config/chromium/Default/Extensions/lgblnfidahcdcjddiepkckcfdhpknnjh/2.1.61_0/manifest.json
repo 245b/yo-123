@@ -1,0 +1,54 @@
+{
+   "action": {
+      "default_icon": {
+         "19": "icons/19.png",
+         "38": "icons/38.png"
+      },
+      "default_popup": "index.html",
+      "default_title": "Stands AdBlocker"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "browser-polyfill.js", "common/debug.js", "common/constants/block-css-value.js", "common/constants/block-types.js", "common/constants/message-types.js", "common/platform/runtime.js", "common/platform/storage-service.js", "common/platform/messages.js", "common/helpers.js", "content/helpers.js", "content/custom-blocking/dialog.js", "content/custom-blocking/overlay.js", "content/custom-blocking/block-elements.js", "content/extended-rules.js", "content/matched-nodes-counter.js", "content/set-css.js", "content/messaging.js", "content/popups.js", "content/start.js" ],
+      "match_about_blank": false,
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_start"
+   } ],
+   "declarative_net_request": {
+      "rule_resources": [ {
+         "enabled": true,
+         "id": "requests",
+         "path": "declarative_net_request/requests.json"
+      }, {
+         "enabled": true,
+         "id": "cookie-banners-requests",
+         "path": "declarative_net_request/cookie-banners-requests.json"
+      }, {
+         "enabled": true,
+         "id": "filter1-requests",
+         "path": "declarative_net_request/filter1-requests.json"
+      } ]
+   },
+   "default_locale": "en",
+   "description": "__MSG_appDesc__",
+   "host_permissions": [ "\u003Call_urls>" ],
+   "icons": {
+      "128": "icons/128.png",
+      "16": "icons/19.png",
+      "48": "icons/38.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlB8Pj+GOnpKxOAc2l9oQRbOSualZoR9vzE9UJdZP1K+oiHSka9oBKhE5xSXyZpDVzya/P/CCLnPJaZbIaks/7m2GfcmyneNgiGylYDOmuBlm8vUNDdeh8SN/t3IeEGvBa6c17JidtHJWJK8FvY/YVqWyewPgcfRsCg1yemcaA/PsvS8OVHtdt+4mXPM9c/RCm1UOANzNnkyUtU9AMY9EF2910B18jqxmhxp5qoPHtnL9ujK0mKdxLVKGV8xNLCxH0zc6gWcu9x+Sin8w7/7669Rs6yttGk28Mqg4uv5//lGUTrc/vEfKIWwr11pDF7Idw3Ev7Q3drw/LcupkcbY3lwIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_appName__",
+   "optional_permissions": [ "management" ],
+   "permissions": [ "storage", "unlimitedStorage", "activeTab", "scripting", "contextMenus", "alarms", "notifications", "tabs", "webNavigation", "declarativeNetRequest", "declarativeNetRequestFeedback" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.1.61",
+   "web_accessible_resources": [ {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "content/popups-script.js", "views/web_accessible/*" ]
+   } ]
+}

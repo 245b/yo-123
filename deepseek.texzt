@@ -1,0 +1,42 @@
+DeepSeek + DuckDuckGo MCP wiring
+
+This project exposes a web_search tool to DeepSeek. The server bridges that tool into DuckDuckGo MCP first, then Context7 MCP, then fallback web search if needed.
+
+How the tool call works (DeepSeek side)
+- DeepSeek uses Chat Completions with tools (function calling). The model returns tool_calls with function.name + JSON arguments.
+- The server executes the tool and sends the tool result back to DeepSeek, then DeepSeek continues.
+
+DuckDuckGo MCP details
+- MCP Streamable HTTP endpoint: http://HOST:8020/mcp
+- Tool name: web-search
+- Args: query (string, required), numResults (integer, optional), page (integer, optional), mode (short|detailed, optional)
+- API key: not required for DuckDuckGo MCP
+
+Context7 MCP details
+- MCP Streamable HTTP endpoint: http://HOST:8010/mcp
+- Tool name: resolve-library-id (first) then query-docs
+- Args: resolve-library-id needs query + libraryName; query-docs needs libraryId + query
+
+Environment wiring (this repo)
+- MCP_DDG_URL=http://HOST:8020/mcp
+- MCP_DDG_TOOL=web-search
+- MCP_DDG_QUERY_KEY=query
+- MCP_DDG_RESULTS_KEY=numResults
+- MCP_CTX7_URL=http://HOST:8010/mcp
+- MCP_CTX7_TOOL=resolve-library-id
+- MCP_CTX7_QUERY_KEY=libraryName
+- MCP_CTX7_RESULTS_KEY=disabled
+
+Host vs Docker
+- If the API runs on your host (npm run dev), use 127.0.0.1 for HOST.
+- If the API runs in Docker Compose, use service names (duckduckgo-mcp, context7-mcp).
+
+Quick manual test (optional)
+- POST initialize, tools/list, then tools/call to http://HOST:8020/mcp
+- Example call payload for web-search:
+  {"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"web-search","arguments":{"query":"Bun runtime","numResults":3}}}
+
+UI behavior
+- For user search requests and news queries, the server runs DuckDuckGo MCP first.
+- The UI should display "ducking..." when DuckDuckGo MCP is attempted.
+- Terminal tools are only allowed for news if fewer than 3 sources are found.

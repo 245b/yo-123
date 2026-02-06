@@ -1,0 +1,216 @@
+<style>
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        src: local('Roboto Light'), local('Roboto-Light'), url('{{path}}/fonts/Roboto-Light.woff2') format('woff2');
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        src: local('Roboto Medium'), local('Roboto-Medium'), url('{{path}}/fonts/Roboto-Medium.woff2') format('woff2');
+    }
+
+    @-webkit-keyframes stndz-block-show-window {
+        from {
+            opacity: 0.4;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    #stndz-block-window {
+        all: unset !important;
+        position: absolute !important;
+        top: 30px !important;
+        width: 350px !important;
+        background-color: rgb(73, 82, 129) !important;
+        border-radius: 5px !important;
+        box-shadow: 0 0 10px 0 rgb(50, 50, 50) !important;
+        color: white !important;
+        animation-name: stndz-block-show-window;
+        animation-duration: 300ms;
+        padding: 20px !important;
+        right: 30px !important;
+    }
+
+    #stndz-block-window * {
+        font-family: 'Roboto' !important;
+        font-weight: 300;
+        font-style: normal !important;
+        font-size: 14px !important;
+        line-height: 20px !important;
+        box-sizing: initial !important;
+    }
+
+    #stndz-block-window b {
+        font-weight: 500 !important;
+    }
+
+    #stndz-block-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        cursor: move !important;
+    }
+
+    #stndz-block-header button {
+        width: 12px !important;
+        height: 12px !important;
+        background-color: transparent !important;
+        background-image: url('{{path}}/images/close.png') !important;
+        background-size: 12px !important;
+        cursor: pointer !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    #stndz-block-check {
+        width: 18px !important;
+        height: 18px !important;
+        margin-right: 4px;
+    }
+
+    #stndz-block-hint {
+        margin: 20px auto !important;
+        width: 187px !important;
+    }
+
+    .stndz-block-button {
+        border-radius: 6px !important;
+        border: solid 1px white !important;
+        background-color: transparent !important;
+        color: white !important;
+        padding: 3px 8px !important;
+        font-weight: 400 !important;
+        cursor: pointer !important;
+    }
+
+    .stndz-block-button:hover {
+        color: rgb(73, 82, 129) !important;
+        background-color: white !important;
+    }
+
+    .stndz-block-chosen-buttons {
+        display: flex !important;
+        gap: 8px !important;
+    }
+
+    .stndz-block-content {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    #stndz-block-list {
+        padding: 0 !important;
+        margin: 10px 0 20px 0 !important;
+    }
+
+    #stndz-block-list li {
+        cursor: default !important;
+        padding: 0 0 3px 5px !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    #stndz-block-list li button {
+        background-color: transparent !important;
+        background-image: url('{{path}}/images/trash-white.png') !important;
+        background-size: 18px !important;
+        width: 18px !important;
+        height: 18px !important;
+        margin-top: 2px !important;
+        cursor: pointer !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    #stndz-block-list li div:hover {
+        background-image: url('{{path}}/images/trash-red.png') !important;
+    }
+
+    #stndz-block-list li:last-child {
+        animation-name: stndz-highlight-animation;
+        animation-duration: 2s;
+    }
+
+    .stndz-block-content-1-message {
+        color: white !important;
+        margin: 10px 0 0 !important;
+    }
+
+    .stndz-block-content-2-message {
+        color: white !important;
+        margin: 10px 0 !important;
+    }
+
+    .stndz-block-button[data-stndz-close="true"] {
+        align-self: flex-start;
+    }
+
+    @-webkit-keyframes stndz-highlight-animation {
+        0% {
+        }
+        50% {
+            background-color: #ffea6f;
+        }
+        100% {
+        }
+    }
+
+    .stndz-block-flex {
+        display: flex !important;
+    }
+
+    .stndz-block-hidden {
+        display: none !important;
+    }
+</style>
+<div id="stndz-block-window">
+  <div id="stndz-block-header">
+    <!--  Title for screen #0 -->
+    <b id="stndz-block-header-0">Click on the element you want to block</b>
+
+    <!--  Title for screen #1 -->
+    <div id="stndz-block-header-1" class="stndz-block-flex stndz-block-hidden">
+      <img id="stndz-block-check" src="{{path}}/images/check.png" alt="check" />
+      <b>Element successfully blocked</b>
+    </div>
+
+    <!--  Title for screen #3 -->
+    <b id="stndz-block-header-2" class="stndz-block-hidden">Done!</b>
+
+    <!--  Close button -->
+    <button data-stndz-close="true"></button>
+  </div>
+
+  <!--  Content for screen #0 -->
+  <div id="stndz-block-content-0" class="stndz-block-content">
+    <img id="stndz-block-hint" src="{{path}}/images/hint.png" alt="hint" />
+    <button class="stndz-block-button" data-stndz-close="true">Cancel</button>
+  </div>
+
+  <!--  Content for screen #1 -->
+  <div id="stndz-block-content-1" class="stndz-block-content stndz-block-hidden">
+    <p class="stndz-block-content-1-message">Choose another element to block or finish by pressing ‘Save’ button.</p>
+    <ul id="stndz-block-list"></ul>
+    <div class="stndz-block-chosen-buttons">
+      <button id="stndz-block-undo" class="stndz-block-button">Cancel</button>
+      <button id="stndz-block-save" class="stndz-block-button">Save</button>
+    </div>
+  </div>
+
+  <!--  Content for screen #2 -->
+  <div id="stndz-block-content-2" class="stndz-block-content stndz-block-hidden">
+    <p class="stndz-block-content-2-message">You can always change the settings in the dashboard or right-click the app
+      icon.</p>
+    <button class="stndz-block-button" data-stndz-close="true">Done (5)</button>
+  </div>
+</div>

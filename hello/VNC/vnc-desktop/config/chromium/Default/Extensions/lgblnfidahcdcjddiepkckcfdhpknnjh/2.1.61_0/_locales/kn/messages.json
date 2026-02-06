@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker by STANDS"
+   },
+   "add_site": {
+      "message": "Add site"
+   },
+   "added_sites": {
+      "message": "Added sites"
+   },
+   "advertising": {
+      "message": "Advertising"
+   },
+   "allowed_sites": {
+      "message": "Allowed sites"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "Stands AdBlocker – it's a free ad blocker for YouTube, Twitch, Pop-Ups, Video Ads, and websites. Block ads everywhere with Stands!"
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Block Element"
+   },
+   "block_elements_on_this_page": {
+      "message": "Block elements on this page"
+   },
+   "block_popups_on_this_site": {
+      "message": "ಈ ಸೈಟ್‌ನಲ್ಲಿ ಪಾಪ್-ಅಪ್‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ"
+   },
+   "blocking_settings": {
+      "message": "Blocking settings"
+   },
+   "blocking_statistic": {
+      "message": "Blocking statistic"
+   },
+   "blocking_statistics_text": {
+      "message": "Here you have historical data about how many ads were blocked over a certain period."
+   },
+   "blocks_on_this_page": {
+      "message": "Blocks on this page"
+   },
+   "close": {
+      "message": "Close"
+   },
+   "cookie_banners": {
+      "message": "ಕುಕಿ ಸೂಚನೆ"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "ಕುಕೀ ಸೂಚನೆಗಳನ್ನು ಪ್ರದರ್ಶಿಸಲು ನೀವು ಆದ್ಯತೆ ನೀಡುವ ಸೈಟ್‌ಗಳನ್ನು ಸೇರಿಸಿ"
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "ಕುಕಿ ಸೂಚನೆ ಶ್ವೇತಪಟ್ಟಿ"
+   },
+   "cookie_banners_tooltip": {
+      "message": "ಎಲ್ಲಾ ವೆಬ್‌ಸೈಟ್‌ಗಳಲ್ಲಿ ಕುಕೀ ಅಧಿಸೂಚನೆಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ. ಕೆಲವು ವೆಬ್‌ಸೈಟ್‌ಗಳ ಸರಿಯಾದ ಕಾರ್ಯನಿರ್ವಹಣೆಗೆ ಅಗತ್ಯವಾಗಿರುವ ಕಾರಣ ಕೆಲವು ಕುಕೀ ಅಧಿಸೂಚನೆಗಳು ಇನ್ನೂ ಕಾಣಿಸಿಕೊಳ್ಳಬಹುದು ಎಂಬುದನ್ನು ದಯವಿಟ್ಟು ಗಮನಿಸಿ."
+   },
+   "describe_the_issue": {
+      "message": "Describe the issue"
+   },
+   "elements_blocked": {
+      "message": "$count$ elements blocked",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Feedback"
+   },
+   "feedback_screen_text": {
+      "message": "We would like to hear your thoughts, suggestions, concerns or problems with anything so we can improve!"
+   },
+   "guided_setup": {
+      "message": "Start with a guided setup:"
+   },
+   "guided_setup_go": {
+      "message": "LET'S GO"
+   },
+   "guided_setup_later": {
+      "message": "LATER"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "ಈ ಸೈಟ್‌ನಲ್ಲಿ ಕುಕೀ ಬ್ಯಾನರ್ ಅನ್ನು ಮರೆಮಾಡಿ"
+   },
+   "in_total": {
+      "message": "in total"
+   },
+   "include_current_url": {
+      "message": "Include current URL in the report"
+   },
+   "items_blocked": {
+      "message": "Items blocked"
+   },
+   "minutes_saved": {
+      "message": "minutes saved"
+   },
+   "more_info_on_statistics": {
+      "message": "More info on 'Statistics' screen"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "ಹೆಚ್ಚಿನ ವಿವರಗಳು ಇಲ್ಲಿ ಲಭ್ಯವಿದೆ"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "ಇಲ್ಲ, ನಾನೇ ಅದನ್ನು ನಿರ್ವಹಿಸುತ್ತೇನೆ"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "ಸ್ಟ್ಯಾಂಡ್‌ಗಳು AdBlocker ಈಗಾಗಲೇ ಅನಗತ್ಯ ಜಾಹೀರಾತುಗಳು ಮತ್ತು ಪಾಪ್-ಅಪ್‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸುತ್ತದೆ. ಈಗ ನಾವು ನಿಮಗೆ ಅಗತ್ಯವಾದ ಮತ್ತು ಕ್ರಿಯಾತ್ಮಕ ಕುಕೀಗಳನ್ನು ಮಾತ್ರ ಸ್ವೀಕರಿಸುವ ಮೂಲಕ ಕುಕೀ ಬ್ಯಾನರ್‌ಗಳನ್ನು ಮರೆಮಾಡುತ್ತೇವೆ."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "ನೀವು ಈ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಯಾವಾಗ ಬೇಕಾದರೂ ಬದಲಾಯಿಸಬಹುದು."
+   },
+   "no_more_cookie_banners_title": {
+      "message": "ಇನ್ನು ಕುಕೀ ಪಾಪ್-ಅಪ್‌ಗಳಿಲ್ಲ"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "ಹೌದು, ಕುಕೀ ಬ್ಯಾನರ್‌ಗಳನ್ನು ನಿರ್ಬಂಧಿಸಿ"
+   },
+   "off": {
+      "message": "off"
+   },
+   "on_this_page": {
+      "message": "on this page"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Add sites with allowed popups using the form below."
+   },
+   "popup_allowed_sites": {
+      "message": "Popup allowed sites"
+   },
+   "popups": {
+      "message": "Popups"
+   },
+   "popups_tooltip": {
+      "message": "By default popups are blocked on all sites, you can allow popups on specific sites"
+   },
+   "privacy_policy": {
+      "message": "Privacy policy"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "We are sorry to hear that something isn’t right. Please tell us about it and we’ll fix it."
+   },
+   "resume_blocking": {
+      "message": "Resume blocking on this site"
+   },
+   "seconds_saved": {
+      "message": "seconds saved"
+   },
+   "send": {
+      "message": "Send"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Settings"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS is paused on all sites"
+   },
+   "statistic": {
+      "message": "Statistic"
+   },
+   "terms_of_use": {
+      "message": "Terms of use"
+   },
+   "the_site_was_whitelisted": {
+      "message": "The site $host$ was whitelisted",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Total"
+   },
+   "tracking": {
+      "message": "Tracking"
+   },
+   "tracking_tooltip": {
+      "message": "Protect your privacy from thousands of web tracking scripts and third parties"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Turn off blocking everywhere"
+   },
+   "turn_on": {
+      "message": "Turn on"
+   },
+   "turn_on_blocking": {
+      "message": "Turn on blocking"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "ಈ ಸೈಟ್‌ನಲ್ಲಿ ಜಾಹೀರಾತು ನಿರ್ಬಂಧಿಸುವಿಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Unblock elements on this page"
+   },
+   "version": {
+      "message": "Version"
+   },
+   "whitelist_this_site": {
+      "message": "Whitelist this site"
+   },
+   "whitelisted_sites": {
+      "message": "Whitelisted sites"
+   },
+   "whitelisted_text": {
+      "message": "Here you can manage your whitelist. When a site is whitelisted, Stands is completely disabled on that site, no blocking of any kind and no placement of ads that sponsor your cause."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

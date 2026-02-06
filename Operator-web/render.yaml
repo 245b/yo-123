@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: operator-web
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    plan: free
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: DEEPSEEK_MODEL
+        value: deepseek-chat
+      - key: DEEPSEEK_BASE_URL
+        value: https://api.deepseek.com

@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker do STANDS"
+   },
+   "add_site": {
+      "message": "Adicionar site"
+   },
+   "added_sites": {
+      "message": "Sites adicionados"
+   },
+   "advertising": {
+      "message": "Publicidade"
+   },
+   "allowed_sites": {
+      "message": "Sites permitidos"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "Stands AdBlocker — é um bloqueador de anúncios gratuito para YouTube, Twitch, pop-ups, vídeos publicitários e sites em geral. Bloqueie anúncios em todos os lugares com o Stands!"
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Bloqueador de Anúncios: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Bloquear"
+   },
+   "block_elements_on_this_page": {
+      "message": "Bloquear elementos nesta página"
+   },
+   "block_popups_on_this_site": {
+      "message": "Bloquear pop-ups neste site"
+   },
+   "blocking_settings": {
+      "message": "Configurações de bloqueio"
+   },
+   "blocking_statistic": {
+      "message": "Estatísticas de bloqueio"
+   },
+   "blocking_statistics_text": {
+      "message": "Aqui você tem dados históricos sobre quantos anúncios foram bloqueados durante um certo período."
+   },
+   "blocks_on_this_page": {
+      "message": "Bloqueios nesta página"
+   },
+   "close": {
+      "message": "Fechar"
+   },
+   "cookie_banners": {
+      "message": "Notificação de cookies"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Adicione os sites onde prefere que as notificações de cookies sejam exibidas."
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Lista branca de notificações de cookies"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Bloqueie as notificações de cookies em todos os sites. Note que algumas notificações de cookies ainda podem aparecer, pois são essenciais para o funcionamento correto de certos sites."
+   },
+   "describe_the_issue": {
+      "message": "Descreva o problema"
+   },
+   "elements_blocked": {
+      "message": "$count$ elementos bloqueados",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Feedback"
+   },
+   "feedback_screen_text": {
+      "message": "Gostaríamos de ouvir seus pensamentos, sugestões, preocupações ou problemas com qualquer coisa para que possamos melhorar!"
+   },
+   "guided_setup": {
+      "message": "Comece com uma configuração guiada:"
+   },
+   "guided_setup_go": {
+      "message": "VAMOS LÁ"
+   },
+   "guided_setup_later": {
+      "message": "DEPOIS"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Ocultar banner de cookies neste site"
+   },
+   "in_total": {
+      "message": "no total"
+   },
+   "include_current_url": {
+      "message": "Incluir URL atual no relatório"
+   },
+   "items_blocked": {
+      "message": "Itens bloqueados"
+   },
+   "minutes_saved": {
+      "message": "minutos salvos"
+   },
+   "more_info_on_statistics": {
+      "message": "Mais informações na tela 'Estatísticas'"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "aqui"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "Não, eu próprio(a) irei gerir isso"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "O Stands AdBlocker já bloqueia anúncios e pop-ups indesejados. Agora, também iremos ocultar os banners de cookies, aceitando apenas os cookies essenciais e funcionais por si."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "Pode alterar esta definição a qualquer momento. Mais detalhes estão disponíveis"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "Chega de pop-ups de cookies"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Sim, bloquear os banners de cookies"
+   },
+   "off": {
+      "message": "desativado"
+   },
+   "on_this_page": {
+      "message": "nesta página"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Adicione sites com pop-ups permitidos usando o formulário abaixo."
+   },
+   "popup_allowed_sites": {
+      "message": "Sites com pop-ups permitidos"
+   },
+   "popups": {
+      "message": "Pop-ups"
+   },
+   "popups_tooltip": {
+      "message": "Por padrão, os pop-ups são bloqueados em todos os sites. Você pode permitir pop-ups em sites específicos"
+   },
+   "privacy_policy": {
+      "message": "Política de privacidade"
+   },
+   "rate_stands_adblocker": {
+      "message": "Gosta do Stands AdBlocker? Uma avaliação rápida significaria muito!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Lamentamos saber que algo não está certo. Por favor, nos informe sobre isso e corrigiremos o problema."
+   },
+   "resume_blocking": {
+      "message": "Retomar o bloqueio neste site"
+   },
+   "seconds_saved": {
+      "message": "segundos salvos"
+   },
+   "send": {
+      "message": "Enviar."
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Configurações."
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS está pausado em todos os sites"
+   },
+   "statistic": {
+      "message": "Estatística"
+   },
+   "terms_of_use": {
+      "message": "Termos de uso"
+   },
+   "the_site_was_whitelisted": {
+      "message": "O site $host$ foi adicionado à lista de permissões",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Total"
+   },
+   "tracking": {
+      "message": "Rastreamento"
+   },
+   "tracking_tooltip": {
+      "message": "Proteja sua privacidade de milhares de scripts de rastreamento na web e terceiros."
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Desativar bloqueio em todos os lugares"
+   },
+   "turn_on": {
+      "message": "Ligar"
+   },
+   "turn_on_blocking": {
+      "message": "Ativar bloqueio"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Bloquear anúncios neste site"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Desbloquear elementos nesta página"
+   },
+   "version": {
+      "message": "Versão"
+   },
+   "whitelist_this_site": {
+      "message": "Colocar este site na lista branca"
+   },
+   "whitelisted_sites": {
+      "message": "Sites da lista branca"
+   },
+   "whitelisted_text": {
+      "message": "Aqui você pode gerenciar sua lista branca. Quando um site é adicionado à lista branca, o Stands é completamente desativado nesse site, nenhum bloqueio de qualquer tipo e nenhum anúncio que patrocina sua causa é exibido."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Navegue com mais tranquilidade! Bloqueámos $ads$ anúncios e $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}

@@ -1,0 +1,186 @@
+services:
+  operator-web:
+    build:
+      context: ./Operator-web
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "bun", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    environment:
+      - PORT=3000
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - REQUEST_TIMEOUT_MS=${REQUEST_TIMEOUT_MS}
+      - DEEPSEEK_TIMEOUT_MS=${DEEPSEEK_TIMEOUT_MS}
+      - WEB_FETCH_TIMEOUT_MS=${WEB_FETCH_TIMEOUT_MS}
+      - TERM_AGENT_TOKEN=${TERM_AGENT_TOKEN}
+      - TERM_AGENT_URL=${TERM_AGENT_URL:-http://workspace:7682}
+      - TERM_AGENT_TIMEOUT_MS=${TERM_AGENT_TIMEOUT_MS}
+      - TERM_SESSION_ID=${TERM_SESSION_ID:-}
+      - SEARCH_MODE=${SEARCH_MODE:-terminal}
+      - ALLOW_TERMINAL_EXEC=${ALLOW_TERMINAL_EXEC}
+      - TOOL_BUDGET_TERMINAL=${TOOL_BUDGET_TERMINAL}
+      - AGENT_MAX_STEPS=${AGENT_MAX_STEPS}
+      - DEEPSEEK_MAX_STEPS=${DEEPSEEK_MAX_STEPS}
+      - MCP_PROTOCOL_VERSION=${MCP_PROTOCOL_VERSION}
+      - MCP_DDG_URL=${MCP_DDG_URL}
+      - MCP_DDG_TOOL=${MCP_DDG_TOOL}
+      - MCP_DDG_HEADERS=${MCP_DDG_HEADERS}
+      - MCP_DDG_TOKEN=${MCP_DDG_TOKEN}
+      - MCP_DDG_TOKEN_HEADER=${MCP_DDG_TOKEN_HEADER}
+      - MCP_DDG_TOKEN_PREFIX=${MCP_DDG_TOKEN_PREFIX}
+      - MCP_DDG_TIMEOUT_MS=${MCP_DDG_TIMEOUT_MS}
+      - MCP_DDG_PROTOCOL_VERSION=${MCP_DDG_PROTOCOL_VERSION}
+      - MCP_DDG_ARGS=${MCP_DDG_ARGS}
+      - MCP_DDG_QUERY_KEY=${MCP_DDG_QUERY_KEY}
+      - MCP_DDG_RESULTS_KEY=${MCP_DDG_RESULTS_KEY}
+      - MCP_CTX7_URL=${MCP_CTX7_URL}
+      - MCP_CTX7_TOOL=${MCP_CTX7_TOOL}
+      - MCP_CTX7_TOOL_RESOLVE=${MCP_CTX7_TOOL_RESOLVE}
+      - MCP_CTX7_TOOL_QUERY=${MCP_CTX7_TOOL_QUERY}
+      - MCP_CTX7_HEADERS=${MCP_CTX7_HEADERS}
+      - MCP_CTX7_TOKEN=${MCP_CTX7_TOKEN}
+      - MCP_CTX7_TOKEN_HEADER=${MCP_CTX7_TOKEN_HEADER}
+      - MCP_CTX7_TOKEN_PREFIX=${MCP_CTX7_TOKEN_PREFIX}
+      - MCP_CTX7_TIMEOUT_MS=${MCP_CTX7_TIMEOUT_MS}
+      - MCP_CTX7_RETRIES=${MCP_CTX7_RETRIES}
+      - MCP_CTX7_RETRY_DELAY_MS=${MCP_CTX7_RETRY_DELAY_MS}
+      - MCP_CTX7_PROTOCOL_VERSION=${MCP_CTX7_PROTOCOL_VERSION}
+      - MCP_CTX7_ARGS=${MCP_CTX7_ARGS}
+      - MCP_CTX7_RESOLVE_ARGS=${MCP_CTX7_RESOLVE_ARGS}
+      - MCP_CTX7_QUERY_ARGS=${MCP_CTX7_QUERY_ARGS}
+      - MCP_CTX7_QUERY_KEY=${MCP_CTX7_QUERY_KEY}
+      - MCP_CTX7_LIBRARY_NAME_KEY=${MCP_CTX7_LIBRARY_NAME_KEY}
+      - MCP_CTX7_LIBRARY_KEY=${MCP_CTX7_LIBRARY_KEY}
+      - MCP_CTX7_RESULTS_KEY=${MCP_CTX7_RESULTS_KEY}
+      - OPERATOR_DATA_DIR=/app/data
+    volumes:
+      - ./data/operator-web:/app/data
+    depends_on:
+      - workspace
+      - duckduckgo-mcp
+      - context7-mcp
+    networks:
+      - agent
+
+  duckduckgo-mcp:
+    image: mekayelanik/duckduckgo-mcp:latest
+    environment:
+      - PROTOCOL=SHTTP
+      - HOST=0.0.0.0
+      - PORT=8020
+    ports:
+      - "8020:8020"
+    networks:
+      - agent
+    restart: unless-stopped
+
+  context7-mcp:
+    image: mekayelanik/context7-mcp:latest
+    environment:
+      - PROTOCOL=SHTTP
+      - HOST=0.0.0.0
+      - PORT=8010
+    ports:
+      - "8010:8010"
+    networks:
+      - agent
+    restart: unless-stopped
+
+  workspace:
+    build:
+      context: ./hello/VNC/vnc-desktop
+    platform: linux/amd64
+    container_name: workspace
+    hostname: operator
+    environment:
+      - TERM_AGENT_TOKEN=${TERM_AGENT_TOKEN}
+      - TERM_AGENT_PERMS=${TERM_AGENT_PERMS:-all}
+      - TERM_AGENT_PORT=7682
+      - TTYD_PORT=7681
+      - TTYD_BASE_PATH=/terminal
+      - TTYD_PING_INTERVAL=30
+      - TERM_SESSION_ID=${TERM_SESSION_ID:-}
+      - RUN_USER=operator
+      - RUN_HOME=/home/operator
+      - WORKSPACE_DIR=/home/operator/Desktop
+      - WORKSPACE_ROOT=/projects/Operator
+      - PROJECTS_DIR=/projects
+      - OPERATOR_DIR=/projects/Operator
+      - TERM_SESSION_DIR=/projects/Operator
+      - VNC_RESOLUTION=1152x648
+      - VNC_COL_DEPTH=24
+      - VNC_PORT=5900
+      - VNC_LISTEN=0.0.0.0
+      - VNC_PASSWORD=
+      - VNC_PASSWORD_FILE=
+      - NOVNC_PORT=6080
+      - EDITOR_W_PCT=30
+      - TERM_H_PCT=25
+      - RELAYOUT_INTERVAL=5
+      - DATA_DIR=/home/operator/Data
+      - DOWNLOAD_DIR=/home/operator/Data/Downloads
+      - LOW_MEMORY_MODE=1
+      - EDITOR_EXTRA_FLAGS=
+      - BROWSER_RENDERER_LIMIT=2
+      - BROWSER_MAX_MEM_MB=384
+      - BROWSER_DISABLE_EXTENSIONS=1
+      - BROWSER_EXTRA_FLAGS=
+      - BROWSER_DEBUG_PORT=9222
+      - BROWSER_DEBUG_ADDRESS=0.0.0.0
+      - BROWSER_CDP_PROXY_PORT=9223
+      - BROWSER_CDP_TARGET_HOST=127.0.0.1
+      - ENABLE_COMPOSITOR=0
+      - MEMORY_LOG_INTERVAL=60
+      - ENABLE_DESKTOP_EXTRAS=0
+      - ENABLE_DESKTOP_ICONS=1
+      - APP_RELAUNCH_DELAY=8
+      - STATUS_LOG_INTERVAL=60
+      - COMPOSITOR_CHECK_INTERVAL=30
+      - BLACK_BG_REFRESH_INTERVAL=30
+      - BROWSER_URL=about:blank
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - MCP_CTX7_URL=${MCP_CTX7_URL}
+      - MCP_CTX7_TOOL=${MCP_CTX7_TOOL}
+      - MCP_CTX7_TOOL_RESOLVE=${MCP_CTX7_TOOL_RESOLVE}
+      - MCP_CTX7_TOOL_QUERY=${MCP_CTX7_TOOL_QUERY}
+      - MCP_CTX7_HEADERS=${MCP_CTX7_HEADERS}
+      - MCP_CTX7_TOKEN=${MCP_CTX7_TOKEN}
+      - MCP_CTX7_TOKEN_HEADER=${MCP_CTX7_TOKEN_HEADER}
+      - MCP_CTX7_TOKEN_PREFIX=${MCP_CTX7_TOKEN_PREFIX}
+      - MCP_CTX7_TIMEOUT_MS=${MCP_CTX7_TIMEOUT_MS}
+      - MCP_CTX7_RETRIES=${MCP_CTX7_RETRIES}
+      - MCP_CTX7_RETRY_DELAY_MS=${MCP_CTX7_RETRY_DELAY_MS}
+      - MCP_CTX7_PROTOCOL_VERSION=${MCP_CTX7_PROTOCOL_VERSION}
+      - MCP_CTX7_ARGS=${MCP_CTX7_ARGS}
+      - MCP_CTX7_RESOLVE_ARGS=${MCP_CTX7_RESOLVE_ARGS}
+      - MCP_CTX7_QUERY_ARGS=${MCP_CTX7_QUERY_ARGS}
+      - MCP_CTX7_QUERY_KEY=${MCP_CTX7_QUERY_KEY}
+      - MCP_CTX7_LIBRARY_NAME_KEY=${MCP_CTX7_LIBRARY_NAME_KEY}
+      - MCP_CTX7_LIBRARY_KEY=${MCP_CTX7_LIBRARY_KEY}
+      - MCP_CTX7_RESULTS_KEY=${MCP_CTX7_RESULTS_KEY}
+    expose:
+      - "7681"
+      - "7682"
+    ports:
+      - "7681:7681"
+      - "7682:7682"
+    volumes:
+      - ./hello/VNC/vnc-desktop/workspace:/workspace
+      - ./hello/VNC/vnc-desktop/workspace:/projects
+      - ./hello/VNC/vnc-desktop/workspace:/home/operator/workspace
+      - ./hello/VNC/vnc-desktop/desktop:/home/operator/Desktop
+      - ./data/workspace:/home/operator/Data
+      - ./hello/VNC/vnc-desktop/config:/home/operator/.config
+      - ./data/workspace/logs:/home/operator/.logs
+    restart: unless-stopped
+    networks:
+      - agent
+
+networks:
+  agent:
+    driver: bridge

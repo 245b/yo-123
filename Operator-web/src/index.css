@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --background-operator-gray: rgb(24 24 27);
+  --background-operator-white: rgb(39 39 42);
+  --fill-tsp-gray-main: rgba(255, 255, 255, 0.12);
+  --fill-tsp-white-main: rgba(255, 255, 255, 0.08);
+  --fill-tsp-white-dark: rgba(255, 255, 255, 0.12);
+  --fill-tsp-white-light: rgba(255, 255, 255, 0.06);
+  --text-primary: rgb(244 244 245);
+  --text-tertiary: rgba(244, 244, 245, 0.7);
+  --text-disable: rgba(244, 244, 245, 0.45);
+  --text-secondary: rgba(244, 244, 245, 0.85);
+  --icon-primary: rgb(244 244 245);
+  --icon-tertiary: rgba(244, 244, 245, 0.7);
+  --border-main: rgba(255, 255, 255, 0.12);
+  --border-dark: rgba(255, 255, 255, 0.1);
+  --border-btn-main: rgba(255, 255, 255, 0.12);
+  --Button-primary-black: rgb(0 0 0);
+  --text-onblack: rgb(244 244 245);
+  --theme-shadow-s2: rgba(0, 0, 0, 0.4);
+  --theme-shadow-s3: rgba(0, 0, 0, 0.25);
+  --function-error: rgb(239 68 68);
+}
+
+.ms_sb {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fill-tsp-gray-main, rgba(255, 255, 255, 0.16)) transparent;
+}
+
+.ms_sb::-webkit-scrollbar {
+  width: 10px;
+}
+
+.ms_sb::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ms_sb::-webkit-scrollbar-thumb {
+  background-color: var(--fill-tsp-gray-main, rgba(255, 255, 255, 0.18));
+  border-radius: 9999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+.ms_sb::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fill-tsp-gray-main, rgba(255, 255, 255, 0.24));
+}
+
+.ms_ip {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.ms_ip:-webkit-autofill,
+.ms_ip:-webkit-autofill:hover,
+.ms_ip:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary, #fff);
+  caret-color: var(--text-primary, #fff);
+  box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.text-token-text-secondary {
+  color: var(--text-secondary);
+}
+
+.hover\:bg-token-bg-secondary:hover {
+  background: var(--fill-tsp-gray-main);
+}

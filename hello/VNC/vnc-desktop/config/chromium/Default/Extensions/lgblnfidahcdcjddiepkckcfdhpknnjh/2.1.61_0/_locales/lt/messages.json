@@ -1,0 +1,239 @@
+{
+   "adblocker_by_stands": {
+      "message": "AdBlocker pagal STANDS"
+   },
+   "add_site": {
+      "message": "Pridėti svetainę"
+   },
+   "added_sites": {
+      "message": "Pridėtos svetainės"
+   },
+   "advertising": {
+      "message": "Skelbimai"
+   },
+   "allowed_sites": {
+      "message": "Leidžiamos svetainės"
+   },
+   "appDesc": {
+      "description": "Description of Application",
+      "message": "AdBlocker Stands: Reklamos blokatorius YouTube, vaizdo įrašų reklamoms, Facebook, Twitch, iššokantiems langams ir svetainėms."
+   },
+   "appName": {
+      "description": "Name of Application",
+      "message": "Ad Blocker: Stands AdBlocker"
+   },
+   "block_element": {
+      "message": "Blokuoti"
+   },
+   "block_elements_on_this_page": {
+      "message": "Blokuoti elementus šioje puslapyje"
+   },
+   "block_popups_on_this_site": {
+      "message": "Blokuoti iššokančius langus šioje svetainėje"
+   },
+   "blocking_settings": {
+      "message": "Blokojimo nustatymai"
+   },
+   "blocking_statistic": {
+      "message": "Blokojimo statistika"
+   },
+   "blocking_statistics_text": {
+      "message": "Čia galite rasti istorinę informaciją apie tai, kiek reklaminių skelbimų buvo užblokuota per tam tikrą laikotarpį."
+   },
+   "blocks_on_this_page": {
+      "message": "Blokuojama šiame puslapyje"
+   },
+   "close": {
+      "message": "Uždaryti"
+   },
+   "cookie_banners": {
+      "message": "Cookie notice"
+   },
+   "cookie_banners_allowed_add_sites": {
+      "message": "Add sites where you prefer cookie notices to be displayed."
+   },
+   "cookie_banners_allowed_sites": {
+      "message": "Cookie notice whitelist"
+   },
+   "cookie_banners_tooltip": {
+      "message": "Block cookie notifications on all websites. Please note that some cookie notifications may still appear, as they are essential for the proper functioning of certain websites."
+   },
+   "describe_the_issue": {
+      "message": "Aprašykite problemą"
+   },
+   "elements_blocked": {
+      "message": "$count$ elementų blokuota",
+      "placeholders": {
+         "count": {
+            "content": "$1",
+            "example": "0"
+         }
+      }
+   },
+   "feedback": {
+      "message": "Atsiliepimai"
+   },
+   "feedback_screen_text": {
+      "message": "Norėtume išgirsti jūsų mintis, pasiūlymus, rūpesčius ar problemas, kad galėtume pagerinti!"
+   },
+   "guided_setup": {
+      "message": "Pradėti su nurodytu sąrankos procesu:"
+   },
+   "guided_setup_go": {
+      "message": "EIKIME"
+   },
+   "guided_setup_later": {
+      "message": "VĖLIAU"
+   },
+   "hide_cookie_banners_on_this_site": {
+      "message": "Hide cookie banners on this site"
+   },
+   "in_total": {
+      "message": "viso"
+   },
+   "include_current_url": {
+      "message": "Įtraukti dabartinę URL adresą į ataskaitą"
+   },
+   "items_blocked": {
+      "message": "Blokuoti elementai"
+   },
+   "minutes_saved": {
+      "message": "sutaupytos minutės"
+   },
+   "more_info_on_statistics": {
+      "message": "Daugiau informacijos galite rasti „Statistikos“ ekrane"
+   },
+   "no_more_cookie_banners_link": {
+      "message": "here"
+   },
+   "no_more_cookie_banners_no_button": {
+      "message": "No, I'll manage it myself"
+   },
+   "no_more_cookie_banners_text1": {
+      "message": "Stands AdBlocker already blocks unwanted ads and pop-ups. Now we'll also hide cookie banners by accepting only essential and functional cookies for you."
+   },
+   "no_more_cookie_banners_text2": {
+      "message": "You can change this setting anytime. More details are available"
+   },
+   "no_more_cookie_banners_title": {
+      "message": "No more cookie banners"
+   },
+   "no_more_cookie_banners_yes_button": {
+      "message": "Yes, block cookie banners"
+   },
+   "off": {
+      "message": "išjungta"
+   },
+   "on_this_page": {
+      "message": "šiame puslapyje"
+   },
+   "popup_allowed_add_sites": {
+      "message": "Pridėkite svetaines su leidžiamomis iššokančiomis reklamomis naudodami žemiau esantį formą."
+   },
+   "popup_allowed_sites": {
+      "message": "Iššokančių reklamų leidžiamos svetainės"
+   },
+   "popups": {
+      "message": "Iššokančios reklamos"
+   },
+   "popups_tooltip": {
+      "message": "Pagal numatytuosius nustatymus iššokančios reklamos blokuojamos visose svetainėse, tačiau galite leisti iššokančias reklamas konkrečiose svetainėse"
+   },
+   "privacy_policy": {
+      "message": "Privatumo politika"
+   },
+   "rate_stands_adblocker": {
+      "message": "Like Stands AdBlocker? A quick rating would mean a lot!"
+   },
+   "report_an_issue": {
+      "message": "Report an issue"
+   },
+   "report_issue_text": {
+      "message": "Mums labai gaila girdėti, kad kažkas nesutampa. Pasakykite mums apie tai, ir mes tai ištaisysime."
+   },
+   "resume_blocking": {
+      "message": "Vėl blokuoti šioje svetainėje"
+   },
+   "seconds_saved": {
+      "message": "sutaupyti sekundės"
+   },
+   "send": {
+      "message": "Siųsti"
+   },
+   "send_feedback": {
+      "message": "Send feedback"
+   },
+   "settings": {
+      "message": "Nustatymai"
+   },
+   "stands": {
+      "message": "STANDS"
+   },
+   "stands_is_paused": {
+      "message": "STANDS pauzė visose svetainėse"
+   },
+   "statistic": {
+      "message": "Statistika"
+   },
+   "terms_of_use": {
+      "message": "Naudotojo sutartis"
+   },
+   "the_site_was_whitelisted": {
+      "message": "Svetainė $host$ buvo įtraukta į baltąjį sąrašą",
+      "placeholders": {
+         "host": {
+            "content": "$1",
+            "example": "-"
+         }
+      }
+   },
+   "total": {
+      "message": "Iš viso"
+   },
+   "tracking": {
+      "message": "Sekimas"
+   },
+   "tracking_tooltip": {
+      "message": "Apsaugokite savo privatumą nuo tūkstančių internetinių sekimo scenarijų ir trečiųjų šalių"
+   },
+   "turn_off_blocking_everywhere": {
+      "message": "Išjungti blokavimą visur"
+   },
+   "turn_on": {
+      "message": "Įjungti"
+   },
+   "turn_on_blocking": {
+      "message": "Įjungti blokavimą"
+   },
+   "turn_on_blocking_on_this_site": {
+      "message": "Enable ad blocking on this site"
+   },
+   "unblock_elements_on_this_page": {
+      "message": "Atblokuoti elementus šioje puslapyje"
+   },
+   "version": {
+      "message": "Versija"
+   },
+   "whitelist_this_site": {
+      "message": "Pridėti šį puslapį į baltąjį sąrašą"
+   },
+   "whitelisted_sites": {
+      "message": "Baltuose sąrašuose"
+   },
+   "whitelisted_text": {
+      "message": "Čia galite tvarkyti savo baltuosius sąrašus. Kai svetainė patenka į baltąjį sąrašą, Stands visiškai išjungiamas šioje svetainėje, nėra jokio blokavimo ir reklamos, kurios remia jūsų veiklą, nėra rodomos."
+   },
+   "you_blocked_ads_popups": {
+      "message": "Your browsing just got cleaner! We've blocked $ads$ ads and $popups$ pop-ups.",
+      "placeholders": {
+         "ads": {
+            "content": "$1",
+            "example": "0"
+         },
+         "popups": {
+            "content": "$2",
+            "example": "0"
+         }
+      }
+   }
+}
