@@ -13,7 +13,7 @@ RUN set -e; \
     pacman-key --populate archlinux; \
     pacman -Syu --noconfirm --noprogressbar --ignore filesystem; \
     pacman -S --noconfirm --noprogressbar --needed \
-      ca-certificates curl wget gnupg \
+      ca-certificates curl wget gnupg unzip \
       dbus supervisor \
       xorg-server-xvfb xorg-xauth xorg-xset xorg-xsetroot xorg-xprop xorg-xdpyinfo \
       x11vnc wmctrl \
@@ -40,6 +40,18 @@ RUN set -e; \
     rm -rf /var/cache/pacman/pkg/*
 
 RUN npm install -g playwright pnpm
+
+ARG BUN_VERSION=1.3.4
+RUN set -e; \
+    arch="$(uname -m)"; \
+    if [ "$arch" = "x86_64" ]; then bun_arch="x64"; fi; \
+    if [ "$arch" = "aarch64" ]; then bun_arch="aarch64"; fi; \
+    if [ -z "${bun_arch:-}" ]; then echo "unsupported arch: $arch" >&2; exit 1; fi; \
+    curl -fsSL "https://github.com/oven-sh/bun/releases/download/bun-v${BUN_VERSION}/bun-linux-${bun_arch}.zip" -o /tmp/bun.zip; \
+    unzip -q /tmp/bun.zip -d /tmp; \
+    install -m 0755 "/tmp/bun-linux-${bun_arch}/bun" /usr/local/bin/bun; \
+    if [ -f "/tmp/bun-linux-${bun_arch}/bunx" ]; then install -m 0755 "/tmp/bun-linux-${bun_arch}/bunx" /usr/local/bin/bunx; fi; \
+    rm -rf /tmp/bun.zip "/tmp/bun-linux-${bun_arch}"
 
 ARG ICU_VERSION=75_1
 ARG ICU_TAG=75-1

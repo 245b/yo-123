@@ -15,6 +15,7 @@ export type Run = {
   ta: HTMLTextAreaElement | null
   box: Element | null
   rd?: ReadableStreamDefaultReader<Uint8Array> | null
+  ws?: WebSocket | null
   stop?: boolean
   stalled?: boolean
 }

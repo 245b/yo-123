@@ -1,5 +1,31 @@
 import path from "node:path"
 
+const isPlaceholder = (raw: string) => {
+  const t = raw.trim().toLowerCase()
+
+  if (!t) {
+    return true
+  }
+
+  if (t === "replace_me" || t === "replaceme") {
+    return true
+  }
+
+  if (t === "sk-replace_me" || t === "sk_replace_me") {
+    return true
+  }
+
+  if (t === "disabled" || t === "none") {
+    return true
+  }
+
+  if (t === "unset" || t === "null") {
+    return true
+  }
+
+  return false
+}
+
 export const loadEnv = async (root: string) => {
   const envp = path.join(root, ".env")
   const envf = Bun.file(envp)
@@ -39,7 +65,7 @@ export const loadEnv = async (root: string) => {
 
     const cur = (process.env[k] ?? "").trim()
 
-    if (cur && cur !== "sk-REPLACE_ME") {
+    if (cur && !isPlaceholder(cur)) {
       continue
     }
 

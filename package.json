@@ -1,0 +1,32 @@
+{
+  "name": "start-new",
+  "private": true,
+  "packageManager": "bun@1.2.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "Operator-web",
+    "hello/VNC/vnc-desktop"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "stress": "turbo run stress",
+    "dev": "turbo run dev --parallel",
+    "infra:vnc:check": "turbo run infra:vnc:check",
+    "infra:vnc:smoke": "turbo run infra:vnc:smoke",
+    "infra:vnc:parity": "turbo run infra:vnc:parity",
+    "registry:generate": "bun tools/generate-integrations-registry.ts",
+    "backup:runtime": "bun tools/backup-runtime-artifacts.ts",
+    "security:scan": "bun tools/scan-secrets.ts",
+    "verify": "bun run typecheck && bun run test && bun run build && bun run stress && bun run infra:vnc:check && bun run infra:vnc:smoke && bun run infra:vnc:parity && bun run security:scan"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.9",
+    "@types/node": "^25.2.3",
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2",
+    "zod": "^3.25.76"
+  }
+}

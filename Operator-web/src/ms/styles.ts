@@ -16,6 +16,8 @@ html[data-ms-w] nav{width:var(--ms-side-w, auto)!important;min-width:var(--ms-si
 #__ms_chat_more{position:absolute;top:10px;right:10px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9999px;border:0;padding:0;background:transparent;color:var(--icon-secondary,var(--icon-tertiary));opacity:0;pointer-events:none;z-index:5;cursor:pointer;transition:opacity .15s ease,background-color .15s ease;}
 [data-ms-chatbox="1"]:hover #__ms_chat_more,[data-ms-chatbox="1"]:focus-within #__ms_chat_more{opacity:1;pointer-events:auto;}
 #__ms_chat_more:hover{background:var(--fill-tsp-gray-main);}
+html[data-ms-chat-active="1"] #js-update-notification-button{display:none!important;}
+html[data-ms-chat-active="1"] #js-update-notification-button + div[aria-haspopup="dialog"]{display:none!important;}
 #chat-home-view-container{margin-top:0!important;}
 #chat-home-view-container:not(:has(#__ms_ds)){position:fixed!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;}
 html[data-ms-side="1"] #chat-home-view-container:not(:has(#__ms_ds)){left:calc(50% + (var(--ms-side-w, 0px)/2))!important;}

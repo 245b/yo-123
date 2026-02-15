@@ -12,17 +12,24 @@
     "server": "bun server/index.ts",
     "dev:server": "bun --watch server/index.ts",
     "start": "bun server/index.ts",
-    "check": "npm run typecheck && npm run build",
+    "check": "bun run typecheck && bun run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "bun test",
     "stress:install": "playwright install chromium",
-    "stress": "npm run build && playwright test"
+    "stress": "bun run build && playwright test",
+    "stress:chrome": "bun run build && playwright test --project=chrome"
   },
   "dependencies": {
     "mammoth": "^1.11.0",
+    "monaco-editor": "^0.55.1",
+    "node-pty": "^1.0.0",
     "pdfjs-dist": "^5.4.530",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tesseract.js": "^7.0.0"
+    "tesseract.js": "^7.0.0",
+    "xterm": "^5.3.0",
+    "@xterm/addon-fit": "^0.10.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
@@ -41,8 +48,11 @@
     "vite": "^6.3.6"
   },
   "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.53.3",
     "@rollup/rollup-win32-x64-msvc": "4.53.3",
+    "@tailwindcss/oxide-linux-x64-gnu": "4.1.18",
     "@tailwindcss/oxide-win32-x64-msvc": "4.1.18",
+    "lightningcss-linux-x64-gnu": "1.30.2",
     "lightningcss-win32-x64-msvc": "1.30.2"
   }
 }

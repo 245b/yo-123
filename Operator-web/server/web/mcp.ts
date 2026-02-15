@@ -1,4 +1,5 @@
 import { clean } from "../utils/text"
+import { mergeResults, normProvider, providerArgs } from "./mcp-providers"
 
 export type McpSearchItem = {
   url: string
@@ -862,88 +863,6 @@ const mcpSearch = async (cfg: McpConfig, query: string, maxResults: number, extr
   return { ok: true, results }
 }
 
-const normProvider = (raw: string) => {
-  const t = clean(raw).toLowerCase()
-
-  if (!t) {
-    return ""
-  }
-
-  if (t === "ddg" || t === "duckduckgo" || t === "duck") {
-    return "ddg"
-  }
-
-  if (t === "searxng" || t === "searx") {
-    return "searxng"
-  }
-
-  if (t === "ctx7" || t === "context7") {
-    return "ctx7"
-  }
-
-  return ""
-}
-
-const providerArgs = (id: string, kind: string) => {
-  const out: Record<string, unknown> = {}
-
-  if (id !== "searxng") {
-    return out
-  }
-
-  if (kind !== "news") {
-    return out
-  }
-
-  out.categories = "news"
-  out.time_range = "day"
-  return out
-}
-
-const mergeResults = (base: McpSearchItem[], extra: McpSearchItem[], limit: number) => {
-  if (!extra.length) {
-    return base
-  }
-
-  const out = base.slice()
-  const seen = new Set<string>()
-
-  for (var i = 0; i < out.length; i++) {
-    const url0 = clean(out[i]?.url ?? "")
-
-    if (!url0) {
-      continue
-    }
-
-    seen.add(url0)
-  }
-
-  for (var i = 0; i < extra.length; i++) {
-    if (limit > 0 && out.length >= limit) {
-      break
-    }
-
-    const row = extra[i]
-    const url = clean(row?.url ?? "")
-
-    if (!url) {
-      continue
-    }
-
-    if (seen.has(url)) {
-      continue
-    }
-
-    seen.add(url)
-    out.push(row)
-  }
-
-  if (limit > 0 && out.length > limit) {
-    return out.slice(0, limit)
-  }
-
-  return out
-}
 
 export const mcpSearchChain = async (query: string, maxResults: number, kind?: string, provider?: string) => {
   const k0 = typeof kind === "string" ? kind : ""

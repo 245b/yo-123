@@ -1,0 +1,10 @@
+{
+  "name": "@operator/web-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --cwd ../../Operator-web dev:web",
+    "build": "bun run --cwd ../../Operator-web build",
+    "typecheck": "bun run --cwd ../../Operator-web typecheck"
+  }
+}

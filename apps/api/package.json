@@ -1,0 +1,12 @@
+{
+  "name": "@operator/api-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --cwd ../../Operator-web dev:server",
+    "start": "bun run --cwd ../../Operator-web server",
+    "build": "bun run --cwd ../../Operator-web build",
+    "typecheck": "bun run --cwd ../../Operator-web typecheck",
+    "test": "bun run --cwd ../../Operator-web test"
+  }
+}

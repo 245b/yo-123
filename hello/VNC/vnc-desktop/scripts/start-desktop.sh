@@ -8,7 +8,8 @@ WORKSPACE_DIR="${WORKSPACE_DIR:-${RUN_HOME}/Desktop}"
 DATA_DIR="${DATA_DIR:-${RUN_HOME}/Data}"
 DOWNLOAD_DIR="${DOWNLOAD_DIR:-${DATA_DIR}/Downloads}"
 PROJECTS_DIR="${PROJECTS_DIR:-/projects}"
-OPERATOR_DIR="${OPERATOR_DIR:-${PROJECTS_DIR%/}/Operator}"
+OPERATOR_DIR="${OPERATOR_DIR:-${PROJECTS_DIR%/}/operator}"
+TERM_SESSION_DIR="${TERM_SESSION_DIR:-$OPERATOR_DIR}"
 TRASH_DIR="${TRASH_DIR:-/trash}"
 RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp/runtime-${RUN_USER}}"
 OPENBOX_DIR="${RUN_HOME}/.config/openbox"
@@ -43,6 +44,7 @@ mkdir -p "$DESKTOP_DIR" "$DATA_DIR" "$DOWNLOAD_DIR" "$TEMP_DIR" "$DOCS_DIR" \
   "$MUSIC_DIR" "$PICTURES_DIR" "$VIDEOS_DIR" "$TEMPLATES_DIR" "$PUBLIC_DIR"
 mkdir -p "$PROJECTS_DIR"
 mkdir -p "$OPERATOR_DIR"
+mkdir -p "$TERM_SESSION_DIR"
 
 for entry in "$PROJECTS_DIR"/* "$PROJECTS_DIR"/.[!.]* "$PROJECTS_DIR"/..?*; do
   if [ ! -e "$entry" ]; then
@@ -60,6 +62,8 @@ chown root:operator "$PROJECTS_DIR" 2>/dev/null || true
 chmod 2775 "$PROJECTS_DIR" 2>/dev/null || true
 chown root:operator "$OPERATOR_DIR" 2>/dev/null || true
 chmod 2775 "$OPERATOR_DIR" 2>/dev/null || true
+chown root:operator "$TERM_SESSION_DIR" 2>/dev/null || true
+chmod 2775 "$TERM_SESSION_DIR" 2>/dev/null || true
 ensure_symlink() {
   local target="$1"
   local link_path="$2"

@@ -1,5 +1,6 @@
 import * as ms from "../ms"
-import { toBase } from "../lib/route"
+import { clearActiveChat } from "../lib/activeChat"
+import { fromBase, toBase } from "../lib/route"
 import type { BootDeps, MsWin } from "./bootTypes"
 
 export const bootSnapshot = (d: BootDeps, doc: Document, win: Window) => {
@@ -26,12 +27,23 @@ export const bootSnapshot = (d: BootDeps, doc: Document, win: Window) => {
   const home = () => {
     const sw = win as unknown as { __ms_ds_reset?: ((keep?: boolean) => void) | null } | null
     sw?.__ms_ds_reset?.()
-    window.localStorage.removeItem("ms_chat_active")
+    clearActiveChat(window)
     window.history.replaceState(null, "", toBase("/"))
   }
 
   const fresh = () => {
     home()
+  }
+  const syncSessionFlag = () => {
+    const tw = win.parent && win.parent !== win ? win.parent : win
+    const p = fromBase(tw.location?.pathname ?? "")
+
+    if (p.startsWith("/t/")) {
+      doc.documentElement.setAttribute("data-ms-chat-active", "1")
+      return
+    }
+
+    doc.documentElement.removeAttribute("data-ms-chat-active")
   }
   const fn = (ev: Event) => {
     const path = ev.composedPath()
@@ -142,11 +154,21 @@ export const bootSnapshot = (d: BootDeps, doc: Document, win: Window) => {
 
   const root = doc.querySelector("browser-mcp-container")?.shadowRoot ?? null
 
+  var sid = 0
+  const syncLoop = () => {
+    sid = 0
+    syncSessionFlag()
+    sid = win.setTimeout(syncLoop, 180)
+  }
+
   win.addEventListener("pointerdown", fn, true)
   root?.addEventListener("pointerdown", fn, true)
   win.addEventListener("click", fn, true)
   root?.addEventListener("click", fn, true)
+  syncSessionFlag()
+  sid = win.setTimeout(syncLoop, 180)
   d.ca.current = () => {
+    win.clearTimeout(sid)
     win.removeEventListener("pointerdown", fn, true)
     root?.removeEventListener("pointerdown", fn, true)
     win.removeEventListener("click", fn, true)

@@ -1,39 +1,20 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import * as ms from "../ms"
-import { loadOpen, saveOpen } from "./lib/store"
+import { useShellLayoutController } from "../features/layout/useShellLayoutController"
 import { createBoot } from "./boot"
 import { useRouteSync } from "./useRouteSync"
 import Frames from "./ui/Frames"
 import Attachments from "./ui/Attachments"
-
-type StopWin = Window & {
-  __ms_ds_busy?: boolean
-  __ms_ds_abort?: AbortController | null
-  __ms_ds_run?: unknown
-  __ms_ds_stop?: ((why?: string) => void) | null
-}
+import RightPanel from "./ui/RightPanel"
+import { useCreatedArtifacts } from "./ui/useCreatedArtifacts"
+import { uiTokens } from "../../../packages/ui/src"
 
 const App = () => {
   const dur = 200
   const pad = 12
   const collapsed = 52
 
-  const s1 = useState<boolean>(loadOpen)
-  const open = s1[0]
-  const setOpen = s1[1]
-
-  const s2 = useState<number>(0)
-  const x = s2[0]
-  const setX = s2[1]
-
-  const s3 = useState<number>(300)
-  const w = s3[0]
-  const setW = s3[1]
-
-  const s4 = useState<boolean>(true)
-  const live = s4[0]
-  const setLive = s4[1]
-
+  const created = useCreatedArtifacts()
   const ia = useRef<HTMLIFrameElement | null>(null)
   const ib = useRef<HTMLIFrameElement | null>(null)
   const ca = useRef<(() => void) | null>(null)
@@ -41,6 +22,21 @@ const App = () => {
   const shift = useRef<number>(0)
   const sd = useRef<Document | null>(null)
   const vr = useRef<string>("")
+  const layout = useShellLayoutController({
+    artifactSignal: created.hasNewArtifact,
+    mainFrameRef: ia,
+  })
+  const open = layout.open
+  const setOpen = layout.setOpen
+  const x = layout.x
+  const setX = layout.setX
+  const w = layout.w
+  const setW = layout.setW
+  const live = layout.live
+  const rightOpen = layout.rightOpen
+  const setRightOpen = layout.setRightOpen
+  const rightW = layout.rightW
+  const vw = layout.vw
 
   if (!vr.current) {
     const id0 = window.crypto?.randomUUID?.() ?? ""
@@ -62,10 +58,6 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    setLive(true)
-  }, [open])
-
-  useEffect(() => {
     const doc = ib.current?.contentDocument ?? null
 
     if (!doc) {
@@ -79,50 +71,6 @@ const App = () => {
 
     doc.documentElement.setAttribute("data-ms-collapsed", "1")
   }, [open])
-
-  useEffect(() => saveOpen(open), [open])
-
-  useEffect(() => {
-    const fn = (ev: Event) => {
-      const k0 = (ev as KeyboardEvent).key ?? ""
-      const k1 = k0 || ((ev as KeyboardEvent).code ?? "")
-      const k = k1.toLowerCase()
-
-      if (k !== "escape" && k !== "esc") {
-        return
-      }
-
-      const el = ia.current
-      const w0 = el?.contentWindow ?? null
-      const w = w0 as StopWin | null
-
-      if (!w) {
-        return
-      }
-
-      const stop = w.__ms_ds_stop
-
-      if (typeof stop !== "function") {
-        return
-      }
-
-      const busy = w.__ms_ds_busy === true
-      const ac = w.__ms_ds_abort ?? null
-      const run = w.__ms_ds_run ?? null
-      const ok = busy || ac || run
-
-      if (!ok) {
-        return
-      }
-
-      stop("Stopped")
-      ev.preventDefault()
-      ev.stopPropagation()
-    }
-
-    window.addEventListener("keydown", fn, true)
-    return () => window.removeEventListener("keydown", fn, true)
-  }, [])
 
   useEffect(() => {
     const el = ia.current
@@ -139,6 +87,11 @@ const App = () => {
   }, [open, w])
 
   const sideW = open ? w : collapsed
+  const maxRight = Math.max(320, Math.floor(vw * 0.94))
+  const rightPx0 = Math.min(rightW, maxRight)
+  const rightPx = rightOpen ? rightPx0 : 0
+  const chatW = rightOpen ? `calc(100% - ${rightPx}px)` : "100%"
+  const fillW = `${rightPx}px`
   const boot = createBoot({
     pad,
     dur,
@@ -191,7 +144,42 @@ const App = () => {
   return (
     <div className="h-screen w-screen overflow-hidden bg-zinc-950 text-zinc-50">
       <div className="relative h-full w-full overflow-hidden bg-zinc-950">
-        <Frames open={open} w={sideW} x={x} dur={dur} live={live} ia={ia} ib={ib} boot={boot} />
+        <div
+          data-ms-right-fill={rightOpen ? "1" : "0"}
+          className="pointer-events-none absolute inset-y-0 right-0 z-40"
+          style={{
+            width: fillW,
+            background: uiTokens.panelBackground,
+            borderLeft: `1px solid ${uiTokens.borderColor}`,
+            transitionProperty: "width",
+            transitionDuration: `${dur}ms`,
+            transitionTimingFunction: "ease-in-out",
+          }}
+        />
+        <div
+          data-ms-chat-shell="1"
+          className="relative h-full"
+          style={{
+            width: chatW,
+            transitionProperty: "width",
+            transitionDuration: `${dur}ms`,
+            transitionTimingFunction: "ease-in-out",
+          }}
+        >
+          <Frames open={open} w={sideW} x={x} dur={dur} live={live} ia={ia} ib={ib} boot={boot} />
+        </div>
+        <RightPanel
+          open={rightOpen}
+          w={rightW}
+          dur={dur}
+          tree={created.tree}
+          artifacts={created.artifacts}
+          selectedPath={created.selectedPath}
+          selectedContent={created.selectedContent}
+          onSelectPath={created.setSelectedPath}
+          onResize={layout.onRightResize}
+          onSetOpen={setRightOpen}
+        />
       </div>
       <Attachments ia={ia} />
     </div>

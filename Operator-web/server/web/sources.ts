@@ -148,16 +148,38 @@ export const webAllow = baseAllow.concat(vendorAllow)
 
 export const webBlock = ["bbc.com", "bbc.co.uk"]
 
+const isPlaceholder = (v: string) => {
+  const t = v.trim().toLowerCase()
+
+  if (!t) {
+    return true
+  }
+
+  if (t === "replace_me" || t === "replaceme") {
+    return true
+  }
+
+  if (t === "none" || t === "disabled") {
+    return true
+  }
+
+  if (t === "null" || t === "unset") {
+    return true
+  }
+
+  return false
+}
+
 const braveKey = () => {
   const k0 = (process.env.BRAVE_API_KEY ?? "").trim()
 
-  if (k0 && k0 !== "REPLACE_ME") {
+  if (!isPlaceholder(k0)) {
     return k0
   }
 
   const k1 = (process.env.BRAVE_SEARCH_API_KEY ?? "").trim()
 
-  if (k1 && k1 !== "REPLACE_ME") {
+  if (!isPlaceholder(k1)) {
     return k1
   }
 

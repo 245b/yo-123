@@ -1,7 +1,8 @@
 import { fromBase, toBase } from "../../lib/route"
+import { activeChatKey, writeActiveChat } from "../../lib/activeChat"
 import type { Att, Ch, Msg, TermEntry } from "./types"
 
-export const activeKey = "ms_chat_active"
+export const activeKey = activeChatKey
 
 export type StoreApi = {
   loadChats: () => Ch[]
@@ -17,7 +18,6 @@ export type StoreApi = {
 
 export const setupStore = (win: Window): StoreApi => {
   const ck = "ms_chats"
-  const ak = activeKey
   const pk = "ms_chat_"
   const ap = "ms_chat_att_"
   const tk = "ms_chat_term_"
@@ -403,9 +403,11 @@ export const setupStore = (win: Window): StoreApi => {
 
   const setCur = (id: string) => {
     const cid = id.trim()
+    const html = win.document?.documentElement ?? null
 
     if (cid) {
-      win.localStorage.setItem(ak, cid)
+      writeActiveChat(win, cid)
+      html?.setAttribute("data-ms-chat-active", "1")
       const tw = win.parent && win.parent !== win ? win.parent : win
       const base = "/t/"
       const p = fromBase(tw.location?.pathname ?? "")
@@ -421,7 +423,8 @@ export const setupStore = (win: Window): StoreApi => {
       return
     }
 
-    win.localStorage.removeItem(ak)
+    writeActiveChat(win, "")
+    html?.removeAttribute("data-ms-chat-active")
     const tw = win.parent && win.parent !== win ? win.parent : win
     const p = fromBase(tw.location?.pathname ?? "")
 

@@ -1,2 +1,2 @@
-data/workspace/Downloads/Installer_Copy.exe filter=lfs diff=lfs merge=lfs -text
-hello/VNC/vnc-desktop/data/Downloads/Installer_Copy.exe filter=lfs diff=lfs merge=lfs -text
+# Intentionally empty.
+# Runtime binaries and generated artifacts are ignored and must not be tracked.

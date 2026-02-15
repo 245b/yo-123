@@ -173,6 +173,24 @@ export const setupEvents = (
       return
     }
 
+    const ignore0 = (btn as { closest?: (s: string) => Element | null }).closest?.(".ms-term") ?? null
+
+    if (ignore0) {
+      return
+    }
+
+    const ignore1 = (btn as { closest?: (s: string) => Element | null }).closest?.('[data-ms-prompts="1"]') ?? null
+
+    if (ignore1) {
+      return
+    }
+
+    const ignore2 = (btn as { closest?: (s: string) => Element | null }).closest?.('[data-ms-tools="1"]') ?? null
+
+    if (ignore2) {
+      return
+    }
+
     const box =
       btn.closest('[data-ms-chatbox="1"]') ??
       btn.closest("form") ??
@@ -244,15 +262,7 @@ export const setupEvents = (
     }
 
     const mk = (btn.getAttribute("data-ms-plus") ?? "").trim() === "1"
-    const dt = (btn.getAttribute("data-testid") ?? "").trim()
-    const isModel = dt === "model-selector-dropdown"
-    const t0 = (btn.getAttribute("type") ?? "").toLowerCase()
-    const a0 = (btn.getAttribute("aria-label") ?? "").toLowerCase()
-    const c0 = btn.getAttribute("class") ?? ""
-    const ok0 = c0.includes("bg-[var(--Button-primary-black)]") && c0.includes("rounded-full")
-    const ok1 = c0.includes("w-8") || c0.includes("h-8")
-    const sendish = t0 === "submit" || a0.includes("send") || (ok0 && ok1)
-    const plus = mk || (!isModel && !sendish)
+    const plus = mk
 
     if (plus) {
       if (pd) {

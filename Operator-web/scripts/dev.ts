@@ -1,11 +1,12 @@
-const run = async () => {
-  const win = process.platform === "win32"
-  const sh = win ? "cmd.exe" : "sh"
-  const web = win ? [sh, "/c", "npm", "run", "dev:web"] : [sh, "-lc", "npm run dev:web"]
-  const api = win ? [sh, "/c", "npm", "run", "dev:server"] : [sh, "-lc", "npm run dev:server"]
+import { spawnSafe } from "@operator/execution/spawn-safe"
 
-  const p0 = Bun.spawn({ cmd: web, stdout: "inherit", stderr: "inherit" })
-  const p1 = Bun.spawn({ cmd: api, stdout: "inherit", stderr: "inherit" })
+const run = async () => {
+  const bin = process.execPath
+  const web = [bin, "run", "dev:web"]
+  const api = [bin, "run", "dev:server"]
+
+  const p0 = spawnSafe({ kind: "host", cmd: web, stdout: "inherit", stderr: "inherit" })
+  const p1 = spawnSafe({ kind: "host", cmd: api, stdout: "inherit", stderr: "inherit" })
 
   const kill = () => {
     p0.kill()

@@ -1,7 +1,8 @@
 services:
   operator-web:
     build:
-      context: ./Operator-web
+      context: .
+      dockerfile: ./Operator-web/Dockerfile
     ports:
       - "3000:3000"
     restart: unless-stopped
@@ -16,16 +17,38 @@ services:
       - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
       - REQUEST_TIMEOUT_MS=${REQUEST_TIMEOUT_MS}
       - DEEPSEEK_TIMEOUT_MS=${DEEPSEEK_TIMEOUT_MS}
+      - OPERATOR_TURN_TIMEOUT_MS=${OPERATOR_TURN_TIMEOUT_MS:-0}
+      - OPERATOR_REASONING_TIMEOUT_MS=${OPERATOR_REASONING_TIMEOUT_MS:-0}
+      - DEEPSEEK_TURN_TIMEOUT_MS=${DEEPSEEK_TURN_TIMEOUT_MS:-0}
       - WEB_FETCH_TIMEOUT_MS=${WEB_FETCH_TIMEOUT_MS}
       - TERM_AGENT_TOKEN=${TERM_AGENT_TOKEN}
       - TERM_AGENT_URL=${TERM_AGENT_URL:-http://workspace:7682}
       - TERM_AGENT_TIMEOUT_MS=${TERM_AGENT_TIMEOUT_MS}
-      - TERM_SESSION_ID=${TERM_SESSION_ID:-}
+      - TERM_SESSION_ID=${TERM_SESSION_ID:-operator}
+      - OPERATOR_ENFORCED_ROOT=${OPERATOR_ENFORCED_ROOT:-/projects/operator}
+      - VNC_CONTAINER_NAME=${VNC_CONTAINER_NAME:-workspace}
+      - VNC_WORKDIR=${VNC_WORKDIR:-/projects/operator}
+      - OPERATOR_RUNTIME_V2=${OPERATOR_RUNTIME_V2:-1}
+      - OPERATOR_EXEC_V3=${OPERATOR_EXEC_V3:-1}
+      - OPERATOR_TOOL_REGISTRY_V2=${OPERATOR_TOOL_REGISTRY_V2:-1}
+      - OPERATOR_DATA_HOST_V1=${OPERATOR_DATA_HOST_V1:-1}
+      - OPERATOR_EXTENSION_HOST_V1=${OPERATOR_EXTENSION_HOST_V1:-1}
+      - OPERATOR_LSP_HOST_V1=${OPERATOR_LSP_HOST_V1:-1}
+      - OPERATOR_PTY_BACKEND=${OPERATOR_PTY_BACKEND:-pty-host-v2}
+      - OPERATOR_PTY_HOST_MODE=${OPERATOR_PTY_HOST_MODE:-docker}
+      - OPERATOR_APPROVAL_POLICY=on-request
+      - OPERATOR_SANDBOX_MODE=workspace-write
+      - OPERATOR_EXEC_POLICY_OPERATOR_PATH=/app/data/rules/policy.rules
+      - OPERATOR_EXEC_POLICY_WORKSPACE_PATH=.operator/policy.rules
+      - OPERATOR_EXEC_POLICY_TTL_MS=2000
+      - DOCKER_HOST=${DOCKER_HOST:-}
+      - DOCKER_API_VERSION=${DOCKER_API_VERSION:-}
       - SEARCH_MODE=${SEARCH_MODE:-terminal}
       - ALLOW_TERMINAL_EXEC=${ALLOW_TERMINAL_EXEC}
       - TOOL_BUDGET_TERMINAL=${TOOL_BUDGET_TERMINAL}
       - AGENT_MAX_STEPS=${AGENT_MAX_STEPS}
       - DEEPSEEK_MAX_STEPS=${DEEPSEEK_MAX_STEPS}
+      - DEEPSEEK_AUTO_COMPACT_TOKEN_LIMIT=${DEEPSEEK_AUTO_COMPACT_TOKEN_LIMIT:-}
       - MCP_PROTOCOL_VERSION=${MCP_PROTOCOL_VERSION}
       - MCP_DDG_URL=${MCP_DDG_URL}
       - MCP_DDG_TOOL=${MCP_DDG_TOOL}
@@ -57,13 +80,34 @@ services:
       - MCP_CTX7_LIBRARY_NAME_KEY=${MCP_CTX7_LIBRARY_NAME_KEY}
       - MCP_CTX7_LIBRARY_KEY=${MCP_CTX7_LIBRARY_KEY}
       - MCP_CTX7_RESULTS_KEY=${MCP_CTX7_RESULTS_KEY}
+      - MCP_YT_URL=${MCP_YT_URL:-http://youtube-transcript-mcp:8030/mcp}
+      - MCP_YT_TOOL=${MCP_YT_TOOL:-get_video_info,get_transcript}
+      - MCP_YT_HEADERS=${MCP_YT_HEADERS:-{}}
+      - MCP_YT_TOKEN=${MCP_YT_TOKEN:-}
+      - MCP_YT_TOKEN_HEADER=${MCP_YT_TOKEN_HEADER:-Authorization}
+      - MCP_YT_TOKEN_PREFIX=${MCP_YT_TOKEN_PREFIX:-Bearer}
+      - MCP_YT_TIMEOUT_MS=${MCP_YT_TIMEOUT_MS:-45000}
+      - MCP_YT_RETRIES=${MCP_YT_RETRIES:-2}
+      - MCP_YT_RETRY_DELAY_MS=${MCP_YT_RETRY_DELAY_MS:-1500}
+      - MCP_YT_PROTOCOL_VERSION=${MCP_YT_PROTOCOL_VERSION:-2024-11-05}
+      - MCP_YT_ARGS=${MCP_YT_ARGS:-{}}
+      - MCP_YT_QUERY_KEY=${MCP_YT_QUERY_KEY:-url}
+      - MCP_YT_LANG_KEY=${MCP_YT_LANG_KEY:-lang}
+      - MCP_YT_LANG=${MCP_YT_LANG:-en}
+      - MCP_YT_MAX_VIDEOS=${MCP_YT_MAX_VIDEOS:-10}
       - OPERATOR_DATA_DIR=/app/data
     volumes:
       - ./data/operator-web:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
-      - workspace
-      - duckduckgo-mcp
-      - context7-mcp
+      workspace:
+        condition: service_healthy
+      duckduckgo-mcp:
+        condition: service_started
+      context7-mcp:
+        condition: service_started
+      youtube-transcript-mcp:
+        condition: service_started
     networks:
       - agent
 
@@ -91,12 +135,35 @@ services:
       - agent
     restart: unless-stopped
 
+  youtube-transcript-mcp:
+    image: mcp/youtube-transcript:latest
+    entrypoint: ["python", "-c"]
+    command:
+      - |
+        from mcp_youtube_transcript import server
+        m = server()
+        m.settings.host = "0.0.0.0"
+        m.settings.port = 8030
+        m.settings.streamable_http_path = "/mcp"
+        m.run(transport="streamable-http")
+    ports:
+      - "8030:8030"
+    networks:
+      - agent
+    restart: unless-stopped
+
   workspace:
     build:
       context: ./hello/VNC/vnc-desktop
     platform: linux/amd64
     container_name: workspace
     hostname: operator
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys,json; u='http://127.0.0.1:7682/v1/health'; data=json.loads(urllib.request.urlopen(u,timeout=1.5).read().decode('utf-8')); sys.exit(0 if data.get('ok')==True else 1)"]
+      interval: 20s
+      timeout: 3s
+      retries: 10
+      start_period: 20s
     environment:
       - TERM_AGENT_TOKEN=${TERM_AGENT_TOKEN}
       - TERM_AGENT_PERMS=${TERM_AGENT_PERMS:-all}
@@ -104,14 +171,16 @@ services:
       - TTYD_PORT=7681
       - TTYD_BASE_PATH=/terminal
       - TTYD_PING_INTERVAL=30
-      - TERM_SESSION_ID=${TERM_SESSION_ID:-}
+      - TERM_SESSION_ID=${TERM_SESSION_ID:-operator}
       - RUN_USER=operator
       - RUN_HOME=/home/operator
       - WORKSPACE_DIR=/home/operator/Desktop
-      - WORKSPACE_ROOT=/projects/Operator
+      - WORKSPACE_ROOT=${OPERATOR_ENFORCED_ROOT:-/projects/operator}
       - PROJECTS_DIR=/projects
-      - OPERATOR_DIR=/projects/Operator
-      - TERM_SESSION_DIR=/projects/Operator
+      - OPERATOR_DIR=/projects/operator
+      - EDITOR_WORKSPACE_DIR=/projects/operator
+      - TERM_SESSION_DIR=${OPERATOR_ENFORCED_ROOT:-/projects/operator}
+      - TERM_AGENT_PURGE_ON_START=0
       - VNC_RESOLUTION=1152x648
       - VNC_COL_DEPTH=24
       - VNC_PORT=5900
@@ -163,6 +232,21 @@ services:
       - MCP_CTX7_LIBRARY_NAME_KEY=${MCP_CTX7_LIBRARY_NAME_KEY}
       - MCP_CTX7_LIBRARY_KEY=${MCP_CTX7_LIBRARY_KEY}
       - MCP_CTX7_RESULTS_KEY=${MCP_CTX7_RESULTS_KEY}
+      - MCP_YT_URL=${MCP_YT_URL:-http://youtube-transcript-mcp:8030/mcp}
+      - MCP_YT_TOOL=${MCP_YT_TOOL:-get_video_info,get_transcript}
+      - MCP_YT_HEADERS=${MCP_YT_HEADERS:-{}}
+      - MCP_YT_TOKEN=${MCP_YT_TOKEN:-}
+      - MCP_YT_TOKEN_HEADER=${MCP_YT_TOKEN_HEADER:-Authorization}
+      - MCP_YT_TOKEN_PREFIX=${MCP_YT_TOKEN_PREFIX:-Bearer}
+      - MCP_YT_TIMEOUT_MS=${MCP_YT_TIMEOUT_MS:-45000}
+      - MCP_YT_RETRIES=${MCP_YT_RETRIES:-2}
+      - MCP_YT_RETRY_DELAY_MS=${MCP_YT_RETRY_DELAY_MS:-1500}
+      - MCP_YT_PROTOCOL_VERSION=${MCP_YT_PROTOCOL_VERSION:-2024-11-05}
+      - MCP_YT_ARGS=${MCP_YT_ARGS:-{}}
+      - MCP_YT_QUERY_KEY=${MCP_YT_QUERY_KEY:-url}
+      - MCP_YT_LANG_KEY=${MCP_YT_LANG_KEY:-lang}
+      - MCP_YT_LANG=${MCP_YT_LANG:-en}
+      - MCP_YT_MAX_VIDEOS=${MCP_YT_MAX_VIDEOS:-10}
     expose:
       - "7681"
       - "7682"

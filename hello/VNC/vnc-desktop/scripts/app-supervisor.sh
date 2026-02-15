@@ -7,7 +7,8 @@ RUN_USER="${RUN_USER:-operator}"
 RUN_HOME="${RUN_HOME:-/home/operator}"
 WORKSPACE_DIR="${WORKSPACE_DIR:-${RUN_HOME}/Desktop}"
 PROJECTS_DIR="${PROJECTS_DIR:-/projects}"
-OPERATOR_DIR="${OPERATOR_DIR:-${PROJECTS_DIR%/}/Operator}"
+OPERATOR_DIR="${OPERATOR_DIR:-${PROJECTS_DIR%/}/operator}"
+TERM_SESSION_DIR="${TERM_SESSION_DIR:-$OPERATOR_DIR}"
 EDITOR_BIN="${EDITOR_BIN:-/opt/lite-xl/lite-xl}"
 EDITOR_WORKSPACE_DIR="${EDITOR_WORKSPACE_DIR:-}"
 EDITOR_MATCH_PATTERN="${EDITOR_MATCH_PATTERN:-lite-xl}"
@@ -48,9 +49,13 @@ if [ "$WORKSPACE_DIR" = "${RUN_HOME}/workspace" ]; then
   WORKSPACE_DIR="${RUN_HOME}/Desktop"
 fi
 if [ -z "$EDITOR_WORKSPACE_DIR" ]; then
-  if [ -n "$OPERATOR_DIR" ]; then
+  if [ -z "$EDITOR_WORKSPACE_DIR" ] && [ -n "$TERM_SESSION_DIR" ]; then
+    EDITOR_WORKSPACE_DIR="$TERM_SESSION_DIR"
+  fi
+  if [ -z "$EDITOR_WORKSPACE_DIR" ] && [ -n "$OPERATOR_DIR" ]; then
     EDITOR_WORKSPACE_DIR="$OPERATOR_DIR"
-  else
+  fi
+  if [ -z "$EDITOR_WORKSPACE_DIR" ]; then
     EDITOR_WORKSPACE_DIR="$WORKSPACE_DIR"
   fi
 fi
@@ -81,7 +86,7 @@ if ! [[ "$BLACK_BG_REFRESH_INTERVAL" =~ ^[0-9]+$ ]]; then
   BLACK_BG_REFRESH_INTERVAL=30
 fi
 
-mkdir -p "$WORKSPACE_DIR" "$PROJECTS_DIR" "$OPERATOR_DIR" "$EDITOR_WORKSPACE_DIR" "$BROWSER_PROFILE_DIR" "$RUN_HOME/.logs" "$RUNTIME_DIR"
+mkdir -p "$WORKSPACE_DIR" "$PROJECTS_DIR" "$OPERATOR_DIR" "$TERM_SESSION_DIR" "$BROWSER_PROFILE_DIR" "$RUN_HOME/.logs" "$RUNTIME_DIR"
 
 for entry in "$PROJECTS_DIR"/* "$PROJECTS_DIR"/.[!.]* "$PROJECTS_DIR"/..?*; do
   if [ ! -e "$entry" ]; then
@@ -95,6 +100,10 @@ for entry in "$PROJECTS_DIR"/* "$PROJECTS_DIR"/.[!.]* "$PROJECTS_DIR"/..?*; do
   rm -rf "$entry" 2>/dev/null || true
 done
 
+if [ ! -e "$EDITOR_WORKSPACE_DIR" ]; then
+  mkdir -p "$EDITOR_WORKSPACE_DIR"
+fi
+
 mkdir -p "$(dirname "$LAYOUT_STATE_FILE")"
 mkdir -p "$(dirname "$MEMORY_LOG_FILE")"
 if [ -n "$TRASH_DIR" ] && [ "$TRASH_DIR" != "/" ]; then
@@ -103,7 +112,7 @@ if [ -n "$TRASH_DIR" ] && [ "$TRASH_DIR" != "/" ]; then
 fi
 chmod 700 "$RUNTIME_DIR" || true
 if id "$RUN_USER" >/dev/null 2>&1; then
-  chown -R "$RUN_USER:$RUN_USER" "$WORKSPACE_DIR" "$PROJECTS_DIR" "$OPERATOR_DIR" "$EDITOR_WORKSPACE_DIR" "$RUN_HOME" 2>/dev/null || true
+  chown -R "$RUN_USER:$RUN_USER" "$WORKSPACE_DIR" "$PROJECTS_DIR" "$OPERATOR_DIR" "$TERM_SESSION_DIR" "$EDITOR_WORKSPACE_DIR" "$RUN_HOME" 2>/dev/null || true
   chown "$RUN_USER:$RUN_USER" "$RUNTIME_DIR" 2>/dev/null || true
 fi
 
@@ -334,7 +343,10 @@ ensure_cdp_proxy() {
 }
 
 launch_terminal() {
-  local term_dir="$OPERATOR_DIR"
+  local term_dir="$TERM_SESSION_DIR"
+  if [ ! -d "$term_dir" ]; then
+    term_dir="$OPERATOR_DIR"
+  fi
   if [ ! -d "$term_dir" ]; then
     term_dir="$WORKSPACE_DIR"
   fi

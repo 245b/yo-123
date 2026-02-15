@@ -1,0 +1,14 @@
+{
+  "name": "@operator/integrations",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "registry:generate": "bun ../../tools/generate-integrations-registry.ts"
+  }
+}

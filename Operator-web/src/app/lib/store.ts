@@ -19,6 +19,65 @@ export const saveOpen = (open: boolean) => {
   window.localStorage.setItem("ms_open", open ? "1" : "0")
 }
 
+export const loadRightOpen = () => {
+  const ok = typeof window !== "undefined"
+
+  if (!ok) {
+    return false
+  }
+
+  const v = window.localStorage.getItem("ms_open_right") ?? ""
+  return v === "1"
+}
+
+export const saveRightOpen = (open: boolean) => {
+  const ok = typeof window !== "undefined"
+
+  if (!ok) {
+    return
+  }
+
+  window.localStorage.setItem("ms_open_right", open ? "1" : "0")
+}
+
+export const loadRightWidth = () => {
+  const ok = typeof window !== "undefined"
+
+  if (!ok) {
+    return 0
+  }
+
+  const raw = window.localStorage.getItem("ms_right_w") ?? ""
+  const n = Number.parseInt(raw, 10)
+
+  if (!Number.isFinite(n)) {
+    return 0
+  }
+
+  if (n <= 0) {
+    return 0
+  }
+
+  return n
+}
+
+export const saveRightWidth = (w: number) => {
+  const ok = typeof window !== "undefined"
+
+  if (!ok) {
+    return
+  }
+
+  const n0 = Number.isFinite(w) ? w : 0
+  const n = Math.round(n0)
+
+  if (n <= 0) {
+    return
+  }
+
+  window.localStorage.setItem("ms_right_w", `${n}`)
+}
+
 export type DraftFile = { id: string; name: string; type: string; file: Blob }
 
 const draftDb = "ms_pj_draft_files"

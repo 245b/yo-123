@@ -1,5 +1,6 @@
 import { initChatOverlays } from "./chats/overlays"
 import { loadChats, saveChats, type ChatItem } from "./chats/store"
+import { readActiveChat, writeActiveChat } from "../../lib/activeChat"
 import { apiBaseCandidates, apiUrlWithBase, probeApiBase, rememberApiBase } from "../../lib/api"
 
 export const chats = (doc: Document) => {
@@ -17,7 +18,6 @@ export const chats = (doc: Document) => {
 
   const pad = 12
   const ck = "ms_chats"
-  const ak = "ms_chat_active"
   const pk = "ms_chat_"
   const ap = "ms_chat_att_"
   const tk = "ms_chat_term_"
@@ -113,18 +113,18 @@ export const chats = (doc: Document) => {
     rm(doc)
     rm(sr)
 
-    const cur = (win.localStorage.getItem(ak) ?? "").trim()
+    const cur = readActiveChat(win)
 
     if (cur === id) {
       const next = (out[0]?.id ?? "").trim()
 
       if (next) {
-        win.localStorage.setItem(ak, next)
+        writeActiveChat(win, next)
         win.requestAnimationFrame(() => chats(doc))
         return
       }
 
-      win.localStorage.removeItem(ak)
+      writeActiveChat(win, "")
     }
 
     win.requestAnimationFrame(() => chats(doc))
@@ -339,7 +339,7 @@ export const chats = (doc: Document) => {
   box.style.gap = "4px"
 
   const cs = load()
-  const cur = (win.localStorage.getItem(ak) ?? "").trim()
+  const cur = readActiveChat(win)
 
   for (var i = 0; i < cs.length; i++) {
     const c = cs[i]
@@ -368,7 +368,7 @@ export const chats = (doc: Document) => {
         return
       }
 
-      win.localStorage.setItem(ak, id)
+      writeActiveChat(win, id)
       win.requestAnimationFrame(() => chats(doc))
     })
 

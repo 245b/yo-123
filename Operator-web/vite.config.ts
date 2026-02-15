@@ -42,6 +42,9 @@ export default defineConfig({
     host: "localhost",
     port: 5173,
     strictPort: true,
+    fs: {
+      allow: [resolve(root, "..")],
+    },
     proxy: {
       "/api": {
         target: "http://127.0.0.1:3000",

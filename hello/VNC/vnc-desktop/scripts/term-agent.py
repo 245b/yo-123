@@ -18,16 +18,20 @@ TOKEN = os.environ.get("TERM_AGENT_TOKEN", "").strip()
 RUN_USER = os.environ.get("RUN_USER", "operator").strip() or "operator"
 RUN_HOME = os.environ.get("RUN_HOME", "/home/operator").strip() or "/home/operator"
 PROJECTS_DIR = os.environ.get("PROJECTS_DIR", "/projects").strip() or "/projects"
+OPERATOR_DIR = os.environ.get("OPERATOR_DIR", f"{PROJECTS_DIR}/operator").strip() or f"{PROJECTS_DIR}/operator"
 PORT = int(os.environ.get("TERM_AGENT_PORT", "7682") or "7682")
-WORKSPACE_ROOT = os.environ.get("WORKSPACE_ROOT", f"{PROJECTS_DIR}/Operator").strip() or f"{PROJECTS_DIR}/Operator"
+WORKSPACE_ROOT = os.environ.get("WORKSPACE_ROOT", f"{PROJECTS_DIR}/operator").strip() or f"{PROJECTS_DIR}/operator"
 TERM_SESSION_DIR = os.environ.get("TERM_SESSION_DIR", WORKSPACE_ROOT).strip() or WORKSPACE_ROOT
 TRASH_DIR = os.environ.get("TRASH_DIR", "/trash").strip()
 TERM_AGENT_PERMS = os.environ.get("TERM_AGENT_PERMS", "all").strip().lower() or "all"
+PURGE_ON_START = os.environ.get("TERM_AGENT_PURGE_ON_START", "").strip().lower() in ("1", "true", "yes", "on")
 PROJECTS_ROOT = Path(PROJECTS_DIR).resolve()
-ROOT = Path(WORKSPACE_ROOT).resolve()
+ROOT = Path(TERM_SESSION_DIR).resolve()
+OPERATOR_ROOT = Path(OPERATOR_DIR).resolve()
+ROOT_COMMON = os.path.commonpath([str(OPERATOR_ROOT), str(ROOT)])
 
-if ROOT.name != "Operator":
-  ROOT = (PROJECTS_ROOT / "Operator").resolve()
+if ROOT_COMMON != str(OPERATOR_ROOT):
+  ROOT = OPERATOR_ROOT
 
 if not TRASH_DIR:
   TRASH_DIR = "/trash"
@@ -40,6 +44,8 @@ HUNK_RE = re.compile(r"@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@")
 
 LOCKS = {}
 LOCKS_LOCK = threading.Lock()
+PTY_PROCS = {}
+PTY_LOCK = threading.Lock()
 
 
 def parse_perms(raw):
@@ -90,6 +96,8 @@ def clean_session(raw):
 
 def session_root(session):
   sid = clean_session(session)
+  if ROOT.name.lower() == sid.lower():
+    return ROOT
   return ROOT / sid
 
 
@@ -176,6 +184,18 @@ def path_in_root(path):
   return path_in_base(ROOT, path)
 
 
+def workspace_anchor():
+  if PROJECTS_ROOT == ROOT:
+    return ROOT.name
+  try:
+    rel = ROOT.relative_to(PROJECTS_ROOT)
+    if rel.parts:
+      return rel.parts[0]
+  except Exception:
+    pass
+  return ROOT.name
+
+
 def enforce_workspace_layout():
   PROJECTS_ROOT.mkdir(parents=True, exist_ok=True)
   ROOT.mkdir(parents=True, exist_ok=True)
@@ -183,8 +203,10 @@ def enforce_workspace_layout():
   if PROJECTS_ROOT == ROOT:
     return
 
+  keep_name = workspace_anchor()
+
   for child in PROJECTS_ROOT.iterdir():
-    if child.name == ROOT.name:
+    if child.name == keep_name:
       continue
 
     if child.is_dir() and not child.is_symlink():
@@ -198,6 +220,9 @@ def enforce_workspace_layout():
 
 
 def prune_operator_root():
+  if not PURGE_ON_START:
+    return
+
   ROOT.mkdir(parents=True, exist_ok=True)
   keep = set()
 
@@ -216,6 +241,141 @@ def prune_operator_root():
       child.unlink()
     except Exception:
       shutil.rmtree(child, ignore_errors=True)
+
+
+def split_parts(raw):
+  text0 = (raw or "").strip()
+  if not text0:
+    return []
+  text1 = text0.replace("\\", "/")
+  text2 = re.sub(r"^[a-zA-Z]:/", "", text1)
+  text3 = re.sub(r"^/+", "", text2)
+  parts0 = text3.split("/")
+  out = []
+  for part in parts0:
+    item = (part or "").strip()
+    if not item:
+      continue
+    if item in (".", ".."):
+      continue
+    out.append(item)
+  return out
+
+
+def scoped_session_path(session, raw):
+  base = ensure_session_root(session)
+  sid = clean_session(session)
+  parts = split_parts(raw)
+
+  if not parts:
+    return str(base)
+
+  base_parts = [p.lower() for p in ROOT.parts if p and p != os.sep]
+  lower = [p.lower() for p in parts]
+  from_idx = 0
+
+  if base_parts and len(lower) >= len(base_parts):
+    same = True
+    for i in range(len(base_parts)):
+      if (lower[i] or "") != (base_parts[i] or ""):
+        same = False
+        break
+    if same:
+      from_idx = len(base_parts)
+
+  p0 = lower[0] if len(lower) > 0 else ""
+  p1 = lower[1] if len(lower) > 1 else ""
+
+  if p0 == "projects" and p1 == "operator":
+    from_idx = 2
+
+  if not from_idx and p0 == "operator":
+    from_idx = 1
+
+  last = base_parts[-1] if base_parts else ""
+
+  if not from_idx and last and p0 == last:
+    from_idx = 1
+
+  tail = parts[from_idx:]
+
+  if tail and (tail[0] or "").lower() == sid.lower():
+    tail = tail[1:]
+
+  if not tail:
+    return str(base)
+
+  target = (base / Path(*tail)).resolve(strict=False)
+
+  if not path_in_base(base, target):
+    return str(base)
+
+  return str(target)
+
+
+def command_tokens(raw):
+  text = (raw or "").strip()
+  if not text:
+    return []
+  try:
+    return shlex.split(text, posix=True)
+  except Exception:
+    return re.findall(r'(?:[^\s"\\\']+|"[^"]*"|\\\'[^\\\']*\\\')+', text)
+
+
+def token_candidates(raw):
+  text = (raw or "").strip()
+  if not text:
+    return []
+  out = [text]
+  eq = text.find("=")
+  if eq > 0 and eq < len(text) - 1:
+    out.append(text[eq + 1 :])
+  return out
+
+
+def clean_candidate(raw):
+  text = (raw or "").strip()
+  if not text:
+    return ""
+  return re.sub(r"^[`\"'(){}\[\];|&]+|[`\"'(){}\[\];|&]+$", "", text).strip()
+
+
+def command_boundary_error(session, raw):
+  text = (raw or "").strip()
+  if not text:
+    return ""
+  traversed = re.search(r"(^|[\s;|&(){}])\.\.([/\\]|$|[\s;|&(){}])", text)
+  if traversed:
+    return "Session boundary violation: .."
+  base = ensure_session_root(session)
+  tokens = command_tokens(text)
+
+  for token in tokens:
+    for row in token_candidates(token):
+      item0 = clean_candidate(row)
+      item = item0.replace("\\", "/")
+
+      if not item:
+        continue
+
+      if item.startswith("~"):
+        return f"Session boundary violation: {token}"
+
+      if item == ".." or item.startswith("../") or item.endswith("/..") or "/../" in item:
+        return f"Session boundary violation: {token}"
+
+      if not item.startswith("/"):
+        continue
+
+      target = Path(item).resolve(strict=False)
+
+      if path_in_base(base, target):
+        continue
+
+      return f"Session boundary violation: {token}"
+
+  return ""
 
 
 def resolve_path(raw, allow_missing=False):
@@ -707,6 +867,18 @@ def ensure_venv(root):
   return True, str(venv), ""
 
 
+def node_manager(root):
+  if (root / "bun.lockb").exists() or (root / "bun.lock").exists():
+    return "bun"
+  if (root / "pnpm-lock.yaml").exists():
+    return "pnpm"
+  if (root / "yarn.lock").exists():
+    return "yarn"
+  if (root / "package-lock.json").exists():
+    return "npm"
+  return "npm"
+
+
 def detect_project(root):
   flags = []
   if (root / "package.json").exists():
@@ -730,7 +902,7 @@ def detect_project(root):
     warnings.append(f"Multiple project types detected: {', '.join(flags)}.")
   manager = ""
   if picked == "node":
-    manager = "npm"
+    manager = node_manager(root)
   if picked == "python":
     manager = "pip"
   if picked == "rust":
@@ -783,9 +955,23 @@ def project_install(root, locked, network, hashes):
   cmd = []
   env = base_env()
   if kind == "node":
-    if locked and not (r / "package-lock.json").exists():
-      return None, "Missing package-lock.json"
-    cmd = ["npm", "ci"] if locked else ["npm", "install"]
+    manager = info.get("manager") or "npm"
+    if manager == "bun":
+      if locked and not ((r / "bun.lockb").exists() or (r / "bun.lock").exists()):
+        return None, "Missing bun.lockb or bun.lock"
+      cmd = ["bun", "install", "--frozen-lockfile"] if locked else ["bun", "install"]
+    if manager == "pnpm":
+      if locked and not (r / "pnpm-lock.yaml").exists():
+        return None, "Missing pnpm-lock.yaml"
+      cmd = ["pnpm", "install", "--frozen-lockfile"] if locked else ["pnpm", "install"]
+    if manager == "yarn":
+      if locked and not (r / "yarn.lock").exists():
+        return None, "Missing yarn.lock"
+      cmd = ["yarn", "install", "--immutable"] if locked else ["yarn", "install"]
+    if manager == "npm":
+      if locked and not (r / "package-lock.json").exists():
+        return None, "Missing package-lock.json"
+      cmd = ["npm", "ci"] if locked else ["npm", "install"]
   if kind == "python":
     if locked and not (r / "requirements.txt").exists():
       return None, "Missing requirements.txt"
@@ -859,7 +1045,15 @@ def project_test(root, timeout_s):
     return None, "Unsupported project type"
   cmd = []
   if kind == "node":
-    cmd = ["npm", "test"]
+    manager = info.get("manager") or "npm"
+    if manager == "bun":
+      cmd = ["bun", "test"]
+    if manager == "pnpm":
+      cmd = ["pnpm", "test"]
+    if manager == "yarn":
+      cmd = ["yarn", "test"]
+    if manager == "npm":
+      cmd = ["npm", "test"]
   if kind == "python":
     cmd = ["python", "-m", "pytest"]
   if kind == "rust":
@@ -956,6 +1150,9 @@ def exec_cmd(session, command, timeout_ms, max_chars, cwd, target):
     return False, err, {"exitCode": 127, "output": "", "truncated": False}
   if not command:
     return False, "Missing command", {"exitCode": 127, "output": "", "truncated": False}
+  boundary = command_boundary_error(session, command)
+  if boundary:
+    return False, boundary, {"exitCode": 126, "output": boundary, "truncated": False}
   dir_path, err2 = resolve_session_dir(session, cwd)
   if err2:
     return False, err2, {"exitCode": 127, "output": "", "truncated": False}
@@ -1027,6 +1224,92 @@ def editor_open(path, editor, line, col, target, session):
   return ok_out({"path": str(p), "editor": cmd[0]}, []), ""
 
 
+def pty_open(session, cwd, cols, rows):
+  ok, err = ensure_session(session)
+  if not ok:
+    return None, err
+  dir_path, err2 = resolve_session_dir(session, cwd)
+  if err2:
+    return None, err2
+  res = tmux_cmd(["new-window", "-P", "-F", "#{pane_id}", "-t", session, "-c", str(dir_path)], capture=True)
+  if res.returncode != 0:
+    return None, "Failed to open PTY"
+  pane0 = (res.stdout or "").strip()
+  pane = pane0.splitlines()[-1].strip() if pane0 else ""
+  if not pane:
+    return None, "Failed to allocate PTY pane"
+  width = int(cols or 0)
+  height = int(rows or 0)
+  if width > 0 or height > 0:
+    cmd = ["resize-pane", "-t", pane]
+    if width > 0:
+      cmd.extend(["-x", str(width)])
+    if height > 0:
+      cmd.extend(["-y", str(height)])
+    tmux_cmd(cmd)
+  process_id = uuid.uuid4().hex
+  with PTY_LOCK:
+    PTY_PROCS[process_id] = {
+      "session": session,
+      "target_pane": pane,
+      "created_at": now_iso(),
+      "updated_at": now_iso(),
+    }
+  return {
+    "ok": True,
+    "process_id": process_id,
+    "target_pane": pane,
+    "sessionId": session,
+    "cwd": str(dir_path),
+  }, ""
+
+
+def pty_resize(process_id, cols, rows):
+  pid = clean_target(process_id)
+  if not pid:
+    return None, "Missing process_id"
+  with PTY_LOCK:
+    row = PTY_PROCS.get(pid)
+  if not row:
+    return None, "Unknown process_id"
+  pane = row.get("target_pane", "")
+  if not pane:
+    return None, "PTY has no target pane"
+  width = int(cols or 0)
+  height = int(rows or 0)
+  if width <= 0 and height <= 0:
+    return None, "Missing cols/rows"
+  cmd = ["resize-pane", "-t", pane]
+  if width > 0:
+    cmd.extend(["-x", str(width)])
+  if height > 0:
+    cmd.extend(["-y", str(height)])
+  res = tmux_cmd(cmd)
+  if res.returncode != 0:
+    return None, "Failed to resize PTY"
+  with PTY_LOCK:
+    live = PTY_PROCS.get(pid)
+    if live:
+      live["updated_at"] = now_iso()
+  return {"ok": True, "process_id": pid, "target_pane": pane, "cols": width, "rows": height}, ""
+
+
+def pty_terminate(process_id):
+  pid = clean_target(process_id)
+  if not pid:
+    return None, "Missing process_id"
+  with PTY_LOCK:
+    row = PTY_PROCS.get(pid)
+  if not row:
+    return None, "Unknown process_id"
+  pane = row.get("target_pane", "")
+  if pane:
+    tmux_cmd(["kill-pane", "-t", pane])
+  with PTY_LOCK:
+    PTY_PROCS.pop(pid, None)
+  return {"ok": True, "process_id": pid, "terminated": True}, ""
+
+
 class Handler(BaseHTTPRequestHandler):
   def log_message(self, fmt, *args):
     return
@@ -1048,6 +1331,22 @@ class Handler(BaseHTTPRequestHandler):
       return json.loads(raw.decode("utf-8"))
     except Exception:
       return None
+
+  def do_GET(self):
+    if self.path == "/v1/health" or self.path == "/v1/ready":
+      out = {
+        "ok": True,
+        "ts": now_iso(),
+        "session_root": str(ROOT),
+        "workspace_root": str(ROOT),
+        "token_configured": bool(TOKEN),
+        "tmux_available": bool(shutil.which("tmux")),
+        "perms": sorted(list(PERMS)),
+      }
+      self.send_json(200, out)
+      return
+
+    self.send_json(404, {"error": "Not found"})
 
   def authorize(self):
     if not TOKEN:
@@ -1082,6 +1381,46 @@ class Handler(BaseHTTPRequestHandler):
       self.send_json(200, {"ok": True, "sessionId": session})
       return
 
+    if self.path == "/v1/terminal/open":
+      if not self.perm_check("exec"):
+        return
+      session = clean_session(data.get("sessionId", ""))
+      cwd = (data.get("cwd", "") or "").strip()
+      cols = int(data.get("cols", 0) or 0)
+      rows = int(data.get("rows", 0) or 0)
+      lock = session_lock(session)
+      with lock:
+        out, err = pty_open(session, cwd, cols, rows)
+      if err:
+        self.send_json(400, {"ok": False, "error": err})
+        return
+      self.send_json(200, out)
+      return
+
+    if self.path == "/v1/terminal/resize":
+      if not self.perm_check("exec"):
+        return
+      process_id = data.get("process_id", "") or ""
+      cols = int(data.get("cols", 0) or 0)
+      rows = int(data.get("rows", 0) or 0)
+      out, err = pty_resize(process_id, cols, rows)
+      if err:
+        self.send_json(400, {"ok": False, "error": err})
+        return
+      self.send_json(200, out)
+      return
+
+    if self.path == "/v1/terminal/terminate":
+      if not self.perm_check("exec"):
+        return
+      process_id = data.get("process_id", "") or ""
+      out, err = pty_terminate(process_id)
+      if err:
+        self.send_json(400, {"ok": False, "error": err})
+        return
+      self.send_json(200, out)
+      return
+
     if self.path == "/v1/terminal/send":
       if not self.perm_check("exec"):
         return
@@ -1093,6 +1432,10 @@ class Handler(BaseHTTPRequestHandler):
       keys = (data.get("keys", "") or "").strip()
       enter = bool(data.get("enter", False))
       target = data.get("target_pane", "") or ""
+      boundary = command_boundary_error(session, keys)
+      if boundary:
+        self.send_json(400, {"ok": False, "error": boundary})
+        return
       lock = session_lock(session)
       with lock:
         send_keys(session, keys, enter, target)
@@ -1145,7 +1488,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/list":
       if not self.perm_check("read"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       recursive = bool(data.get("recursive", False))
       max_entries = int(data.get("max_entries", 2000) or 2000)
       max_depth = int(data.get("max_depth", 20) or 20)
@@ -1159,7 +1503,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/stat":
       if not self.perm_check("read"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       out, err = fs_stat(path)
       if err:
         self.send_json(400, {"ok": False, "error": err})
@@ -1170,7 +1515,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/read":
       if not self.perm_check("read"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       max_bytes = int(data.get("max_bytes", 0) or 0)
       start_line = int(data.get("start_line", 0) or 0)
       end_line = int(data.get("end_line", 0) or 0)
@@ -1185,7 +1531,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/write":
       if not self.perm_check("write"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       content = data.get("content", "")
       atomic = bool(data.get("atomic", True))
       create_parents = bool(data.get("create_parents", True))
@@ -1199,8 +1546,9 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/move":
       if not self.perm_check("write"):
         return
-      src = data.get("src", "")
-      dst = data.get("dst", "")
+      session = clean_session(data.get("sessionId", ""))
+      src = scoped_session_path(session, data.get("src", ""))
+      dst = scoped_session_path(session, data.get("dst", ""))
       overwrite = bool(data.get("overwrite", False))
       out, err = fs_move(src, dst, overwrite)
       if err:
@@ -1212,8 +1560,9 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/copy":
       if not self.perm_check("write"):
         return
-      src = data.get("src", "")
-      dst = data.get("dst", "")
+      session = clean_session(data.get("sessionId", ""))
+      src = scoped_session_path(session, data.get("src", ""))
+      dst = scoped_session_path(session, data.get("dst", ""))
       recursive = bool(data.get("recursive", True))
       overwrite = bool(data.get("overwrite", False))
       out, err = fs_copy(src, dst, recursive, overwrite)
@@ -1226,7 +1575,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/delete":
       if not self.perm_check("write"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       recursive = bool(data.get("recursive", False))
       to_trash = bool(data.get("to_trash", True))
       out, err = fs_delete(path, recursive, to_trash)
@@ -1239,7 +1589,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/mkdir":
       if not self.perm_check("write"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       parents = bool(data.get("parents", True))
       out, err = fs_mkdir(path, parents)
       if err:
@@ -1251,7 +1602,9 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/purge":
       if not self.perm_check("write"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path0 = (data.get("path", "") or "").strip()
+      path = scoped_session_path(session, path0) if path0 else ""
       recursive = bool(data.get("recursive", True))
       out, err = fs_purge(path, recursive)
       if err:
@@ -1263,7 +1616,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/apply_patch":
       if not self.perm_check("write"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       diff = data.get("unified_diff", "")
       out, err = fs_apply_patch(path, diff)
       if err:
@@ -1275,7 +1629,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/fs/replace_ranges":
       if not self.perm_check("write"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       ranges = data.get("ranges", [])
       out, err = fs_replace_ranges(path, ranges)
       if err:
@@ -1287,12 +1642,12 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/editor/open":
       if not self.perm_check("exec"):
         return
-      path = data.get("path", "")
+      session = clean_session(data.get("sessionId", ""))
+      path = scoped_session_path(session, data.get("path", ""))
       editor = data.get("editor", "nvim")
       line = int(data.get("line", 0) or 0)
       col = int(data.get("col", 0) or 0)
       target = data.get("target_pane", "") or ""
-      session = clean_session(data.get("sessionId", ""))
       lock = session_lock(session)
       with lock:
         out, err = editor_open(path, editor, line, col, target, session)
@@ -1305,7 +1660,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/project/detect":
       if not self.perm_check("read"):
         return
-      root = data.get("root", "")
+      session = clean_session(data.get("sessionId", ""))
+      root = scoped_session_path(session, data.get("root", ""))
       out, err = project_detect(root)
       if err:
         self.send_json(400, {"ok": False, "error": err})
@@ -1316,7 +1672,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/project/setup":
       if not self.perm_check("exec"):
         return
-      root = data.get("root", "")
+      session = clean_session(data.get("sessionId", ""))
+      root = scoped_session_path(session, data.get("root", ""))
       out, err = project_setup(root)
       if err:
         self.send_json(400, {"ok": False, "error": err})
@@ -1327,7 +1684,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/project/install":
       if not self.perm_check("exec"):
         return
-      root = data.get("root", "")
+      session = clean_session(data.get("sessionId", ""))
+      root = scoped_session_path(session, data.get("root", ""))
       locked = bool(data.get("locked", True))
       network = bool(data.get("network", True))
       hashes = bool(data.get("hashes", False))
@@ -1341,7 +1699,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/project/run":
       if not self.perm_check("exec"):
         return
-      root = data.get("root", "")
+      session = clean_session(data.get("sessionId", ""))
+      root = scoped_session_path(session, data.get("root", ""))
       command = data.get("command", [])
       timeout_s = int(data.get("timeout_s", 1200) or 1200)
       out, err = project_run(root, command, timeout_s)
@@ -1354,7 +1713,8 @@ class Handler(BaseHTTPRequestHandler):
     if self.path == "/v1/project/test":
       if not self.perm_check("exec"):
         return
-      root = data.get("root", "")
+      session = clean_session(data.get("sessionId", ""))
+      root = scoped_session_path(session, data.get("root", ""))
       timeout_s = int(data.get("timeout_s", 1200) or 1200)
       out, err = project_test(root, timeout_s)
       if err:

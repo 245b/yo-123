@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
@@ -11,6 +12,25 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@operator/contracts": ["../packages/contracts/src/index.ts"],
+      "@operator/contracts/*": ["../packages/contracts/src/*"],
+      "@operator/observability": ["../packages/observability/src/index.ts"],
+      "@operator/observability/*": ["../packages/observability/src/*"],
+      "@operator/data": ["../packages/data/src/index.ts"],
+      "@operator/data/*": ["../packages/data/src/*"],
+      "@operator/services": ["../packages/services/src/index.ts"],
+      "@operator/services/*": ["../packages/services/src/*"],
+      "@operator/integrations": ["../packages/integrations/src/index.ts"],
+      "@operator/integrations/*": ["../packages/integrations/src/*"],
+      "@operator/ui": ["../packages/ui/src/index.ts"],
+      "@operator/ui/*": ["../packages/ui/src/*"],
+      "@operator/runtime-core": ["../packages/runtime-core/src/index.ts"],
+      "@operator/runtime-core/*": ["../packages/runtime-core/src/*"],
+      "@operator/execution": ["../packages/execution/src/index.ts"],
+      "@operator/execution/*": ["../packages/execution/src/*"]
+    },
     "types": ["vite/client", "bun", "node"]
   },
   "include": ["src", "scripts", "server"]

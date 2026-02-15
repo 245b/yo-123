@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@operator/contracts": ["packages/contracts/src/index.ts"],
+      "@operator/contracts/*": ["packages/contracts/src/*"],
+      "@operator/observability": ["packages/observability/src/index.ts"],
+      "@operator/observability/*": ["packages/observability/src/*"],
+      "@operator/data": ["packages/data/src/index.ts"],
+      "@operator/data/*": ["packages/data/src/*"],
+      "@operator/services": ["packages/services/src/index.ts"],
+      "@operator/services/*": ["packages/services/src/*"],
+      "@operator/integrations": ["packages/integrations/src/index.ts"],
+      "@operator/integrations/*": ["packages/integrations/src/*"],
+      "@operator/ui": ["packages/ui/src/index.ts"],
+      "@operator/ui/*": ["packages/ui/src/*"],
+      "@operator/runtime-core": ["packages/runtime-core/src/index.ts"],
+      "@operator/runtime-core/*": ["packages/runtime-core/src/*"],
+      "@operator/execution": ["packages/execution/src/index.ts"],
+      "@operator/execution/*": ["packages/execution/src/*"]
+    }
+  }
+}

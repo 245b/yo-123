@@ -1,9 +1,10 @@
 import { useEffect } from "react"
+import { activeChatKey, readActiveChat, writeActiveChat } from "../lib/activeChat"
 import { fromBase, toBase } from "../lib/route"
 
 export const useRouteSync = () => {
   useEffect(() => {
-    const ak = "ms_chat_active"
+    const ak = activeChatKey
     const base = "/t/"
 
     const id = () => {
@@ -55,12 +56,11 @@ export const useRouteSync = () => {
       }
 
       const cid = id()
-      const raw0 = window.localStorage.getItem(ak) ?? ""
-      const raw = raw0.trim()
+      const raw = readActiveChat(window)
 
       if (cid) {
         if (raw !== cid) {
-          window.localStorage.setItem(ak, cid)
+          writeActiveChat(window, cid)
         }
 
         return
@@ -76,6 +76,11 @@ export const useRouteSync = () => {
     const st = (ev: Event) => {
       const e = ev as StorageEvent
       const k = e.key ?? ""
+      const a = e.storageArea ?? null
+
+      if (a && a !== window.sessionStorage) {
+        return
+      }
 
       if (k !== ak) {
         return
@@ -95,17 +100,16 @@ export const useRouteSync = () => {
       const cid = id()
 
       if (cid) {
-        const raw0 = window.localStorage.getItem(ak) ?? ""
-        const raw = raw0.trim()
+        const raw = readActiveChat(window)
 
         if (raw !== cid) {
-          window.localStorage.setItem(ak, cid)
+          writeActiveChat(window, cid)
         }
 
         return
       }
 
-      window.localStorage.removeItem(ak)
+      writeActiveChat(window, "")
     }
 
     init()

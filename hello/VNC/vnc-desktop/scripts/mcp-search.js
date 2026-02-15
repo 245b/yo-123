@@ -4,6 +4,66 @@ const { argv, env, stdout, exit } = process
 const clean = (val) => (typeof val === "string" ? val.trim() : "")
 const lower = (val) => clean(val).toLowerCase()
 
+const stripOuterQuotes = (raw) => {
+  var text = clean(raw)
+  if (!text) {
+    return ""
+  }
+  for (;;) {
+    const first = text[0] || ""
+    const last = text[text.length - 1] || ""
+    const pair = (first === `"` && last === `"`) || (first === `'` && last === `'`)
+    if (!pair) {
+      break
+    }
+    if (text.length < 2) {
+      break
+    }
+    text = clean(text.slice(1, -1))
+    if (!text) {
+      break
+    }
+  }
+  text = text.replace(/^["']+/, "").replace(/["']+$/, "").trim()
+  return text
+}
+
+const normalizeQuery = (raw) => {
+  const text0 = clean(raw)
+  if (!text0) {
+    return ""
+  }
+  const text1 = text0
+    .replace(/[“”]/g, `"`)
+    .replace(/[‘’]/g, `'`)
+    .replace(/\s+/g, " ")
+    .trim()
+  const text2 = stripOuterQuotes(text1)
+  return text2 || text1
+}
+
+const queryVariants = (raw) => {
+  const out = []
+  const seen = new Set()
+  const push = (val) => {
+    const v = clean(val)
+    if (!v) {
+      return
+    }
+    if (seen.has(v)) {
+      return
+    }
+    seen.add(v)
+    out.push(v)
+  }
+  const base = clean(raw)
+  const norm = normalizeQuery(base)
+  push(norm)
+  push(base)
+  push(`"${norm}"`)
+  return out
+}
+
 const normProv = (val) => {
   const t = lower(val)
   if (!t) {
@@ -14,6 +74,9 @@ const normProv = (val) => {
   }
   if (t === "ctx7" || t === "context7") {
     return "ctx7"
+  }
+  if (t === "yt" || t === "youtube" || t === "youtube_transcript" || t === "youtube-transcript") {
+    return "yt"
   }
   if (t === "both" || t === "all") {
     return "both"
@@ -80,12 +143,67 @@ const isResearch = (txt) => {
   return hasKey(txt, keys)
 }
 
+const ytIdFrom = (url) => {
+  const m = clean(url).match(/(?:youtube\.com\/watch\?[^"' <>\n\r\t]*v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/i)
+  if (!m || !m[1]) {
+    return ""
+  }
+  return clean(m[1])
+}
+
+const ytUrlsFromText = (raw) => {
+  const text = clean(raw)
+  if (!text) {
+    return []
+  }
+  const matches = text.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?[^"' <>\n\r\t]+|youtu\.be\/[A-Za-z0-9_-]{6,}[^\s"'<>]*)/gi)
+  if (!matches || !matches.length) {
+    return []
+  }
+  const out = []
+  const seen = new Set()
+  for (var i = 0; i < matches.length; i++) {
+    const cur0 = matches[i] || ""
+    const cur1 = clean(cur0).replace(/[),.;!?]+$/g, "")
+    const cur2 = cur1.startsWith("http://") || cur1.startsWith("https://") ? cur1 : `https://${cur1}`
+    const id = ytIdFrom(cur2)
+    const url = id ? `https://www.youtube.com/watch?v=${id}` : cur2
+    if (!url) {
+      continue
+    }
+    if (seen.has(url)) {
+      continue
+    }
+    seen.add(url)
+    out.push(url)
+  }
+  return out
+}
+
+const isYoutubeQuery = (txt) => {
+  if (ytUrlsFromText(txt).length) {
+    return true
+  }
+  const hasYt = hasKey(txt, ["youtube", "youtu.be", "youtube.com"])
+  if (hasYt) {
+    return true
+  }
+  const hasTranscript = hasKey(txt, ["transcript", "captions", "subtitle", "timed transcript", "timestamps"])
+  if (!hasTranscript) {
+    return false
+  }
+  return hasKey(txt, ["video", "watch"])
+}
+
 const pickProvider = (query, lib, libId, prov) => {
   const forced = normProv(prov)
   if (forced && forced !== "auto") {
     return forced
   }
   const t = lower(query)
+  if (isYoutubeQuery(t)) {
+    return "yt"
+  }
   if (isResearch(t)) {
     return "both"
   }
@@ -121,6 +239,10 @@ const parseArgs = (list) => {
     }
     if (cur === "--ctx7" || cur === "--context7") {
       provider = "ctx7"
+      continue
+    }
+    if (cur === "--yt" || cur === "--youtube") {
+      provider = "yt"
       continue
     }
     if (cur === "--both") {
@@ -587,6 +709,38 @@ const cfgCtx7FromEnv = () => {
   }
 }
 
+const cfgYtFromEnv = () => {
+  const url = pickEnv("MCP_YT_URL", "MCP_YOUTUBE_URL") || "http://youtube-transcript-mcp:8030/mcp"
+  const toolRaw = pickEnv("MCP_YT_TOOL", "MCP_YOUTUBE_TOOL") || "get_video_info,get_transcript"
+  const tools = splitList(toolRaw)
+  const toolList = tools.length ? tools : ["get_video_info", "get_transcript"]
+  const headRaw = pickEnv("MCP_YT_HEADERS", "MCP_YOUTUBE_HEADERS")
+  const token = pickEnv("MCP_YT_TOKEN", "MCP_YOUTUBE_TOKEN")
+  const tokenHeader = pickEnv("MCP_YT_TOKEN_HEADER", "MCP_YOUTUBE_TOKEN_HEADER")
+  const tokenPrefix = pickEnv("MCP_YT_TOKEN_PREFIX", "MCP_YOUTUBE_TOKEN_PREFIX")
+  const proto0 = pickEnv("MCP_YT_PROTOCOL_VERSION", "MCP_PROTOCOL_VERSION")
+  const proto = proto0 || "2024-11-05"
+  const timeout0 = pickEnv("MCP_YT_TIMEOUT_MS", "MCP_SEARCH_TIMEOUT_MS")
+  const timeout1 = timeout0 || envVal("REQUEST_TIMEOUT_MS")
+  const timeoutMs = numFrom(timeout1, 45000, 1000, 180000)
+  const retryRaw = pickEnv("MCP_YT_RETRIES", "MCP_SEARCH_RETRIES") || envVal("MCP_RETRIES")
+  const retries = numFrom(retryRaw, 2, 0, 5)
+  const delayRaw = pickEnv("MCP_YT_RETRY_DELAY_MS", "MCP_SEARCH_RETRY_DELAY_MS") || envVal("MCP_RETRY_DELAY_MS")
+  const retryDelayMs = numFrom(delayRaw, 1500, 250, 10000)
+  const argsRaw = pickEnv("MCP_YT_ARGS", "MCP_YOUTUBE_ARGS")
+  const qKeyRaw = clean(pickEnv("MCP_YT_QUERY_KEY", "MCP_YOUTUBE_QUERY_KEY"))
+  const lKeyRaw = clean(pickEnv("MCP_YT_LANG_KEY", "MCP_YOUTUBE_LANG_KEY"))
+  const lRaw = clean(pickEnv("MCP_YT_LANG", "MCP_YOUTUBE_LANG"))
+  const maxRaw = pickEnv("MCP_YT_MAX_VIDEOS", "MCP_YOUTUBE_MAX_VIDEOS")
+  const queryKey = isPlaceholder(qKeyRaw) ? "url" : qKeyRaw || "url"
+  const langKey = isPlaceholder(lKeyRaw) ? "lang" : lKeyRaw || "lang"
+  const lang = isPlaceholder(lRaw) ? "" : lRaw
+  const maxVideos = numFrom(maxRaw, 10, 1, 20)
+  const headers = readHeaders(headRaw, token, tokenHeader, tokenPrefix)
+  const args = readArgs(argsRaw)
+  return { url, tools: toolList, headers, protocol: proto, timeoutMs, retries, retryDelayMs, args, queryKey, langKey, lang, maxVideos }
+}
+
 const resultFrom = (msg) => {
   if (!msg || typeof msg !== "object") {
     return null
@@ -660,6 +814,28 @@ const textFromContent = (content) => {
   return out.join("\n")
 }
 
+const hasUrlText = (raw) => {
+  const text = clean(raw)
+  if (!text) {
+    return false
+  }
+  if (/URL:\s*https?:\/\//i.test(text)) {
+    return true
+  }
+  return /https?:\/\/[^\s]+/i.test(text)
+}
+
+const isNoResultText = (raw) => {
+  const text = clean(raw).toLowerCase()
+  if (!text) {
+    return false
+  }
+  if (text === "no results found.") {
+    return true
+  }
+  return text === "no results found"
+}
+
 const listFrom = (raw) => {
   if (!raw) {
     return []
@@ -681,6 +857,26 @@ const listFrom = (raw) => {
     return obj.data.filter((it) => it && typeof it === "object")
   }
   return []
+}
+
+const isDdgEmptyResult = (res) => {
+  const content = contentFrom(res)
+  if (!content.length) {
+    return true
+  }
+  const json = jsonFromContent(content)
+  const rows = listFrom(json)
+  if (rows.length) {
+    return false
+  }
+  const text = textFromContent(content)
+  if (!text) {
+    return true
+  }
+  if (hasUrlText(text)) {
+    return false
+  }
+  return isNoResultText(text)
 }
 
 const pickLibIdFromRow = (raw) => {
@@ -869,6 +1065,179 @@ const callTool = async (cfg, session, tool, args, tries) => {
   return { ok: false, error: lastErr || "MCP tool call failed" }
 }
 
+const ytUrlsFromResult = (raw) => {
+  const out = []
+  const seen = new Set()
+  const pushAll = (list) => {
+    for (var i = 0; i < list.length; i++) {
+      const url = clean(list[i] || "")
+      if (!url) {
+        continue
+      }
+      if (seen.has(url)) {
+        continue
+      }
+      seen.add(url)
+      out.push(url)
+    }
+  }
+  if (!raw) {
+    return out
+  }
+  const src = typeof raw === "string" ? raw : JSON.stringify(raw)
+  pushAll(ytUrlsFromText(src))
+  const content = contentFrom(raw)
+  pushAll(ytUrlsFromText(textFromContent(content)))
+  const json = jsonFromContent(content)
+  if (json) {
+    const j = typeof json === "string" ? json : JSON.stringify(json)
+    pushAll(ytUrlsFromText(j))
+  }
+  const rows = listFrom(raw)
+  for (var i = 0; i < rows.length; i++) {
+    const row = rows[i] || {}
+    const u0 =
+      typeof row.url === "string"
+        ? row.url
+        : typeof row.link === "string"
+          ? row.link
+          : typeof row.href === "string"
+            ? row.href
+            : ""
+    pushAll(ytUrlsFromText(u0))
+  }
+  return out
+}
+
+const ytSearchUrls = async (query, max) => {
+  const q = clean(query)
+  if (!q) {
+    return []
+  }
+  const limit = max > 0 ? max : 5
+  const sig = AbortSignal.timeout(20000)
+  const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      accept: "text/html",
+      "user-agent":
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+    },
+    signal: sig,
+  }).catch(() => null)
+  if (!res || !res.ok) {
+    return []
+  }
+  const html0 = await res.text().catch(() => "")
+  const html = typeof html0 === "string" ? html0 : ""
+  if (!html) {
+    return []
+  }
+  const ids = html.match(/\/watch\?v=([A-Za-z0-9_-]{6,})/g) || []
+  const out = []
+  const seen = new Set()
+  for (var i = 0; i < ids.length; i++) {
+    const id0 = ids[i] || ""
+    const id1 = id0.replace("/watch?v=", "")
+    const id = clean(id1)
+    if (!id) {
+      continue
+    }
+    const link = `https://www.youtube.com/watch?v=${id}`
+    if (seen.has(link)) {
+      continue
+    }
+    seen.add(link)
+    out.push(link)
+    if (out.length >= limit) {
+      break
+    }
+  }
+  return out
+}
+
+const runYt = async (query, maxArg, cfg, ddgCfg) => {
+  if (!cfg.url) {
+    return { ok: false, error: "Missing MCP URL", provider: "yt" }
+  }
+  const tools = Array.isArray(cfg.tools) ? cfg.tools : []
+  if (!tools.length) {
+    return { ok: false, error: "Missing MCP tool", provider: "yt" }
+  }
+  var urls = ytUrlsFromText(query)
+  var source = "query"
+  var lookup = null
+  if (!urls.length) {
+    const queryLow = lower(query)
+    const lookupQuery = queryLow.includes("youtube.com") || queryLow.includes("youtu.be") ? query : `site:youtube.com ${query}`
+    const lookupMax = maxArg > 0 ? maxArg + 3 : cfg.maxVideos + 3
+    const ddg = await runDdg(lookupQuery, lookupMax, ddgCfg)
+    lookup = ddg
+    source = "ddg"
+    if (ddg.ok) {
+      urls = ytUrlsFromResult(ddg.result)
+    }
+  }
+  if (!urls.length) {
+    const searchMax = maxArg > 0 ? maxArg + 3 : cfg.maxVideos + 3
+    const webUrls = await ytSearchUrls(query, searchMax)
+    if (webUrls.length) {
+      urls = webUrls
+      source = "youtube"
+    }
+  }
+  if (!urls.length) {
+    return { ok: false, error: "No YouTube video URLs found for query", provider: "yt", source, lookup }
+  }
+  const limit = maxArg > 0 ? maxArg : cfg.maxVideos
+  const selected = urls.slice(0, limit)
+  const init = await initSession(cfg)
+  if (!init.ok) {
+    return { ok: false, error: init.error || "MCP initialize failed", provider: "yt", source, lookup, urls: selected }
+  }
+  var ok = false
+  var err = ""
+  const videos = []
+  for (var i = 0; i < selected.length; i++) {
+    const url = selected[i] || ""
+    const row = { url, ok: false, calls: [] }
+    for (var j = 0; j < tools.length; j++) {
+      const tool = tools[j] || ""
+      if (!tool) {
+        continue
+      }
+      const args = Object.assign({}, cfg.args)
+      if (!Object.prototype.hasOwnProperty.call(args, cfg.queryKey)) {
+        args[cfg.queryKey] = url
+      }
+      const needsLang = lower(tool).includes("transcript")
+      if (cfg.lang && needsLang) {
+        if (!Object.prototype.hasOwnProperty.call(args, cfg.langKey)) {
+          args[cfg.langKey] = cfg.lang
+        }
+      }
+      const res = await callTool(cfg, init, tool, args, cfg.retries + 1)
+      if (res.ok) {
+        row.ok = true
+        ok = true
+        row.calls.push({ ok: true, tool, result: res.result })
+        continue
+      }
+      const msg = res.error || "MCP tool call failed"
+      if (!err) {
+        err = `${tool}: ${msg}`
+      }
+      row.calls.push({ ok: false, tool, error: msg })
+    }
+    videos.push(row)
+  }
+  if (ok) {
+    return { ok: true, provider: "yt", source, videos, lookup }
+  }
+  return { ok: false, error: err || "MCP tool call failed", provider: "yt", source, videos, lookup }
+}
+
 const runDdg = async (query, maxArg, cfg) => {
   if (!cfg.url) {
     return { ok: false, error: "Missing MCP URL", provider: "ddg" }
@@ -881,10 +1250,6 @@ const runDdg = async (query, maxArg, cfg) => {
   if (!init.ok) {
     return { ok: false, error: init.error || "MCP initialize failed", provider: "ddg" }
   }
-  const args = Object.assign({}, cfg.args)
-  if (!Object.prototype.hasOwnProperty.call(args, cfg.queryKey)) {
-    args[cfg.queryKey] = query
-  }
   var max = 0
   if (maxArg > 0) {
     max = maxArg
@@ -895,24 +1260,43 @@ const runDdg = async (query, maxArg, cfg) => {
       max = numFrom(maxRaw, 0, 1, 500)
     }
   }
-  if (max > 0 && cfg.resultsKey) {
-    if (!Object.prototype.hasOwnProperty.call(args, cfg.resultsKey)) {
-      args[cfg.resultsKey] = max
-    }
-  }
+  const vars = queryVariants(query)
   var lastErr = ""
-  for (var i = 0; i < tools.length; i++) {
-    const tool = tools[i] || ""
-    if (!tool) {
+  var sawNoResults = false
+  for (var v = 0; v < vars.length; v++) {
+    const q = vars[v] || ""
+    if (!q) {
       continue
     }
-    const tries = tool === "web-search" ? cfg.retries + 1 : 1
-    const res = await callTool(cfg, init, tool, args, tries)
-    if (res.ok) {
-      return { ok: true, result: res.result, tool, provider: "ddg" }
+    const args = Object.assign({}, cfg.args)
+    if (!Object.prototype.hasOwnProperty.call(args, cfg.queryKey)) {
+      args[cfg.queryKey] = q
     }
-    const err = res.error || "MCP tool call failed"
-    lastErr = `${tool}: ${err}`
+    if (max > 0 && cfg.resultsKey) {
+      if (!Object.prototype.hasOwnProperty.call(args, cfg.resultsKey)) {
+        args[cfg.resultsKey] = max
+      }
+    }
+    for (var i = 0; i < tools.length; i++) {
+      const tool = tools[i] || ""
+      if (!tool) {
+        continue
+      }
+      const tries = tool === "web-search" ? cfg.retries + 1 : 1
+      const res = await callTool(cfg, init, tool, args, tries)
+      if (res.ok) {
+        if (isDdgEmptyResult(res.result)) {
+          sawNoResults = true
+          continue
+        }
+        return { ok: true, result: res.result, tool, provider: "ddg", query: q }
+      }
+      const err = res.error || "MCP tool call failed"
+      lastErr = `${tool}: ${err}`
+    }
+  }
+  if (sawNoResults && !lastErr) {
+    return { ok: false, error: "MCP search returned no results", provider: "ddg" }
   }
   return { ok: false, error: lastErr || "MCP tool call failed", provider: "ddg" }
 }
@@ -971,6 +1355,92 @@ const runCtx7 = async (query, lib, libId, maxArg, cfg) => {
   return { ok: true, result: res.result, tool: cfg.queryTool, provider: "ctx7", libraryId, resolved }
 }
 
+const autoOrder = (pref, query) => {
+  const out = []
+  const seen = new Set()
+  const push = (id) => {
+    const v = clean(id)
+    if (!v) {
+      return
+    }
+    if (seen.has(v)) {
+      return
+    }
+    seen.add(v)
+    out.push(v)
+  }
+  const t = clean(pref).toLowerCase()
+  if (t === "yt") {
+    push("yt")
+    push("ddg")
+    push("ctx7")
+  }
+  if (t === "ctx7") {
+    push("ctx7")
+    push("ddg")
+  }
+  if (t === "both") {
+    push("ddg")
+    push("ctx7")
+  }
+  if (!out.length || t === "ddg") {
+    push("ddg")
+    push("ctx7")
+  }
+  if (isYoutubeQuery(lower(query))) {
+    push("yt")
+  }
+  return out
+}
+
+const runAuto = async (query, parsed, ddgCfg, ctx7Cfg, ytCfg) => {
+  const pref = pickProvider(query, parsed.lib, parsed.libId, parsed.provider)
+  const order = autoOrder(pref, query)
+  const attempts = []
+  var lastErr = ""
+
+  for (var i = 0; i < order.length; i++) {
+    const id = order[i] || ""
+    if (!id) {
+      continue
+    }
+    var out = { ok: false, error: "Unknown provider", provider: id }
+    if (id === "ddg") {
+      out = await runDdg(query, parsed.max, ddgCfg)
+    }
+    if (id === "ctx7") {
+      out = await runCtx7(query, parsed.lib, parsed.libId, parsed.max, ctx7Cfg)
+    }
+    if (id === "yt") {
+      out = await runYt(query, parsed.max, ytCfg, ddgCfg)
+    }
+    const err0 = typeof out.error === "string" ? out.error : ""
+    const err = clean(err0)
+    attempts.push({ provider: id, ok: out.ok, error: err || undefined })
+    if (out.ok) {
+      return Object.assign({}, out, {
+        requestedProvider: "auto",
+        usedProvider: id,
+        attemptedProviders: order,
+        attempts,
+      })
+    }
+    if (err) {
+      lastErr = err
+    }
+  }
+
+  return {
+    ok: false,
+    error: lastErr || "MCP tool call failed",
+    provider: "auto",
+    requestedProvider: "auto",
+    usedProvider: "",
+    attemptedProviders: order,
+    attempts,
+  }
+}
+
 const main = async () => {
   const parsed = parseArgs(argv.slice(2))
   const query = parsed.query
@@ -979,15 +1449,22 @@ const main = async () => {
       {
         ok: false,
         error:
-          "Usage: mcp-search [--provider ddg|ctx7|both|auto] [--lib <name>] [--library-id <id>] [--max N] \"query\"",
+          "Usage: mcp-search [--provider ddg|ctx7|yt|both|auto] [--lib <name>] [--library-id <id>] [--max N] \"query\"",
       },
       2,
     )
     return
   }
-  const provider = pickProvider(query, parsed.lib, parsed.libId, parsed.provider)
+  const forced = normProv(parsed.provider)
+  const provider = forced && forced !== "auto" ? forced : pickProvider(query, parsed.lib, parsed.libId, parsed.provider)
   const ddgCfg = cfgFromEnv()
   const ctx7Cfg = cfgCtx7FromEnv()
+  const ytCfg = cfgYtFromEnv()
+  if (forced === "auto" || !forced) {
+    const out = await runAuto(query, parsed, ddgCfg, ctx7Cfg, ytCfg)
+    writeOut(out, out.ok ? 0 : 1)
+    return
+  }
   if (provider === "ddg") {
     const out = await runDdg(query, parsed.max, ddgCfg)
     writeOut(out, out.ok ? 0 : 1)
@@ -998,13 +1475,27 @@ const main = async () => {
     writeOut(out, out.ok ? 0 : 1)
     return
   }
+  if (provider === "yt") {
+    const out = await runYt(query, parsed.max, ytCfg, ddgCfg)
+    writeOut(out, out.ok ? 0 : 1)
+    return
+  }
   if (provider === "both") {
     const ddg = await runDdg(query, parsed.max, ddgCfg)
     const ctx7 = await runCtx7(query, parsed.lib, parsed.libId, parsed.max, ctx7Cfg)
-    const ok = ddg.ok || ctx7.ok
-    const out = { ok, provider: "both", ddg, ctx7 }
+    const ytNeeded = isYoutubeQuery(lower(query))
+    const yt = ytNeeded
+      ? await runYt(query, parsed.max, ytCfg, ddgCfg)
+      : {
+          ok: false,
+          skipped: true,
+          provider: "yt",
+          reason: "Skipped YouTube MCP for non-YouTube query",
+        }
+    const ok = ddg.ok || ctx7.ok || yt.ok
+    const out = { ok, provider: "both", ddg, ctx7, yt }
     if (!ok) {
-      const err = ddg.error || ctx7.error || "MCP tool call failed"
+      const err = ddg.error || ctx7.error || yt.error || "MCP tool call failed"
       writeOut(Object.assign(out, { error: err }), 1)
       return
     }

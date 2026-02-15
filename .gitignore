@@ -1,7 +1,32 @@
 .env
+.deleter_backup_dir.txt
 .codex-debugger/
 .codex-trash/
-hello/VNC/vnc-desktop/config/chromium/Singleton*
+.turbo/
+node_modules/
+apps/*/node_modules/
+packages/*/node_modules/
+Operator-web/node_modules/
+package-lock.json
+*.log
+**/playwright-report/
+**/test-results/
+
+# Bench outputs (generated)
+Operator-web/bench-*.json
+
+# Local reference clones (avoid committing vendored source trees / build artifacts)
+Operator-web/vendor/
+
+# Runtime / generated state (do not commit)
+data/
+hello/VNC/vnc-desktop/data/
+hello/VNC/vnc-desktop/config/chromium/
+hello/VNC/vnc-desktop/config/window-layout.env
+hello/VNC/vnc-desktop/config/lite-xl/session.lua
+hello/VNC/vnc-desktop/scripts/__pycache__/
+hello/VNC/vnc-desktop/workspace/operator/
+hello/VNC/vnc-desktop/workspace/Operator/
 hello/VNC/vnc-desktop/desktop/Data
 hello/VNC/vnc-desktop/desktop/Downloads
 hello/VNC/vnc-desktop/desktop/Projects

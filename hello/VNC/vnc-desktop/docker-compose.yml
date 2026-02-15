@@ -26,10 +26,13 @@ services:
       - RUN_USER=operator
       - RUN_HOME=/home/operator
       - WORKSPACE_DIR=/home/operator/Desktop
-      - WORKSPACE_ROOT=/projects/Operator
+      - WORKSPACE_ROOT=/projects/operator
       - PROJECTS_DIR=/projects
-      - OPERATOR_DIR=/projects/Operator
-      - TERM_SESSION_DIR=/projects/Operator
+      - OPERATOR_DIR=/projects/operator
+      - EDITOR_WORKSPACE_DIR=/projects/operator
+      - TERM_SESSION_DIR=/projects/operator
+      - TERM_SESSION_ID=operator
+      - TERM_AGENT_PURGE_ON_START=0
       - DATA_DIR=/home/operator/Data
       - DOWNLOAD_DIR=/home/operator/Data/Downloads
       - LOW_MEMORY_MODE=1

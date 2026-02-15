@@ -1,8 +1,8 @@
 import type { Msg } from "../types"
 import { body } from "../utils/http"
 import { clean, clip, unq } from "../utils/text"
-import { loadEnv } from "../env"
 import { createDeepSeek } from "./deepseek"
+import { readDeepSeekApiKey } from "./key"
 import { parseMessages } from "./messages"
 
 export type TitleDeps = {
@@ -136,16 +136,10 @@ export const createTitleHandler = (deps: TitleDeps) => {
   }
 
   return async (req: Request) => {
-    var key = (process.env.DEEPSEEK_API_KEY ?? "").trim()
+    var key = readDeepSeekApiKey()
 
-    if (!key || key === "sk-REPLACE_ME") {
-      await loadEnv(deps.root)
-      const k0 = (process.env.DEEPSEEK_API_KEY ?? "").trim()
-      key = k0
-    }
-
-    if (!key || key === "sk-REPLACE_ME") {
-      return deps.bad("Missing DEEPSEEK_API_KEY (set in .env; see .env.example)", 500)
+    if (!key) {
+      return deps.bad("Missing DEEPSEEK_API_KEY", 500)
     }
 
     const sig = req.signal

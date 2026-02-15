@@ -1,4 +1,5 @@
 import { chats } from "./bridge/chats"
+import { activeChatKey, clearActiveChat } from "../lib/activeChat"
 import { toBase } from "../lib/route"
 import type { BootDeps, MsWin } from "./bootTypes"
 
@@ -238,7 +239,7 @@ export const bootSidebar = (d: BootDeps, doc: Document, win: Window) => {
   const home = () => {
     const sw = d.ia.current?.contentWindow as unknown as { __ms_ds_reset?: ((keep?: boolean) => void) | null } | null
     sw?.__ms_ds_reset?.()
-    window.localStorage.removeItem("ms_chat_active")
+    clearActiveChat(window)
     window.history.replaceState(null, "", toBase("/"))
   }
 
@@ -339,8 +340,17 @@ export const bootSidebar = (d: BootDeps, doc: Document, win: Window) => {
   const st = (ev: Event) => {
     const e = ev as StorageEvent
     const k = e.key ?? ""
+    const a = e.storageArea ?? null
 
-    if (k !== "ms_chats" && k !== "ms_chat_active") {
+    if (k !== "ms_chats" && k !== activeChatKey) {
+      return
+    }
+
+    if (k === activeChatKey && a && a !== window.sessionStorage) {
+      return
+    }
+
+    if (k === "ms_chats" && a && a !== window.localStorage) {
       return
     }
 

@@ -1,3 +1,5 @@
+import { readActiveChat } from "../../../lib/activeChat"
+
 export type OverlayDeps = {
   doc: Document
   tdoc: Document
@@ -187,8 +189,7 @@ export const initChatOverlays = (deps: OverlayDeps) => {
       }
 
       if (!id) {
-        const cur0 = deps.win.localStorage.getItem("ms_chat_active") ?? ""
-        id = cur0.trim()
+        id = readActiveChat(deps.win)
       }
 
       if (!id) {

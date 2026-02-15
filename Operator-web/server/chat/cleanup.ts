@@ -2,6 +2,7 @@ import path from "node:path"
 import { mkdir, readdir, unlink } from "node:fs/promises"
 import { fsDelete } from "../terminal/client"
 import { inside, norm } from "../utils/path"
+import { createCleanupQueueStore } from "../../../packages/data/src/cleanupQueueStore"
 
 type QueueRow = {
   chatId: string
@@ -395,7 +396,7 @@ export const createChatCleanupService = (root: string): ChatCleanupService => {
   const logs = path.join(base, "logs")
   const transcripts = path.join(base, "transcripts")
   const sessions = path.join(base, "sessions")
-  const queue = queuePath(base)
+  const queueStore = createCleanupQueueStore(base)
   const ws = workspaceRoot()
   const everyMs = 10 * 60 * 1000
   var timer: ReturnType<typeof setInterval> | null = null
@@ -438,38 +439,11 @@ export const createChatCleanupService = (root: string): ChatCleanupService => {
   }
 
   const queueUpsert = async (chatId: string) => {
-    const list = await readQueue(queue)
-    const next: QueueRow[] = []
-    const ts = new Date().toISOString()
-    var has = false
-
-    for (var i = 0; i < list.length; i++) {
-      const row = list[i]
-
-      if (!row) {
-        continue
-      }
-
-      if (row.chatId === chatId) {
-        next.push({ chatId, ts, attempts: row.attempts })
-        has = true
-        continue
-      }
-
-      next.push(row)
-    }
-
-    if (!has) {
-      next.push({ chatId, ts, attempts: 0 })
-    }
-
-    await writeQueue(queue, next)
+    await queueStore.upsert(chatId)
   }
 
   const queueDrop = async (chatId: string) => {
-    const list = await readQueue(queue)
-    const next = list.filter((row) => row?.chatId !== chatId)
-    await writeQueue(queue, next)
+    await queueStore.drop(chatId)
   }
 
   const processQueue = async () => {
@@ -478,7 +452,7 @@ export const createChatCleanupService = (root: string): ChatCleanupService => {
     }
 
     running = true
-    const list = await readQueue(queue)
+    const list = await queueStore.list()
     const keep: QueueRow[] = []
 
     for (var i = 0; i < list.length; i++) {
@@ -504,7 +478,7 @@ export const createChatCleanupService = (root: string): ChatCleanupService => {
       keep.push({ chatId, ts: new Date().toISOString(), attempts })
     }
 
-    await writeQueue(queue, keep)
+    await queueStore.replace(keep)
     running = false
   }
 

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "xterm/css/xterm.css";
 
 :root {
   --background-operator-gray: rgb(24 24 27);
@@ -71,4 +72,26 @@
 
 .hover\:bg-token-bg-secondary:hover {
   background: var(--fill-tsp-gray-main);
+}
+
+.ms_right_editor {
+  white-space: pre;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: transparent;
+}
+
+.ms-term-xterm {
+  width: 100%;
+  min-height: 140px;
+  border: 1px solid var(--border-main, rgba(255, 255, 255, 0.12));
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ms-term-xterm .xterm-viewport {
+  background: transparent !important;
+}
+
+.ms-term-xterm .xterm-screen {
+  padding: 6px 8px;
 }

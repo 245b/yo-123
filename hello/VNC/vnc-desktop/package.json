@@ -1,0 +1,10 @@
+{
+  "name": "@operator/vnc-infra",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "infra:vnc:check": "bun run scripts/infra-check.ts",
+    "infra:vnc:smoke": "python scripts/term-agent-smoke.py",
+    "infra:vnc:parity": "bun run scripts/term-agent-parity.ts"
+  }
+}

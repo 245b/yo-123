@@ -1,0 +1,27 @@
+.git/
+.codex-debugger/
+.codex-trash/
+.turbo/
+
+**/node_modules/
+**/dist/
+**/coverage/
+**/playwright-report/
+**/test-results/
+
+data/
+*.log
+.env
+.env.*
+
+# VNC desktop runtime state (compose mounts this at runtime)
+hello/VNC/vnc-desktop/config/chromium/
+hello/VNC/vnc-desktop/config/window-layout.env
+hello/VNC/vnc-desktop/data/
+hello/VNC/vnc-desktop/workspace/operator/
+hello/VNC/vnc-desktop/workspace/Operator/
+hello/VNC/vnc-desktop/desktop/Data/
+hello/VNC/vnc-desktop/desktop/Downloads/
+hello/VNC/vnc-desktop/desktop/Projects/
+hello/VNC/vnc-desktop/desktop/Temp Files/
+

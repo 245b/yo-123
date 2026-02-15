@@ -16,3 +16,9 @@ services:
         value: deepseek-chat
       - key: DEEPSEEK_BASE_URL
         value: https://api.deepseek.com
+      - key: OPERATOR_REASONING_TIMEOUT_MS
+        value: "0"
+      - key: OPERATOR_TURN_TIMEOUT_MS
+        value: "0"
+      - key: DEEPSEEK_TURN_TIMEOUT_MS
+        value: "0"

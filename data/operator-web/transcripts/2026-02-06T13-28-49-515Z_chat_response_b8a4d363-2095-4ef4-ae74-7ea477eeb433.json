@@ -1,8 +1,0 @@
-{
-  "ts": "2026-02-06T13:28:49.515Z",
-  "chatId": "qa-shell-1",
-  "sessionId": "qa-shell-1",
-  "model": "deepseek-chat",
-  "text": "I checked the session folder. It's currently empty—there are no files or subdirectories inside it.",
-  "ctx": null
-}
