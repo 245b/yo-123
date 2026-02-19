@@ -80,7 +80,13 @@ function Is-IgnoredPath {
   $rel = $RelPath.ToLowerInvariant()
 
   foreach ($prefix in $IgnorePrefixes) {
-    if ($rel.StartsWith($prefix.ToLowerInvariant())) {
+    $p = $prefix.ToLowerInvariant().TrimEnd('\', '/')
+
+    if ($rel -eq $p) {
+      return $true
+    }
+
+    if ($rel.StartsWith(($p + "\"))) {
       return $true
     }
   }
