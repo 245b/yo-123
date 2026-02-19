@@ -37,3 +37,13 @@ export const TermAgentHealthSchema = z.object({
   tmux_available: z.boolean(),
   perms: z.array(z.string()),
 })
+
+export const PreviewOpenRequestSchema = z.object({
+  url: z.string().trim().min(1),
+})
+
+export const PreviewOpenResponseSchema = z.object({
+  ok: z.literal(true),
+  url: z.string().trim().min(1),
+  tabId: z.string().trim().min(1).optional(),
+})

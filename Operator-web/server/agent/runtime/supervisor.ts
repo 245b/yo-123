@@ -994,7 +994,6 @@ export class RuntimeSupervisor {
     }
 
     if (parsed.kind === "event") {
-      obsEvent(parsed)
       const ev0 = typeof parsed.event === "string" ? parsed.event : ""
       const ev = ev0.trim().toLowerCase()
 
@@ -1003,6 +1002,7 @@ export class RuntimeSupervisor {
         return
       }
 
+      obsEvent(parsed)
       const payload = parsed.payload
 
       if (!payload || typeof payload !== "object") {

@@ -18,6 +18,41 @@ const list = [
 ]
 
 const def = list[0]?.id ?? "operator-1-5-lite"
+const modelSel =
+  '[data-testid="model-selector-dropdown"], [data-ms-model-btn="1"], [aria-haspopup="dialog"][aria-expanded]'
+
+const pickModelBtn = (doc: Document) => {
+  const xs = Array.from(doc.querySelectorAll<HTMLElement>(modelSel))
+
+  for (var i = 0; i < xs.length; i++) {
+    const x = xs[i]
+
+    if (!x) {
+      continue
+    }
+
+    const id = (x.getAttribute("data-testid") ?? "").trim()
+
+    if (id === "model-selector-dropdown") {
+      return x
+    }
+
+    const ms = (x.getAttribute("data-ms-model-btn") ?? "").trim()
+
+    if (ms === "1") {
+      return x
+    }
+
+    const t0 = x.textContent ?? ""
+    const t = t0.trim().toLowerCase()
+
+    if (t.startsWith("operator")) {
+      return x
+    }
+  }
+
+  return null
+}
 
 const pick = (raw: string) => {
   const t = raw.trim()
@@ -101,7 +136,7 @@ export const Operator = (doc: Document, win: Window, o: Mid) => {
   const mode = doc.documentElement.getAttribute("data-ms-mode") ?? def
   const pick1 = pick(mode)
   const label = pick1.label
-  const m0 = doc.querySelector<HTMLButtonElement>('button[data-testid="model-selector-dropdown"]')
+  const m0 = pickModelBtn(doc)
   const txt = m0?.querySelector<HTMLElement>('[data-ms-model-label="1"]') ?? null
 
   if (txt && txt.textContent !== label) {
@@ -114,7 +149,7 @@ export const Operator = (doc: Document, win: Window, o: Mid) => {
     doc.documentElement.setAttribute("data-ms-operator", "1")
 
     var rid = 0
-    var btn: HTMLButtonElement | null = null
+    var btn: HTMLElement | null = null
 
     const stop = () => {
       if (!rid) {
@@ -142,7 +177,7 @@ export const Operator = (doc: Document, win: Window, o: Mid) => {
       }
 
       const ok = btn && doc.documentElement.contains(btn)
-      const ms = ok ? btn : doc.querySelector<HTMLButtonElement>('button[data-testid="model-selector-dropdown"]')
+      const ms = ok ? btn : pickModelBtn(doc)
 
       if (!ms) {
         rid = win.requestAnimationFrame(step)
@@ -207,7 +242,8 @@ export const Operator = (doc: Document, win: Window, o: Mid) => {
 
       const on = mn.getAttribute("data-open") === "1"
       const it = t?.closest?.("#__ms_operator [data-ms-item]") ?? null
-      const ms = t?.closest?.('button[data-testid="model-selector-dropdown"]') ?? null
+      const ms0 = t?.closest?.(modelSel) ?? null
+      const ms = ms0 instanceof HTMLElement ? ms0 : null
       const in0 = t?.closest?.("#__ms_operator") ?? null
 
       if (it) {
@@ -220,7 +256,7 @@ export const Operator = (doc: Document, win: Window, o: Mid) => {
         const pick2 = pick(v)
         doc.documentElement.setAttribute("data-ms-mode", pick2.id)
         const label = pick2.label
-        const m0 = doc.querySelector<HTMLButtonElement>('button[data-testid="model-selector-dropdown"]')
+        const m0 = pickModelBtn(doc)
         const txt = m0?.querySelector<HTMLElement>('[data-ms-model-label="1"]') ?? null
 
         if (txt && txt.textContent !== label) {
@@ -269,7 +305,7 @@ export const Operator = (doc: Document, win: Window, o: Mid) => {
 
         mn.setAttribute("data-open", "1")
         ms.setAttribute("aria-expanded", "true")
-        btn = ms instanceof HTMLButtonElement ? ms : btn
+        btn = ms
         stop()
         step()
         ev.preventDefault()

@@ -21,6 +21,8 @@ export type UseCreatedArtifacts = {
   selectedContent: string
   setSelectedPath: (path: string) => void
   hasNewArtifact: number
+  previewUrl: string
+  previewSignal: number
 }
 
 const trim = (raw: unknown) => {
@@ -333,10 +335,17 @@ export const useCreatedArtifacts = (): UseCreatedArtifacts => {
   const s4 = useState<number>(0)
   const hasNewArtifact = s4[0]
   const setHasNewArtifact = s4[1]
+  const s5 = useState<string>("")
+  const previewUrl = s5[0]
+  const setPreviewUrl = s5[1]
+  const s6 = useState<number>(0)
+  const previewSignal = s6[0]
+  const setPreviewSignal = s6[1]
 
   const cref = useRef<string>("")
   const aref = useRef<CreatedArtifact[]>([])
   const pref = useRef<Record<string, number>>({})
+  const prefPreview = useRef<Record<string, string>>({})
 
   useEffect(() => {
     cref.current = chatId
@@ -369,6 +378,14 @@ export const useCreatedArtifacts = (): UseCreatedArtifacts => {
     setSelectedPath((cur) => nextSelectedPath(cur, list))
 
     const cid = trim(chatId)
+    const pendingUrl = cid ? trim(prefPreview.current[cid]) : ""
+
+    if (pendingUrl) {
+      delete prefPreview.current[cid]
+      setPreviewUrl(pendingUrl)
+      setPreviewSignal((n) => n + 1)
+    }
+
     const pending = cid ? pref.current[cid] ?? 0 : 0
 
     if (!pending) {
@@ -387,6 +404,34 @@ export const useCreatedArtifacts = (): UseCreatedArtifacts => {
     const fn = (ev: MessageEvent) => {
       const row = obj(ev.data)
       const type = trim(row?.type)
+
+      if (type === "ms-agent-preview-url") {
+        const cid = trim(row?.chatId)
+        const url = trim(row?.url)
+
+        if (!cid || !url) {
+          return
+        }
+
+        const routeId = routeChatId()
+        const isActive = cid === cref.current || cid === routeId
+
+        if (!isActive) {
+          prefPreview.current[cid] = url
+          return
+        }
+
+        setChatId((cur) => {
+          if (cur === cid) {
+            return cur
+          }
+
+          return cid
+        })
+        setPreviewUrl(url)
+        setPreviewSignal((n) => n + 1)
+        return
+      }
 
       if (type !== "ms-agent-term-event") {
         return
@@ -473,5 +518,7 @@ export const useCreatedArtifacts = (): UseCreatedArtifacts => {
     selectedContent: content,
     setSelectedPath: setPath,
     hasNewArtifact,
+    previewUrl,
+    previewSignal,
   }
 }

@@ -16,7 +16,7 @@ RUN apt-get update \
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 
 COPY . .
-RUN bun install
+RUN env -u HTTP_PROXY -u HTTPS_PROXY -u NO_PROXY -u http_proxy -u https_proxy -u no_proxy bun install --ignore-scripts
 RUN bun run build
 
 ENV NODE_ENV=production

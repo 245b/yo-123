@@ -8,6 +8,7 @@ import { fileResponse } from "./api/static"
 import { createChatCleanupService, type ChatCleanupService } from "./chat/cleanup"
 import { createCleanupService } from "./routes/chats/cleanup/service"
 import { createCleanupHandler } from "./routes/chats/cleanup/handler"
+import { createPreviewOpenHandler } from "./routes/browser/preview/handler"
 import { createLegacyChatHandler } from "./routes/chat/legacy/handler"
 import { createHealthHandler } from "./routes/health/handler"
 import { AgentWsController } from "./agent/ws"
@@ -84,6 +85,7 @@ export const runServer = async () => {
   const healthRoute = createHealthHandler({ http, runtime })
   const legacyChatRoute = createLegacyChatHandler(http)
   const cleanupRoute = createCleanupHandler({ http, service: cleanupService })
+  const previewOpenRoute = createPreviewOpenHandler({ http })
 
   if (!(dataHostOn && hostStates.enabled)) {
     cleanupLocal.start()
@@ -141,6 +143,10 @@ export const runServer = async () => {
 
       if (p.startsWith("/api/chats/") && p.endsWith("/cleanup") && req.method === "POST") {
         return cleanupRoute(req, p)
+      }
+
+      if (p === "/api/browser/preview/open" && req.method === "POST") {
+        return previewOpenRoute(req)
       }
 
       if (p.startsWith("/api/")) {

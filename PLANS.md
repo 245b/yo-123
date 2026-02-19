@@ -69,3 +69,19 @@ This section tracks the Codex reference extraction + wiring rollout (no Rust bin
 - PTY sessions survive pty-host restarts via snapshot + restore path.
 - UI remains responsive and reflects degraded host states.
 - `bun run verify` passes twice consecutively with dev rollout flags enabled.
+
+---
+
+# Codex Feedback-Loop Parity + UI Fail-Stop Hardening
+
+This section tracks direct Codex template copy + active websocket runtime hardening.
+
+## Status Checklist
+- [ ] Copy Codex template `orchestrator.md` and `collaboration_mode/default.md` from reference path with minimal local placeholder compatibility.
+- [ ] Preserve and align runtime resilience phrasing in `Operator-web/server/agent/runtime/worker.ts`.
+- [ ] Eliminate heartbeat-driven `runtime_event_untyped` warning noise in `Operator-web/server/agent/runtime/supervisor.ts`.
+- [ ] Enforce fail-stop behavior in `Operator-web/src/ms/chat/response.ts` for terminal turn states and degraded/stopped `exec-host`.
+- [ ] Restrict auto-retry in `Operator-web/src/ms/chat/flow.ts` to transient transport failures only.
+- [ ] Add/extend Playwright smoke coverage for failed turn status and degraded exec-host fail-stop behavior.
+- [ ] Run `bun run --cwd Operator-web test` and `bun run --cwd Operator-web stress`.
+- [ ] Run full gate `bun run verify` from repo root.

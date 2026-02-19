@@ -136,6 +136,11 @@ const strictOutputQualityRules = [
   "For React + TypeScript code, avoid unused imports (for example, do not import React if it is not referenced).",
   "Generated build steps must pass strict TypeScript checks in modern Vite/React toolchains.",
 ].join("\n")
+const fullStackBootstrapRules = [
+  "The workspace server image already preinstalls Node.js, npm, create-vite, Vite, React, React DOM, and TypeScript tooling.",
+  "When asked to create a full-stack web app, do not spend turns installing this global toolchain.",
+  "For full-stack bootstraps, prefer a single scaffold/setup action first, then move directly to implementation.",
+].join("\n")
 const mcpSearchRules = [
   "For web lookup, research, or current-info requests, use terminal_exec with mcp-search as the first lookup action.",
   "Do not use curl/wget/http/httpie for initial web search or discovery when mcp-search is available.",
@@ -144,6 +149,7 @@ const mcpSearchRules = [
 const resilienceRules = [
   "Operate as a persistent problem solver: when a command or tool fails, diagnose the error, apply a fix, and retry.",
   "Do not stop after the first failure unless blocked by permissions, missing secrets, an unavailable runtime, or an explicit user stop.",
+  "When a step fails, report what failed, what you tried, and what you will do next before continuing.",
   "For stale terminal errors like Unknown process_id/Unknown process, recover by calling session_ensure, starting a new interactive shell with terminal_exec (tty=true), and then continuing the task.",
 ].join("\n")
 const truthfulnessRules = TRUTHFULNESS_POLICY_RUNTIME_MESSAGE
@@ -1002,7 +1008,7 @@ const buildInstructions = async (state: RuntimeSession, allowTerminalExec: boole
   const base = await loadBasePrompt()
   const user = await loadAgentsInstructions()
   const developer0 = (process.env.OPERATOR_DEVELOPER_INSTRUCTIONS || "").trim()
-  const quality0 = [strictOutputQualityRules, mcpSearchRules, resilienceRules].join("\n")
+  const quality0 = [strictOutputQualityRules, fullStackBootstrapRules, mcpSearchRules, resilienceRules].join("\n")
   const quality = developer0 ? `${developer0}\n\n${quality0}` : quality0
   const developer = `${quality}\n\n${truthfulnessRules}`
   const permissions = (process.env.OPERATOR_PERMISSIONS_INSTRUCTIONS || "").trim()

@@ -174,6 +174,7 @@ services:
       - TERM_SESSION_ID=${TERM_SESSION_ID:-operator}
       - RUN_USER=operator
       - RUN_HOME=/home/operator
+      - TZ=America/New_York
       - WORKSPACE_DIR=/home/operator/Desktop
       - WORKSPACE_ROOT=${OPERATOR_ENFORCED_ROOT:-/projects/operator}
       - PROJECTS_DIR=/projects
@@ -188,6 +189,10 @@ services:
       - VNC_PASSWORD=
       - VNC_PASSWORD_FILE=
       - NOVNC_PORT=6080
+      - VNC_CHROME_ONLY_MODE=1
+      - ENABLE_EDITOR=0
+      - ENABLE_DESKTOP_TERMINAL=0
+      - ENABLE_VIEWER_TERMINAL=0
       - EDITOR_W_PCT=30
       - TERM_H_PCT=25
       - RELAYOUT_INTERVAL=5
@@ -195,10 +200,13 @@ services:
       - DOWNLOAD_DIR=/home/operator/Data/Downloads
       - LOW_MEMORY_MODE=1
       - EDITOR_EXTRA_FLAGS=
-      - BROWSER_RENDERER_LIMIT=2
-      - BROWSER_MAX_MEM_MB=384
-      - BROWSER_DISABLE_EXTENSIONS=1
-      - BROWSER_EXTRA_FLAGS=
+      - BROWSER_RENDERER_LIMIT=1
+      - BROWSER_MAX_MEM_MB=192
+      - BROWSER_DISABLE_EXTENSIONS=0
+      - BROWSER_PROFILE_DIR=/tmp/chromium-kiosk
+      - BROWSER_LANG=en-US
+      - BROWSER_ACCEPT_LANG=en-US,en
+      - BROWSER_EXTRA_FLAGS=--aggressive-cache-discard --disk-cache-size=10485760 --media-cache-size=10485760
       - BROWSER_DEBUG_PORT=9222
       - BROWSER_DEBUG_ADDRESS=0.0.0.0
       - BROWSER_CDP_PROXY_PORT=9223
@@ -206,12 +214,14 @@ services:
       - ENABLE_COMPOSITOR=0
       - MEMORY_LOG_INTERVAL=60
       - ENABLE_DESKTOP_EXTRAS=0
-      - ENABLE_DESKTOP_ICONS=1
+      - ENABLE_DESKTOP_ICONS=0
       - APP_RELAUNCH_DELAY=8
       - STATUS_LOG_INTERVAL=60
       - COMPOSITOR_CHECK_INTERVAL=30
       - BLACK_BG_REFRESH_INTERVAL=30
-      - BROWSER_URL=about:blank
+      - SESSION_FORGET_ON_START=1
+      - BROWSER_FULLSCREEN=1
+      - BROWSER_URL=chrome://newtab/
       - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
       - MCP_CTX7_URL=${MCP_CTX7_URL}
       - MCP_CTX7_TOOL=${MCP_CTX7_TOOL}

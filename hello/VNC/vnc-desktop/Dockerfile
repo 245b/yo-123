@@ -39,7 +39,7 @@ RUN set -e; \
     pacman -Scc --noconfirm; \
     rm -rf /var/cache/pacman/pkg/*
 
-RUN npm install -g playwright pnpm
+RUN npm install -g playwright pnpm create-vite vite react react-dom typescript tsx
 
 ARG BUN_VERSION=1.3.4
 RUN set -e; \
@@ -61,7 +61,6 @@ ARG DEBIAN_LIBFLAC12_VERSION=1.4.2+ds-2
 ARG DEBIAN_ARCH=amd64
 ARG DEBIAN_LIB_DIR=x86_64-linux-gnu
 ARG NOVNC_VERSION=1.5.0
-ARG LITE_XL_VERSION=2.1.8
 
 RUN set -e; \
     pacman -S --noconfirm --noprogressbar --needed gcc make binutils; \
@@ -103,19 +102,6 @@ RUN set -e; \
     ln -s /opt/novnc /usr/share/novnc; \
     python -m pip install --no-cache-dir --break-system-packages websockify    
 
-RUN set -e; \
-    pacman -S --noconfirm --noprogressbar --needed \
-      cmake git meson ninja pkgconf wayland wayland-protocols; \
-    curl -fsSL "https://github.com/lite-xl/lite-xl/archive/refs/tags/v${LITE_XL_VERSION}.tar.gz" \
-      -o /tmp/lite-xl.tar.gz; \
-    tar -xzf /tmp/lite-xl.tar.gz -C /tmp; \
-    cd "/tmp/lite-xl-${LITE_XL_VERSION}"; \
-    bash scripts/build.sh -b build -P; \
-    DESTDIR=/opt/lite-xl meson install --skip-subprojects -C build; \
-    ln -sf /opt/lite-xl/lite-xl /usr/bin/lite-xl; \
-    rm -rf "/tmp/lite-xl-${LITE_XL_VERSION}" /tmp/lite-xl.tar.gz; \
-    pacman -Scc --noconfirm
-
 RUN if ! id -u operator >/dev/null 2>&1; then \
       groupadd -f operator; \
       useradd -m -s /bin/bash -g operator operator; \
@@ -138,6 +124,7 @@ RUN printf '%s\n' '#!/bin/sh' \
     && ln -sf /clear /usr/local/bin/cls
 
 COPY scripts/ /opt/scripts/
+COPY policies/ /etc/chromium/policies/
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN chmod +x /opt/scripts/*.sh /opt/scripts/*.js \
     && ln -sf /opt/scripts/mcp-search.js /usr/local/bin/mcp-search \

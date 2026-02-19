@@ -1,0 +1,19 @@
+{
+  "HighEfficiencyModeEnabled": true,
+  "MemorySaverModeSavings": 2,
+  "BatterySaverModeAvailability": 0,
+  "IntlAcceptLanguages": "en-US,en",
+  "TranslateEnabled": false,
+  "DefaultGeolocationSetting": 2,
+  "ExtensionInstallForcelist": [
+    "lgblnfidahcdcjddiepkckcfdhpknnjh;https://clients2.google.com/service/update2/crx",
+    "dhnagkedjknpmhmdoaggchdefbmbeabk;https://clients2.google.com/service/update2/crx"
+  ],
+  "ExtensionInstallAllowlist": [
+    "lgblnfidahcdcjddiepkckcfdhpknnjh",
+    "dhnagkedjknpmhmdoaggchdefbmbeabk"
+  ],
+  "ExtensionInstallBlocklist": [
+    "*"
+  ]
+}

@@ -18,6 +18,147 @@ export const normalizeTermOutput = (raw: unknown) => {
   return text0
 }
 
+const previewUrlPattern = /https?:\/\/[^\s"'`<>]+/gi
+
+const trimPreviewCandidate = (raw: string) => {
+  var out = raw.trim()
+
+  while (out) {
+    const last = out[out.length - 1] ?? ""
+
+    if (last === "." || last === "," || last === ";" || last === "!" || last === "?") {
+      out = out.slice(0, -1)
+      continue
+    }
+
+    if (last === ")") {
+      const opens = (out.match(/\(/g) ?? []).length
+      const closes = (out.match(/\)/g) ?? []).length
+
+      if (closes > opens) {
+        out = out.slice(0, -1)
+        continue
+      }
+    }
+
+    if (last === "]") {
+      const opens = (out.match(/\[/g) ?? []).length
+      const closes = (out.match(/\]/g) ?? []).length
+
+      if (closes > opens) {
+        out = out.slice(0, -1)
+        continue
+      }
+    }
+
+    break
+  }
+
+  return out
+}
+
+const canParseUrl = (raw: string) => {
+  const api = URL as typeof URL & {
+    canParse?: (url: string) => boolean
+  }
+  const fn = api.canParse
+
+  if (typeof fn !== "function") {
+    return false
+  }
+
+  return fn(raw)
+}
+
+const loopbackHost = (raw: string) => {
+  const host0 = typeof raw === "string" ? raw : ""
+  const host = host0.trim().toLowerCase()
+
+  if (!host) {
+    return false
+  }
+
+  if (host === "localhost" || host === "127.0.0.1" || host === "0.0.0.0") {
+    return true
+  }
+
+  if (host === "::1" || host === "[::1]") {
+    return true
+  }
+
+  return false
+}
+
+const normalizeLocalPreviewUrl = (raw: string) => {
+  const t = trimPreviewCandidate(raw)
+
+  if (!t) {
+    return ""
+  }
+
+  if (!canParseUrl(t)) {
+    return ""
+  }
+
+  const parsed = new URL(t)
+  const protocol = parsed.protocol.toLowerCase()
+
+  if (protocol !== "http:" && protocol !== "https:") {
+    return ""
+  }
+
+  const host = parsed.hostname.toLowerCase()
+
+  if (!loopbackHost(host)) {
+    return ""
+  }
+
+  if (host === "0.0.0.0") {
+    parsed.hostname = "localhost"
+  }
+
+  return parsed.toString()
+}
+
+export const extractLocalPreviewUrls = (raw: unknown) => {
+  const text0 = typeof raw === "string" ? raw : ""
+  const text = text0.trim()
+
+  if (!text) {
+    return [] as string[]
+  }
+
+  const matches = text.match(previewUrlPattern) ?? []
+  const out: string[] = []
+
+  for (var i = 0; i < matches.length; i++) {
+    const row = matches[i] ?? ""
+    const next = normalizeLocalPreviewUrl(row)
+
+    if (!next) {
+      continue
+    }
+
+    if (out.includes(next)) {
+      continue
+    }
+
+    out.push(next)
+  }
+
+  return out
+}
+
+export const extractLatestLocalPreviewUrl = (raw: unknown) => {
+  const list = extractLocalPreviewUrls(raw)
+
+  if (!list.length) {
+    return ""
+  }
+
+  return list[list.length - 1] ?? ""
+}
+
 export const resolveExecCommandEndOutput = (input: {
   output: unknown
   previous: unknown
@@ -97,4 +238,3 @@ export const buildNoTextCompletionDiagnostic = (input: {
 
   return `${text}\nLatest command output:\n${latest}`
 }
-

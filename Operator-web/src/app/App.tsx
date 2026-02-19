@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import * as ms from "../ms"
 import { useShellLayoutController } from "../features/layout/useShellLayoutController"
 import { createBoot } from "./boot"
@@ -7,6 +7,7 @@ import Frames from "./ui/Frames"
 import Attachments from "./ui/Attachments"
 import RightPanel from "./ui/RightPanel"
 import { useCreatedArtifacts } from "./ui/useCreatedArtifacts"
+import { openBrowserPreview } from "./bridge/browser"
 import { uiTokens } from "../../../packages/ui/src"
 
 const App = () => {
@@ -37,6 +38,12 @@ const App = () => {
   const setRightOpen = layout.setRightOpen
   const rightW = layout.rightW
   const vw = layout.vw
+  const s1 = useState<"code" | "preview">("code")
+  const rightView = s1[0]
+  const setRightView = s1[1]
+  const s2 = useState<string>("")
+  const previewUrl = s2[0]
+  const setPreviewUrl = s2[1]
 
   if (!vr.current) {
     const id0 = window.crypto?.randomUUID?.() ?? ""
@@ -85,6 +92,34 @@ const App = () => {
     const cfg = { open, w: sideW, dur, pad, shift }
     win.requestAnimationFrame(() => ms.mid(doc, win, cfg))
   }, [open, w])
+
+  useEffect(() => {
+    const signal = created.previewSignal
+    const url = created.previewUrl.trim()
+
+    if (!signal || !url) {
+      return
+    }
+
+    setPreviewUrl(url)
+    setRightOpen(true)
+    setRightView("preview")
+    void openBrowserPreview(url)
+  }, [created.previewSignal, created.previewUrl, setRightOpen])
+
+  const previewVncSrc = useMemo(() => {
+    const q = new URLSearchParams()
+    q.set("autoconnect", "1")
+    q.set("resize", "remote")
+    q.set("reconnect", "1")
+    const latest = previewUrl.trim()
+
+    if (latest) {
+      q.set("ms_preview_url", latest)
+    }
+
+    return `http://localhost:6080/vnc.html?${q.toString()}`
+  }, [previewUrl])
 
   const sideW = open ? w : collapsed
   const maxRight = Math.max(320, Math.floor(vw * 0.94))
@@ -176,7 +211,10 @@ const App = () => {
           artifacts={created.artifacts}
           selectedPath={created.selectedPath}
           selectedContent={created.selectedContent}
+          view={rightView}
+          previewVncSrc={previewVncSrc}
           onSelectPath={created.setSelectedPath}
+          onSetView={setRightView}
           onResize={layout.onRightResize}
           onSetOpen={setRightOpen}
         />

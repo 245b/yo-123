@@ -7,9 +7,19 @@ EDITOR_W_PCT="${EDITOR_W_PCT:-30}"
 TERM_H_PCT="${TERM_H_PCT:-25}"
 WINDOW_Y_OFFSET="${WINDOW_Y_OFFSET:-0}"
 EDITOR_Y_OFFSET="${EDITOR_Y_OFFSET:-0}"
+VNC_CHROME_ONLY_MODE="${VNC_CHROME_ONLY_MODE:-0}"
+ENABLE_EDITOR="${ENABLE_EDITOR:-1}"
+ENABLE_DESKTOP_TERMINAL="${ENABLE_DESKTOP_TERMINAL:-1}"
+BROWSER_FULLSCREEN="${BROWSER_FULLSCREEN:-0}"
 EDITOR_MATCH_PATTERN="${EDITOR_MATCH_PATTERN:-lite-xl}"
 BROWSER_MATCH_PATTERN="${BROWSER_MATCH_PATTERN:-chromium}"
 STATE_FILE="${LAYOUT_STATE_FILE:-/home/operator/.config/window-layout.env}"
+
+if [ "$VNC_CHROME_ONLY_MODE" = "1" ]; then
+  ENABLE_EDITOR=0
+  ENABLE_DESKTOP_TERMINAL=0
+  BROWSER_FULLSCREEN=1
+fi
 
 wait_for_display() {
   for _ in {1..60}; do
@@ -60,6 +70,11 @@ apply_geometry() {
   wmctrl -i -r "$win_id" -e "0,${x},${y_adj},${w},${h}"
 }
 
+close_window() {
+  local win_id="$1"
+  wmctrl -i -c "$win_id" >/dev/null 2>&1 || true
+}
+
 wait_for_display || exit 0
 
 # Load persisted geometry if present.
@@ -90,7 +105,19 @@ editor_id=$(get_window_id "$EDITOR_MATCH_PATTERN" || true)
 browser_id=$(get_browser_id || true)
 term_id=$(get_window_id "xterm" || true)
 
-if [ -n "$editor_id" ]; then
+if [ -n "$browser_id" ]; then
+  if [ "$BROWSER_FULLSCREEN" = "1" ]; then
+    apply_geometry "$browser_id" 0 0 "$screen_w" "$screen_h"
+    wmctrl -i -r "$browser_id" -b add,maximized_vert,maximized_horz >/dev/null 2>&1 || true
+  elif geom=$(parse_geom "$BROWSER_GEOM"); then
+    IFS=, read -r browser_x browser_y browser_w_saved browser_h_saved <<< "$geom"
+    apply_geometry "$browser_id" "$browser_x" "$browser_y" "$browser_w_saved" "$browser_h_saved"
+  else
+    apply_geometry "$browser_id" "$right_x" 0 "$right_w" "$browser_h"
+  fi
+fi
+
+if [ "$ENABLE_EDITOR" = "1" ] && [ -n "$editor_id" ]; then
   if geom=$(parse_geom "$EDITOR_GEOM"); then
     IFS=, read -r editor_x editor_y editor_w_saved editor_h_saved <<< "$geom"
     apply_geometry "$editor_id" "$editor_x" "$editor_y" "$editor_w_saved" "$editor_h_saved" "$EDITOR_Y_OFFSET"
@@ -99,20 +126,19 @@ if [ -n "$editor_id" ]; then
   fi
 fi
 
-if [ -n "$browser_id" ]; then
-  if geom=$(parse_geom "$BROWSER_GEOM"); then
-    IFS=, read -r browser_x browser_y browser_w_saved browser_h_saved <<< "$geom"
-    apply_geometry "$browser_id" "$browser_x" "$browser_y" "$browser_w_saved" "$browser_h_saved"
-  else
-    apply_geometry "$browser_id" "$right_x" 0 "$right_w" "$browser_h"
-  fi
+if [ "$ENABLE_EDITOR" != "1" ] && [ -n "$editor_id" ]; then
+  close_window "$editor_id"
 fi
 
-if [ -n "$term_id" ]; then
+if [ "$ENABLE_DESKTOP_TERMINAL" = "1" ] && [ -n "$term_id" ]; then
   if geom=$(parse_geom "$TERM_GEOM"); then
     IFS=, read -r term_x term_y term_w_saved term_h_saved <<< "$geom"
     apply_geometry "$term_id" "$term_x" "$term_y" "$term_w_saved" "$term_h_saved"
   else
     apply_geometry "$term_id" "$right_x" "$browser_h" "$right_w" "$term_h"
   fi
+fi
+
+if [ "$ENABLE_DESKTOP_TERMINAL" != "1" ] && [ -n "$term_id" ]; then
+  close_window "$term_id"
 fi

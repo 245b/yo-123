@@ -5,6 +5,7 @@ import { Terminal } from "xterm"
 import type { Req, Run, TermEntry } from "./types"
 import {
   buildNoTextCompletionDiagnostic,
+  extractLatestLocalPreviewUrl,
   normalizeTermOutput,
   resolveExecCommandEndOutput,
   resolveExecCommandEndStatus,
@@ -825,6 +826,7 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
   const map: Record<string, TermEntry> = {}
   const procByCall: Record<string, string> = {}
   const emittedByCall: Record<string, string> = {}
+  const previewByCall: Record<string, string> = {}
   const promptByCall: Record<string, HTMLElement> = {}
   var capApprovals = true
   var capUserInput = true
@@ -1424,6 +1426,49 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
     }
 
     target.postMessage(payload, "*")
+  }
+
+  const emitPreviewUrlEvent = (callId: string, output: string) => {
+    const key = safeTrim(callId)
+
+    if (!key) {
+      return
+    }
+
+    const url = extractLatestLocalPreviewUrl(output)
+
+    if (!url) {
+      return
+    }
+
+    const prev = previewByCall[key] ?? ""
+
+    if (prev === url) {
+      return
+    }
+
+    previewByCall[key] = url
+    const chatId = safeTrim(req.chatId)
+
+    if (!chatId) {
+      return
+    }
+
+    const target = win.parent
+
+    if (!target) {
+      return
+    }
+
+    target.postMessage(
+      {
+        type: "ms-agent-preview-url",
+        chatId,
+        url,
+        ts: Date.now(),
+      },
+      "*",
+    )
   }
 
   const showApprovalPrompt = (row: Record<string, unknown>) => {
@@ -2030,7 +2075,24 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
           setThinking("Working...")
         }
 
-        if (status === "completed" || status === "failed" || status === "interrupted") {
+        if (status === "failed" || status === "interrupted") {
+          clearPrompts()
+          const fail = detail || (status === "interrupted" ? "Turn interrupted before completion." : "Turn failed before completion.")
+          err = fail
+          finalizeRunningTerms(fail)
+          finish({
+            stream: true,
+            ok: false,
+            text: txt,
+            error: fail,
+            stalled,
+            terms: allTerms(),
+            wsConnectedBase: connected.base,
+          })
+          return
+        }
+
+        if (status === "completed") {
           clearPrompts()
         }
 
@@ -2093,6 +2155,7 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
           const st = st0 === "running" || st0 === "failed" ? st0 : "done"
           setTool(id, { tool, input, output, status: st })
           emitTermEvent(map[id] ?? null)
+          emitPreviewUrlEvent(id, output)
         }
 
         if (inflight) {
@@ -2218,6 +2281,7 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
         const prev = normalizeTermOutput(prev0)
         const next = `${prev}${chunk}` || "running..."
         setTool(callId, { output: next, status: "running" }, processId)
+        emitPreviewUrlEvent(callId, next)
         setThinking("Working...")
         return
       }
@@ -2252,6 +2316,7 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
         const out = status === "running" ? out0 || prev || "running..." : resolveExecCommandEndOutput({ output: out0, previous: prev })
         setTool(callId, { output: out, status }, processId)
         emitTermEvent(map[callId] ?? null)
+        emitPreviewUrlEvent(callId, out)
 
         if (!txt) {
           setThinking("Thinking...")
@@ -2280,6 +2345,7 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
         const out = out0 || map[callId]?.output || "done"
         setTool(callId, { output: out, status }, processId)
         emitTermEvent(map[callId] ?? null)
+        emitPreviewUrlEvent(callId, out)
         return
       }
 
@@ -2303,6 +2369,35 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
           reason,
         }
         renderRuntime()
+
+        const isExec = role === "exec-host"
+        const hardStop = state === "degraded" || state === "stopped"
+        const turnActive =
+          doSubmit ||
+          taskSeen ||
+          turnStatus === "running" ||
+          turnStatus === "waiting_approval" ||
+          turnStatus === "waiting_user_input"
+
+        if (isExec && hardStop && turnActive) {
+          const fail = reason || `Runtime host ${role} is ${state}`
+          turnStatus = "failed"
+          turnDetail = fail
+          err = fail
+          clearPrompts()
+          finalizeRunningTerms(fail)
+          finish({
+            stream: true,
+            ok: false,
+            text: txt,
+            error: fail,
+            stalled,
+            terms: allTerms(),
+            wsConnectedBase: connected.base,
+          })
+          return
+        }
+
         return
       }
 
@@ -2352,6 +2447,35 @@ export const streamWsResponse = async (input: WsStreamInput): Promise<StreamResu
         }
 
         run.txt = txt
+        const fatal = turnStatus === "failed" || turnStatus === "interrupted"
+
+        if (fatal) {
+          const fail = turnDetail || err || (turnStatus === "interrupted" ? "Turn interrupted before completion." : "Turn failed before completion.")
+          err = fail
+
+          if (!txt) {
+            const fallback = buildNoTextCompletionDiagnostic({
+              status: turnStatus || "failed",
+              detail: fail,
+              latestOutput: latestTermOutput(),
+            })
+            txt = fallback
+            run.txt = txt
+          }
+
+          draw()
+          finalizeRunningTerms(err)
+          finish({
+            stream: true,
+            ok: false,
+            text: txt,
+            error: err,
+            stalled,
+            terms: allTerms(),
+            wsConnectedBase: connected.base,
+          })
+          return
+        }
 
         if (!txt) {
           const fallback = buildNoTextCompletionDiagnostic({

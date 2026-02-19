@@ -9,6 +9,9 @@ WORKSPACE_DIR="${WORKSPACE_DIR:-${RUN_HOME}/Desktop}"
 PROJECTS_DIR="${PROJECTS_DIR:-/projects}"
 OPERATOR_DIR="${OPERATOR_DIR:-${PROJECTS_DIR%/}/operator}"
 TERM_SESSION_DIR="${TERM_SESSION_DIR:-$OPERATOR_DIR}"
+VNC_CHROME_ONLY_MODE="${VNC_CHROME_ONLY_MODE:-0}"
+ENABLE_EDITOR="${ENABLE_EDITOR:-1}"
+ENABLE_DESKTOP_TERMINAL="${ENABLE_DESKTOP_TERMINAL:-1}"
 EDITOR_BIN="${EDITOR_BIN:-/opt/lite-xl/lite-xl}"
 EDITOR_WORKSPACE_DIR="${EDITOR_WORKSPACE_DIR:-}"
 EDITOR_MATCH_PATTERN="${EDITOR_MATCH_PATTERN:-lite-xl}"
@@ -17,6 +20,9 @@ BROWSER_BIN="${BROWSER_BIN:-chromium}"
 BROWSER_PROFILE_DIR="${BROWSER_PROFILE_DIR:-$RUN_HOME/.config/chromium}"
 BROWSER_MATCH_PATTERN="${BROWSER_MATCH_PATTERN:-chromium}"
 BROWSER_URL="${BROWSER_URL:-about:blank}"
+BROWSER_LANG="${BROWSER_LANG:-en-US}"
+BROWSER_ACCEPT_LANG="${BROWSER_ACCEPT_LANG:-en-US,en}"
+BROWSER_FULLSCREEN="${BROWSER_FULLSCREEN:-0}"
 BROWSER_DEBUG_PORT="${BROWSER_DEBUG_PORT:-9222}"
 BROWSER_DEBUG_ADDRESS="${BROWSER_DEBUG_ADDRESS:-0.0.0.0}"
 BROWSER_LD_LIBRARY_PATH="${BROWSER_LD_LIBRARY_PATH:-/opt/chromium-libs/lib}"
@@ -33,7 +39,11 @@ LOW_MEMORY_MODE="${LOW_MEMORY_MODE:-1}"
 BROWSER_RENDERER_LIMIT="${BROWSER_RENDERER_LIMIT:-}"
 BROWSER_MAX_MEM_MB="${BROWSER_MAX_MEM_MB:-}"
 BROWSER_DISABLE_EXTENSIONS="${BROWSER_DISABLE_EXTENSIONS:-}"
+BROWSER_DISABLE_BACKGROUND_NETWORKING="${BROWSER_DISABLE_BACKGROUND_NETWORKING:-}"
+BROWSER_DISABLE_COMPONENT_UPDATE="${BROWSER_DISABLE_COMPONENT_UPDATE:-}"
+EXTENSION_POLICY_FILE="${EXTENSION_POLICY_FILE:-/etc/chromium/policies/managed/performance.json}"
 BROWSER_EXTRA_FLAGS="${BROWSER_EXTRA_FLAGS:-}"
+SESSION_FORGET_ON_START="${SESSION_FORGET_ON_START:-1}"
 MEMORY_LOG_INTERVAL="${MEMORY_LOG_INTERVAL:-60}"
 MEMORY_LOG_FILE="${MEMORY_LOG_FILE:-${RUN_HOME}/.logs/memory.log}"
 TRASH_DIR="${TRASH_DIR:-/trash}"
@@ -44,6 +54,17 @@ APP_RELAUNCH_DELAY="${APP_RELAUNCH_DELAY:-8}"
 STATUS_LOG_INTERVAL="${STATUS_LOG_INTERVAL:-60}"
 COMPOSITOR_CHECK_INTERVAL="${COMPOSITOR_CHECK_INTERVAL:-30}"
 BLACK_BG_REFRESH_INTERVAL="${BLACK_BG_REFRESH_INTERVAL:-30}"
+EXTENSION_POPUP_CLEAN_INTERVAL="${EXTENSION_POPUP_CLEAN_INTERVAL:-5}"
+
+if [ "$VNC_CHROME_ONLY_MODE" = "1" ]; then
+  ENABLE_EDITOR=0
+  ENABLE_DESKTOP_TERMINAL=0
+  ENABLE_DESKTOP_ICONS=0
+  BROWSER_FULLSCREEN=1
+  if [ "$BROWSER_URL" = "about:blank" ]; then
+    BROWSER_URL="chrome://newtab/"
+  fi
+fi
 
 if [ "$WORKSPACE_DIR" = "${RUN_HOME}/workspace" ]; then
   WORKSPACE_DIR="${RUN_HOME}/Desktop"
@@ -67,6 +88,18 @@ fi
 if [ -z "$BROWSER_DISABLE_EXTENSIONS" ]; then
   BROWSER_DISABLE_EXTENSIONS="$LOW_MEMORY_MODE"
 fi
+if [ -z "$BROWSER_DISABLE_BACKGROUND_NETWORKING" ]; then
+  BROWSER_DISABLE_BACKGROUND_NETWORKING="$LOW_MEMORY_MODE"
+fi
+if [ -z "$BROWSER_DISABLE_COMPONENT_UPDATE" ]; then
+  BROWSER_DISABLE_COMPONENT_UPDATE="$LOW_MEMORY_MODE"
+fi
+if [ "$BROWSER_DISABLE_EXTENSIONS" != "1" ] && [ -f "$EXTENSION_POLICY_FILE" ]; then
+  if grep -q '"ExtensionInstallForcelist"' "$EXTENSION_POLICY_FILE"; then
+    BROWSER_DISABLE_BACKGROUND_NETWORKING=0
+    BROWSER_DISABLE_COMPONENT_UPDATE=0
+  fi
+fi
 if ! [[ "$MEMORY_LOG_INTERVAL" =~ ^[0-9]+$ ]]; then
   MEMORY_LOG_INTERVAL=0
 fi
@@ -85,8 +118,22 @@ fi
 if ! [[ "$BLACK_BG_REFRESH_INTERVAL" =~ ^[0-9]+$ ]]; then
   BLACK_BG_REFRESH_INTERVAL=30
 fi
+if ! [[ "$EXTENSION_POPUP_CLEAN_INTERVAL" =~ ^[0-9]+$ ]]; then
+  EXTENSION_POPUP_CLEAN_INTERVAL=5
+fi
+if [ "$SESSION_FORGET_ON_START" != "0" ] && [ "$SESSION_FORGET_ON_START" != "1" ]; then
+  SESSION_FORGET_ON_START=1
+fi
 
 mkdir -p "$WORKSPACE_DIR" "$PROJECTS_DIR" "$OPERATOR_DIR" "$TERM_SESSION_DIR" "$BROWSER_PROFILE_DIR" "$RUN_HOME/.logs" "$RUNTIME_DIR"
+if [ "$SESSION_FORGET_ON_START" = "1" ]; then
+  if [ -n "$BROWSER_PROFILE_DIR" ] && [ "$BROWSER_PROFILE_DIR" != "/" ]; then
+    rm -rf "$BROWSER_PROFILE_DIR" 2>/dev/null || true
+  fi
+  rm -rf "$RUN_HOME/.config/chromium" "$RUN_HOME/.cache/chromium" "$RUN_HOME/.pki/nssdb" 2>/dev/null || true
+  rm -f "$LAYOUT_STATE_FILE" 2>/dev/null || true
+  mkdir -p "$BROWSER_PROFILE_DIR"
+fi
 
 for entry in "$PROJECTS_DIR"/* "$PROJECTS_DIR"/.[!.]* "$PROJECTS_DIR"/..?*; do
   if [ ! -e "$entry" ]; then
@@ -112,7 +159,8 @@ if [ -n "$TRASH_DIR" ] && [ "$TRASH_DIR" != "/" ]; then
 fi
 chmod 700 "$RUNTIME_DIR" || true
 if id "$RUN_USER" >/dev/null 2>&1; then
-  chown -R "$RUN_USER:$RUN_USER" "$WORKSPACE_DIR" "$PROJECTS_DIR" "$OPERATOR_DIR" "$TERM_SESSION_DIR" "$EDITOR_WORKSPACE_DIR" "$RUN_HOME" 2>/dev/null || true
+  chown "$RUN_USER:$RUN_USER" "$WORKSPACE_DIR" "$PROJECTS_DIR" "$OPERATOR_DIR" "$TERM_SESSION_DIR" "$EDITOR_WORKSPACE_DIR" "$RUN_HOME" 2>/dev/null || true
+  chown "$RUN_USER:$RUN_USER" "$RUN_HOME/.logs" "$RUN_HOME/.config" "$BROWSER_PROFILE_DIR" 2>/dev/null || true
   chown "$RUN_USER:$RUN_USER" "$RUNTIME_DIR" 2>/dev/null || true
 fi
 
@@ -238,6 +286,30 @@ ensure_single_terminal() {
   fi
 }
 
+close_windows_by_pattern() {
+  local pattern="$1"
+  local ids
+  mapfile -t ids < <(printf '%s\n' "$window_list" | awk -v pat="$pattern" 'BEGIN{IGNORECASE=1} $3 ~ pat {print $1}' 2>/dev/null || true)
+  if [ "${#ids[@]}" -eq 0 ]; then
+    return
+  fi
+  for id in "${ids[@]}"; do
+    wmctrl -i -c "$id" >/dev/null 2>&1 || true
+  done
+}
+
+stop_process_by_name() {
+  local name="$1"
+  local pids
+  mapfile -t pids < <(pgrep -u "$RUN_USER" -x "$name" 2>/dev/null || true)
+  if [ "${#pids[@]}" -eq 0 ]; then
+    return
+  fi
+  for pid in "${pids[@]}"; do
+    kill "$pid" >/dev/null 2>&1 || true
+  done
+}
+
 is_process_running() {
   local name="$1"
   pgrep -u "$RUN_USER" -x "$name" >/dev/null 2>&1
@@ -293,21 +365,30 @@ launch_browser() {
     --no-first-run
     --no-default-browser-check
     --user-data-dir="$BROWSER_PROFILE_DIR"
+    --lang="$BROWSER_LANG"
+    --accept-lang="$BROWSER_ACCEPT_LANG"
     --remote-debugging-port="$BROWSER_DEBUG_PORT"
     --remote-debugging-address="$BROWSER_DEBUG_ADDRESS"
   )
 
   if [ "$LOW_MEMORY_MODE" = "1" ]; then
     browser_cmd+=(
-      --disable-background-networking
       --disable-client-side-phishing-detection
-      --disable-component-update
       --disable-default-apps
       --disable-sync
       --metrics-recording-only
       --no-pings
       --disable-features=Translate,BackForwardCache,AcceptCHFrame,MediaRouter,OptimizationHints,GlobalMediaControls
     )
+    if [ "$BROWSER_DISABLE_BACKGROUND_NETWORKING" = "1" ]; then
+      browser_cmd+=(--disable-background-networking)
+    fi
+    if [ "$BROWSER_DISABLE_COMPONENT_UPDATE" = "1" ]; then
+      browser_cmd+=(--disable-component-update)
+    fi
+  fi
+  if [ "$BROWSER_FULLSCREEN" = "1" ]; then
+    browser_cmd+=(--start-maximized)
   fi
   if [ "$BROWSER_DISABLE_EXTENSIONS" = "1" ]; then
     browser_cmd+=(--disable-extensions)
@@ -340,6 +421,46 @@ ensure_cdp_proxy() {
   fi
   run_as_user /opt/scripts/start-cdp-proxy.sh >/tmp/cdp-proxy.log 2>&1 &
   cdp_proxy_pid=$!
+}
+
+close_extension_onboarding_tabs() {
+  if [ "$BROWSER_DISABLE_EXTENSIONS" = "1" ]; then
+    return
+  fi
+  if ! command -v python >/dev/null 2>&1; then
+    return
+  fi
+  python - "$BROWSER_CDP_TARGET_HOST" "$BROWSER_DEBUG_PORT" <<'PY' >/dev/null 2>&1
+import json
+import sys
+import urllib.request
+
+host = sys.argv[1]
+port = sys.argv[2]
+base = f"http://{host}:{port}"
+prefixes = (
+    "chrome-extension://lgblnfidahcdcjddiepkckcfdhpknnjh/",
+    "https://www.standsapp.org/thank-you-chrome/",
+    "chrome-extension://dhnagkedjknpmhmdoaggchdefbmbeabk/popup.html",
+)
+
+try:
+  targets = json.load(urllib.request.urlopen(f"{base}/json/list", timeout=1.2))
+except Exception:
+  raise SystemExit(0)
+
+for target in targets:
+  target_id = target.get("id")
+  target_url = target.get("url", "")
+  if not target_id:
+    continue
+  if not any(target_url.startswith(prefix) for prefix in prefixes):
+    continue
+  try:
+    urllib.request.urlopen(f"{base}/json/close/{target_id}", timeout=1.2).read()
+  except Exception:
+    pass
+PY
 }
 
 launch_terminal() {
@@ -425,14 +546,20 @@ last_editor_launch=0
 last_browser_launch=0
 last_term_launch=0
 window_list=""
+last_extension_popup_cleanup=0
 
-launch_editor
+if [ "$ENABLE_EDITOR" = "1" ]; then
+  launch_editor
+fi
 launch_browser
 ensure_cdp_proxy
-launch_terminal
-last_editor_launch=$(date +%s)
-last_browser_launch="$last_editor_launch"
-last_term_launch="$last_editor_launch"
+if [ "$ENABLE_DESKTOP_TERMINAL" = "1" ]; then
+  launch_terminal
+fi
+launch_now=$(date +%s)
+last_editor_launch="$launch_now"
+last_browser_launch="$launch_now"
+last_term_launch="$launch_now"
 sleep 2
 
 set_black_bg "$(date +%s)"
@@ -444,8 +571,22 @@ while true; do
   term_present=false
 
   window_list="$(wmctrl -lx 2>/dev/null || true)"
-  ensure_single_terminal
+  if [ "$ENABLE_DESKTOP_TERMINAL" = "1" ]; then
+    ensure_single_terminal
+  fi
+  if [ "$ENABLE_EDITOR" != "1" ]; then
+    close_windows_by_pattern "$EDITOR_MATCH_PATTERN"
+    stop_process_by_name "lite-xl"
+  fi
+  if [ "$ENABLE_DESKTOP_TERMINAL" != "1" ]; then
+    close_windows_by_pattern "xterm"
+    stop_process_by_name "xterm"
+  fi
   ensure_cdp_proxy
+  if [ "$EXTENSION_POPUP_CLEAN_INTERVAL" -gt 0 ] && [ $((now - last_extension_popup_cleanup)) -ge "$EXTENSION_POPUP_CLEAN_INTERVAL" ]; then
+    close_extension_onboarding_tabs
+    last_extension_popup_cleanup="$now"
+  fi
 
   if [ "$MEMORY_LOG_INTERVAL" -gt 0 ] && [ $((now - last_memory_log)) -ge "$MEMORY_LOG_INTERVAL" ]; then
     log_memory
@@ -456,23 +597,23 @@ while true; do
     last_trash_cleanup="$now"
   fi
 
-  if has_window "$EDITOR_MATCH_PATTERN"; then
+  if [ "$ENABLE_EDITOR" = "1" ] && has_window "$EDITOR_MATCH_PATTERN"; then
     editor_present=true
   fi
   if has_browser_window; then
     browser_present=true
   fi
-  if has_window "xterm"; then
+  if [ "$ENABLE_DESKTOP_TERMINAL" = "1" ] && has_window "xterm"; then
     term_present=true
   fi
 
-  if [ "$editor_present" = true ] && [ "$editor_was_present" = false ]; then
+  if [ "$ENABLE_EDITOR" = "1" ] && [ "$editor_present" = true ] && [ "$editor_was_present" = false ]; then
     mark_layout_pending
   fi
   if [ "$browser_present" = true ] && [ "$browser_was_present" = false ]; then
     mark_layout_pending
   fi
-  if [ "$term_present" = true ] && [ "$term_was_present" = false ]; then
+  if [ "$ENABLE_DESKTOP_TERMINAL" = "1" ] && [ "$term_present" = true ] && [ "$term_was_present" = false ]; then
     mark_layout_pending
   fi
 
@@ -485,9 +626,15 @@ while true; do
     last_status_log="$now"
   fi
 
-  all_windows_present=false
-  if [ "$editor_present" = true ] && [ "$browser_present" = true ] && [ "$term_present" = true ]; then
-    all_windows_present=true
+  all_windows_present=true
+  if [ "$browser_present" = false ]; then
+    all_windows_present=false
+  fi
+  if [ "$ENABLE_EDITOR" = "1" ] && [ "$editor_present" = false ]; then
+    all_windows_present=false
+  fi
+  if [ "$ENABLE_DESKTOP_TERMINAL" = "1" ] && [ "$term_present" = false ]; then
+    all_windows_present=false
   fi
 
   if [ "$pending_layout" = true ] && { [ "$editor_present" = true ] || [ "$browser_present" = true ] || [ "$term_present" = true ]; }; then
@@ -508,7 +655,7 @@ while true; do
     fi
   fi
 
-  if [ "$editor_present" = false ] && ! is_process_running "lite-xl"; then
+  if [ "$ENABLE_EDITOR" = "1" ] && [ "$editor_present" = false ] && ! is_process_running "lite-xl"; then
     if [ $((now - last_editor_launch)) -ge "$APP_RELAUNCH_DELAY" ]; then
       log_event "editor missing; relaunching"
       launch_editor
@@ -525,7 +672,7 @@ while true; do
       mark_layout_pending
     fi
   fi
-  if [ "$term_present" = false ] && ! is_process_running "xterm"; then
+  if [ "$ENABLE_DESKTOP_TERMINAL" = "1" ] && [ "$term_present" = false ] && ! is_process_running "xterm"; then
     if [ $((now - last_term_launch)) -ge "$APP_RELAUNCH_DELAY" ]; then
       log_event "terminal missing; relaunching"
       launch_terminal

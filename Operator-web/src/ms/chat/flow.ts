@@ -111,6 +111,40 @@ export const setupFlow = (
 
     return false
   }
+  const isTransientTransportFailure = (raw: string, stalled?: boolean) => {
+    if (stalled === true) {
+      return true
+    }
+
+    const t0 = typeof raw === "string" ? raw : ""
+    const t = t0.trim().toLowerCase()
+
+    if (!t) {
+      return false
+    }
+
+    if (t === "websocket connect failed") {
+      return true
+    }
+
+    if (t === "websocket error") {
+      return true
+    }
+
+    if (t === "websocket closed before completion") {
+      return true
+    }
+
+    if (t === "request stalled") {
+      return true
+    }
+
+    if (isLegacyStallText(t0)) {
+      return true
+    }
+
+    return false
+  }
 
   const startThinkingTimer = (ph: HTMLElement | null) => {
     if (!ph) {
@@ -710,7 +744,13 @@ export const setupFlow = (
         return
       }
 
-      if (!sx.ok && !ac.signal.aborted && !again) {
+      const retryable =
+        !sx.ok &&
+        !ac.signal.aborted &&
+        !again &&
+        isTransientTransportFailure(typeof sx.error === "string" ? sx.error : "", sx.stalled === true)
+
+      if (retryable) {
         return sendReq(atts, rq, true)
       }
 
