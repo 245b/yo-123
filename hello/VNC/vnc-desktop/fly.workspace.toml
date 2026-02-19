@@ -75,6 +75,14 @@ primary_region = "iad"
     timeout = "10s"
     path = "/v1/health"
 
+[[services]]
+  internal_port = 6080
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 8443
+
 [vm]
   cpu_kind = "shared"
   cpus = 2

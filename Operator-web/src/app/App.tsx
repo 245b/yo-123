@@ -118,7 +118,22 @@ const App = () => {
       q.set("ms_preview_url", latest)
     }
 
-    return `http://localhost:6080/vnc.html?${q.toString()}`
+    const win = typeof window === "undefined" ? null : window
+    const qs = win ? new URLSearchParams(win.location.search) : null
+    const over0 = (qs?.get("vncBase") ?? "").trim()
+    const over = over0.replace(/\/+$/, "")
+
+    if (over) {
+      return `${over}/vnc.html?${q.toString()}`
+    }
+
+    const host = (win?.location?.hostname ?? "").trim().toLowerCase()
+
+    if (host === "localhost" || host === "127.0.0.1") {
+      return `http://localhost:6080/vnc.html?${q.toString()}`
+    }
+
+    return `https://startnew-workspace-exykvj.fly.dev:8443/vnc.html?${q.toString()}`
   }, [previewUrl])
 
   const sideW = open ? w : collapsed
