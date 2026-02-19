@@ -1,0 +1,8 @@
+.git
+node_modules
+.turbo
+hello/VNC/vnc-desktop/desktop
+hello/VNC/vnc-desktop/workspace
+data
+Operator-web/node_modules
+Operator-web/test-results
