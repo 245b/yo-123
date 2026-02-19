@@ -5,6 +5,8 @@
 
 **/node_modules/
 **/dist/
+!Operator-web/dist/
+!Operator-web/dist/**
 **/coverage/
 **/playwright-report/
 **/test-results/
@@ -24,4 +26,3 @@ hello/VNC/vnc-desktop/desktop/Data/
 hello/VNC/vnc-desktop/desktop/Downloads/
 hello/VNC/vnc-desktop/desktop/Projects/
 hello/VNC/vnc-desktop/desktop/Temp Files/
-

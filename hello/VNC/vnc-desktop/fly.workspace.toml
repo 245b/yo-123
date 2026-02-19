@@ -1,0 +1,81 @@
+app = "startnew-workspace-exykvj"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  TERM_AGENT_PORT = "7682"
+  TERM_AGENT_PERMS = "all"
+  TERM_AGENT_IMPL = "python"
+  TTYD_PORT = "7681"
+  TTYD_BASE_PATH = "/terminal"
+  TTYD_PING_INTERVAL = "30"
+  TERM_SESSION_ID = "operator"
+  RUN_USER = "operator"
+  RUN_HOME = "/home/operator"
+  TZ = "America/New_York"
+  WORKSPACE_DIR = "/home/operator/Desktop"
+  WORKSPACE_ROOT = "/projects/operator"
+  PROJECTS_DIR = "/projects"
+  OPERATOR_DIR = "/projects/operator"
+  EDITOR_WORKSPACE_DIR = "/projects/operator"
+  TERM_SESSION_DIR = "/projects/operator"
+  TERM_AGENT_PURGE_ON_START = "0"
+  VNC_RESOLUTION = "1152x648"
+  VNC_COL_DEPTH = "24"
+  VNC_PORT = "5900"
+  VNC_LISTEN = "0.0.0.0"
+  NOVNC_PORT = "6080"
+  VNC_CHROME_ONLY_MODE = "1"
+  ENABLE_EDITOR = "0"
+  ENABLE_DESKTOP_TERMINAL = "0"
+  ENABLE_VIEWER_TERMINAL = "0"
+  EDITOR_W_PCT = "30"
+  TERM_H_PCT = "25"
+  RELAYOUT_INTERVAL = "5"
+  DATA_DIR = "/home/operator/Data"
+  DOWNLOAD_DIR = "/home/operator/Data/Downloads"
+  LOW_MEMORY_MODE = "1"
+  BROWSER_RENDERER_LIMIT = "1"
+  BROWSER_MAX_MEM_MB = "192"
+  BROWSER_DISABLE_EXTENSIONS = "0"
+  BROWSER_PROFILE_DIR = "/tmp/chromium-kiosk"
+  BROWSER_LANG = "en-US"
+  BROWSER_ACCEPT_LANG = "en-US,en"
+  BROWSER_EXTRA_FLAGS = "--aggressive-cache-discard --disk-cache-size=10485760 --media-cache-size=10485760"
+  BROWSER_DEBUG_PORT = "9222"
+  BROWSER_DEBUG_ADDRESS = "0.0.0.0"
+  BROWSER_CDP_PROXY_PORT = "9223"
+  BROWSER_CDP_TARGET_HOST = "127.0.0.1"
+  ENABLE_COMPOSITOR = "0"
+  MEMORY_LOG_INTERVAL = "60"
+  ENABLE_DESKTOP_EXTRAS = "0"
+  ENABLE_DESKTOP_ICONS = "0"
+  APP_RELAUNCH_DELAY = "8"
+  STATUS_LOG_INTERVAL = "60"
+  COMPOSITOR_CHECK_INTERVAL = "30"
+  BLACK_BG_REFRESH_INTERVAL = "30"
+  SESSION_FORGET_ON_START = "1"
+  BROWSER_FULLSCREEN = "1"
+  BROWSER_URL = "chrome://newtab/"
+
+[http_service]
+  internal_port = 7682
+  force_https = true
+  auto_start_machines = true
+  auto_stop_machines = "off"
+  min_machines_running = 1
+  processes = ["app"]
+
+  [[http_service.checks]]
+    grace_period = "30s"
+    interval = "30s"
+    method = "GET"
+    timeout = "10s"
+    path = "/v1/health"
+
+[vm]
+  cpu_kind = "shared"
+  cpus = 2
+  memory = "4096"

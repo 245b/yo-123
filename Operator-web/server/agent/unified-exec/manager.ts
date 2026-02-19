@@ -4,7 +4,7 @@ import type { HostHealthEvent } from "@operator/contracts/host-health"
 import { HeadTailBuffer } from "@operator/execution/head-tail-buffer"
 import { UNIFIED_EXEC_ENV_DEFAULTS } from "@operator/execution/process-env"
 import { spawnSafe } from "@operator/execution/spawn-safe"
-import { terminalCapture, terminalOpen, terminalResize, terminalSend, terminalTerminate } from "../../terminal/client"
+import { terminalCapture, terminalExec, terminalOpen, terminalResize, terminalSend, terminalTerminate } from "../../terminal/client"
 import { PtyHostClient } from "../pty-host/client"
 
 type ExecDeltaEvent = {
@@ -1006,6 +1006,51 @@ class UnifiedExecManager {
     } as ExecCommandResult
   }
 
+  private async execCommandTermAgentDirect(request: ExecCommandRequest) {
+    if (request.tty === true) {
+      return null
+    }
+
+    const sessionId = this.ensureSession(request.sessionId)
+    const command = (request.command || "").trim()
+    const timeoutMs = toInt(request.timeoutMs, 20000, 1000, 120000)
+    const maxChars = toInt(request.maxChars, 20000, 1000, 200000)
+    const start = Date.now()
+
+    if (!command) {
+      return {
+        output: "",
+        wallTimeMs: 0,
+        truncated: false,
+      } as ExecCommandResult
+    }
+
+    const out = await terminalExec({
+      sessionId,
+      command,
+      timeoutMs,
+      maxChars,
+      cwd: request.workdir,
+      requestId: request.requestId,
+    })
+
+    if (!out.ok) {
+      return null
+    }
+
+    const output = typeof out.output === "string" ? out.output : ""
+    const exitCode = typeof out.exitCode === "number" ? out.exitCode : undefined
+    const truncated = out.truncated === true
+    this.record(sessionId, output)
+
+    return {
+      output,
+      exitCode,
+      wallTimeMs: Date.now() - start,
+      truncated,
+    } as ExecCommandResult
+  }
+
   private async writeStdinTermAgent(request: WriteStdinRequest) {
     const managed = this.termAgentProcesses.get(request.processId)
 
@@ -1250,6 +1295,14 @@ class UnifiedExecManager {
           wallTimeMs: Date.now() - start,
           truncated: truncated.truncated,
         }
+      }
+    }
+
+    if (USE_TERM_AGENT_PTY && !useTty) {
+      const out = await this.execCommandTermAgentDirect(request)
+
+      if (out) {
+        return out
       }
     }
 
